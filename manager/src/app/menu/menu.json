@@ -1,0 +1,77 @@
+[
+  {
+    "routerlink":"/dashboard",
+    "routerLinkActive":"['router-link-active']",
+    "aclass":"list-group-item",
+    "iclass":"fa fa-fw fa-dashboard",
+    "title":"主页",
+    "children":[
+      {
+        "routerlink":"/dashboard",
+        "routerLinkActive":"['router-link-active']",
+        "aclass":"list-group-item",
+        "iclass":"fa fa-fw fa-dashboard",
+        "title":"主页1"
+      },{
+        "routerlink":"/dashboard",
+        "routerLinkActive":"['router-link-active']",
+        "aclass":"list-group-item",
+        "iclass":"fa fa-fw fa-dashboard",
+        "title":"主页2"
+      }
+    ]
+  },
+  {
+    "routerlink":"/dashboard",
+    "routerLinkActive":"['router-link-active']",
+    "aclass":"list-group-item",
+    "iclass":"fa fa-fw fa-dashboard",
+    "title":"菜单一",
+     "children":[]
+  },
+  {
+    "routerlink":"/dashboard",
+    "routerLinkActive":"['router-link-active']",
+    "aclass":"list-group-item",
+    "iclass":"fa fa-fw fa-dashboard",
+    "title":"菜单二",
+    "children":[]
+  },
+  {
+    "routerlink":"/dashboard",
+    "routerLinkActive":"['router-link-active']",
+    "aclass":"list-group-item",
+    "iclass":"fa fa-fw fa-dashboard",
+    "title":"菜单三",
+    "children":[
+      {
+        "routerlink":"/dashboard",
+        "routerLinkActive":"['router-link-active']",
+        "aclass":"list-group-item",
+        "iclass":"fa fa-fw fa-dashboard",
+        "title":"菜单三-1"
+      },
+      {
+        "routerlink":"/login",
+        "routerLinkActive":"['router-link-active']",
+        "aclass":"list-group-item",
+        "iclass":"fa fa-fw fa-dashboard",
+        "title":"登录"
+      },
+      {
+        "routerlink":"/dashboard",
+        "routerLinkActive":"['router-link-active']",
+        "aclass":"list-group-item",
+        "iclass":"fa fa-fw fa-dashboard",
+        "title":"菜单三-3"
+      },
+      {
+        "routerlink":"/login",
+        "routerLinkActive":"['router-link-active']",
+        "aclass":"list-group-item",
+        "iclass":"fa fa-fw fa-dashboard",
+        "title":"登录2"
+      }
+    ]
+  }
+]

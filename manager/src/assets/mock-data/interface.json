@@ -1,0 +1,29 @@
+
+{
+"items":[
+    {
+        "id": 1,
+        "fwbm": "22312",
+        "rjcpxtmc": "12312",
+        "cpmc": "12312",
+        "bigSpecil": "12312",
+        "smallspec": "12312",
+        "state": "12312",
+        "chineName": "12312",
+        "englishName": "12312",
+        "surl": "12312"
+    },
+     {
+        "id": 2,
+        "fwbm": "12312",
+        "rjcpxtmc": "12312",
+        "cpmc": "12312",
+        "bigSpecil": "12312",
+        "smallspec": "12312",
+        "state": "12312",
+        "chineName": "7772",
+        "englishName": "12312",
+        "surl": "12312"
+    }
+]
+}
