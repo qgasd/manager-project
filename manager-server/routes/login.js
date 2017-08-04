@@ -6,13 +6,10 @@ var LdapStrategy = require('passport-ldapauth');
 var Base = require('js-base64').Base64;
 
 var ActiveDirectoryStrategy = require('../public/javascripts/passport-activedirectory/index.js');
-var db=require("../public/javascripts/mysql.js");  
 // 创建 application/x-www-form-urlencoded 编码解析
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
  
 var ActiveDirectory=require('activedirectory');
-
-
 
  //AD验证服务器配置
  var config = { url: 'ldap://172.21.21.218:389',
@@ -46,13 +43,7 @@ if (err) {
   }
   if (!groups) console.log('User: ' + sAMAccountName + ' not found.');
   else {console.log("验证成功！"+JSON.stringify(groups));
-          
-db.query('SELECT 1+1 AS solution', function (err, rows) {
-  if(err){}
-  else{
-    console.log(rows);
-  }
-}); 
+
         res.send(JSON.stringify(groups));
   }//返回组别信息
   })
