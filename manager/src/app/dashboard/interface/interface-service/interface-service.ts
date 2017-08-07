@@ -29,7 +29,7 @@ export class InterfaceService {
    * 获取全部的数据
    */
   public getSdate():Observable<ofInterface[]>{
-     return this.http.get('http://localhost:3000/interface').map(
+     return this.http.post('http://172.21.21.254:3000/interface',"").map(
      res=>{
        let result = res.json();
        console.log(result)
