@@ -14,10 +14,10 @@
     "jade": "~1.11.0",
     "js-base64": "^2.1.9",
     "morgan": "~1.8.1",
+    "mysql": "^2.14.1",
     "passport": "^0.3.2",
     "passport-activedirectory": "^1.0.4",
     "passport-ldapauth": "^2.0.0",
-    "serve-favicon": "~2.4.2",
-    "mysql": "latest"
+    "serve-favicon": "~2.4.2"
   }
 }

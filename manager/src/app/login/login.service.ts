@@ -11,7 +11,9 @@ export class LoginService {
       params.set('username',username);
       params.set('password',base64.Base64.encode(password));
       params.set('ischecked', ischecked);
-     return this.http.post('http://localhost:3000/loginAuthentication',params).map(//ad验证
+     return this.http.post('http://localhost:3000/loginAuthentication',params,{
+        withCredentials:true,
+     }).map(//ad验证
      res=>{
      this.mess = res.json();
     return this.mess;

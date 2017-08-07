@@ -6,13 +6,10 @@ var LdapStrategy = require('passport-ldapauth');
 var Base = require('js-base64').Base64;
 
 var ActiveDirectoryStrategy = require('../public/javascripts/passport-activedirectory/index.js');
-var db=require("../public/javascripts/mysql.js");  
 // 创建 application/x-www-form-urlencoded 编码解析
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
  
 var ActiveDirectory=require('activedirectory');
-
-
 
  //AD验证服务器配置
  var config = { url: 'ldap://172.21.21.218:389',
@@ -38,22 +35,32 @@ var opts = { failWithError: true,session:false }
 router.post('/', passport.authenticate('ActiveDirectory', opts), function(req, res) {
   console.log(req.user._json.sAMAccountName);
   var username = req.user._json.sAMAccountName;
+  var password = req.body.password;
+  var ischecked = req.body.ischecked;
+  var account={
+    username:username,
+    password:password,
+  }
   //根据当前的验证的用户名获取所属组别的信息
   ad.getGroupMembershipForUser(username,function(err,groups){
 if (err) {
     console.log('ERROR: ' +JSON.stringify(err));
     return;
   }
-  if (!groups) console.log('User: ' + sAMAccountName + ' not found.');
-  else {console.log("验证成功！"+JSON.stringify(groups));
-          
-db.query('SELECT 1+1 AS solution', function (err, rows) {
-  if(err){}
-  else{
-    console.log(rows);
-  }
-}); 
-        res.send(JSON.stringify(groups));
+  if (!groups){
+    console.log('User: ' + sAMAccountName + ' not found.');
+  }else {
+    account.username=req.body.username;
+    account.password=req.body.password;
+    req.session.user=account;
+    req.session.sign=true;
+    console.log("验证成功！"+JSON.stringify(groups));
+ if(ischecked=="true"){
+      res.cookie("account",account,{maxAge:60*1000*60*24*7});
+    }else{
+      res.cookie('sessionId',req.session.id);
+    }
+    res.send({'username':username,'password':password,'session':req.session});//返回组别信息 
   }//返回组别信息
   })
   

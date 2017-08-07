@@ -13,9 +13,9 @@
                                 <div class="form-group">
                                     <input type="password" name="password" class="form-control input-underline input-lg"  placeholder="密码"  #password  required/>
                                 </div>
-                                <input type="checkbox">下次自动登录
+                                <input type="checkbox" #ischecked required>一周内免登陆
                             </div>                
-                            <a class="btn btn-default"  (click)="onLoggedin(name.value,password.value)"> 登录 </a>
+                            <a class="btn btn-default"  (click)="onLoggedin(name.value,password.value,ischecked.checked)"> 登录 </a>
                             &nbsp;
                             <a class="btn btn-success" [routerLink]="['/resetpassword']">密码重置</a>
                         </form>
