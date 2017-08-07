@@ -9,6 +9,9 @@ var login = require('./routes/login');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var interfaceService = require('./routes/InterfaceController');
+var basicParameterService = require('./routes/BasicParameterController');
+var employeesService = require('./routes/EmployeesController');
+var softwareProductService = require('./routes/SoftwareProductController'); 
 var app = express();
 //设置跨域访问
 app.all("*", function (req,res,next) {
@@ -75,6 +78,9 @@ app.post('/checkLogin',function(req, res, next) {
 app.use('/', index);
 app.use('/users', users);
 app.use('/loginAuthentication',login);
+app.use('/basicParameter',basicParameterService);
+app.use('/employees',employeesService);
+app.use('/softwareProduct',softwareProductService);
 app.use('/interface',interfaceService)
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
