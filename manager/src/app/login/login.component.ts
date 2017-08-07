@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
                  this.router.navigate(['/dashboard/home']);
              }
          });
-        localStorage.setItem('isLoggedin', 'true');
+            
     }
 
 }
