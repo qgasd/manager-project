@@ -19,4 +19,14 @@ export class LoginService {
     return this.mess;
      });
   }
+  logoout(){
+    return this.http.get('http://localhost:3000/logoout',{
+        withCredentials:true,
+     }).map(//ad验证
+     res=>{
+     this.mess = res.json().message;
+     console.log(this.mess);
+    return this.mess;
+     });
+  }  
 }

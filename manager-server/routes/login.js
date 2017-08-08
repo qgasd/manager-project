@@ -56,8 +56,10 @@ if (err) {
     req.session.sign=true;
     console.log("验证成功！"+JSON.stringify(groups));
  if(ischecked=="true"){
+      res.clearCookie('sessionId');
       res.cookie("account",account,{maxAge:60*1000*60*24*7});
     }else{
+      res.clearCookie('account');
       res.cookie('sessionId',req.session.id);
     }
     res.send({'username':username,'password':password,'session':req.session});//返回组别信息 

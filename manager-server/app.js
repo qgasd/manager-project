@@ -74,6 +74,20 @@ app.post('/checkLogin',function(req, res, next) {
       }
   next();
 });
+app.get('/logoout',function(req,res,next){
+  console.log('+++++++++++++');
+  console.log(req.session);
+  console.log("asdasdad");
+  //console.log(req.cookies);
+  req.session.destroy();
+  res.clearCookie('account');
+  res.clearCookie('sessionId');
+  console.log(req.cookies.account);
+  console.log(req.cookies.sessionId);
+  if(req.session == null )
+  res.send({"message":"清除成功"});
+  next();
+})
 
 app.use('/', index);
 app.use('/users', users);

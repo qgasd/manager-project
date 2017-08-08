@@ -4,11 +4,12 @@ import { Http, RequestOptions, ResponseContentType, RequestMethod, Headers } fro
 import { MenuService } from './menu.service/menu.service';
 import { Menu} from './menu';
 import { CheckLoginService } from '../checkLogin/checkLogin.service';
+import {LoginService} from '../login/login.service';
 @Component({
     selector: 'app-menu',
     templateUrl: './menu.component.html',
     styleUrls: ['./menu.component.css'],
-    providers: [CheckLoginService]
+    providers: [CheckLoginService,LoginService]
 })
 export class MenuComponent implements OnInit {
     public menulist:Array<Menu>;
@@ -18,6 +19,7 @@ export class MenuComponent implements OnInit {
         public http: Http,
         private menuservice:MenuService,
         private checkLoginService : CheckLoginService,
+        private loginService : LoginService,
         public router: Router) {
       
     }
@@ -56,6 +58,17 @@ export class MenuComponent implements OnInit {
     ()=>{}
     );
      }
+    logoout(){
+            return this.loginService.logoout().subscribe(res => {
+                console.log(res);
+                if(res === '清除成功'){
+                     this.checkLoginService.checkLogin().subscribe(res=>{
+                         
+                     })
+                    this.router.navigate(['/login']);
+                }
+            })
+    }
 
 }
 
