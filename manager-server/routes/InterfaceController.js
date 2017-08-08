@@ -3,96 +3,121 @@ var router = express.Router();
 var db = require('../public/javascripts/mysql.js'); 
 //搜索功能
 router.post('/search',function(req,res,next){
-    var softWare=req.body.rjcpxtmc;
-    var greatClass=req.body.bigSpecil;
-    var lessClass=req.body.smallspec;
+    var data=req.body;
+    console.log(JSON.stringify(data));
+    var serviceNum=req.body.int_service_num;
+    var softWare=req.body.software_num;
+    var greatClass=req.body.great_class;
+    var lessClass=req.body.less_class;
     var state=req.body.state;
-    var nameCN=req.body.fuDesc;
-    var nameEN=req.body.chineName;
-    var description=req.body.englishName;
-    var URL=req.body.surl;
-    var remark=req.body.tips;
+    var nameCN=req.body.int_name_cn;
+    var nameEN=req.body.int_name_en;
+    var description=req.body.description;
+    var URL=req.body.URL;
+    var remark=req.body.remark;
+    
+    var pageNum=req.body.page;
+    var pagePer=req.body.itemsPerPage;
     var searchSql="select * from int_information where 1=1 ";
-    if(softWare!=null||softWare!=''){
-        searchSql+=" and software_num="+softWare;
+    if(serviceNum!=undefined&&serviceNum!=null&&serviceNum!=''){
+        searchSql+=" and int_service_num = "+serviceNum+"";
     }
-    if(greatClass!=null||greatClass!=''){
-        searchSql+=" and greatClass="+greatClass;
+    if(softWare!=undefined&&softWare!=null&&softWare!=''){
+        searchSql+=" and software_num = '"+softWare+"'";
     }
-    if(lessClass!=null||lessClass!=''){
-        searchSql+=" and lessClass="+lessClass;
+    if(greatClass!=undefined&&greatClass!=null&&greatClass!=''){
+        searchSql+=" and great_class ='"+greatClass+"'";
     }
-    if(state!=null||state!=''){
-        searchSql+=" and state="+state;
+    if(lessClass!=undefined&&lessClass!=null&&lessClass!=''){
+        searchSql+=" and less_class = '"+lessClass+"'";
+    }
+    if(state!=undefined&&state!=null&&state!=''){
+        searchSql+=" and state = '"+state+"'";
     }  
-    if(nameCN!=null||nameCN!=''){
-        searchSql+=" and nameCN="+nameCN;
+    if(nameCN!=undefined&&nameCN!=null&&nameCN!=''){
+        searchSql+=" and int_name_cn = '"+nameCN+"'";
     }   
-    if(nameEN!=null||nameEN!=''){
-        searchSql+=" and nameEN="+nameEN;
+    if(nameEN!=undefined&&nameEN!=null&&nameEN!=''){
+        searchSql+=" and int_name_en = '"+nameEN+"'";
     }
-    if(description!=null||description!=''){
-        searchSql+=" and description="+description;
+    if(description!=undefined&&description!=null&&description!=''){
+        searchSql+=" and description like '%"+description+"%'";
     }
-    if(URL!=null||URL!=''){
-        searchSql+=" and URL="+URL;
+    if(URL!=undefined&&URL!=null&&URL!=''){
+        searchSql+=" and URL like '%"+URL+"%'";
     }
-    if(remark!=null||remark!=''){
-        searchSql+=" and remark="+remark;
+    if(remark!=undefined&&remark!=null&&remark!=''){
+        searchSql+=" and remark like '%"+remark+"%'";
     }
+    //判断分页参数是否为空
+    if(pageNum!=null&&pageNum!=undefined&&pagePer!=null&&pagePer!=undefined){
+        searchSql+=" limit "+(pageNum-1)*pagePer+", "+pagePer;
+    }
+
+    console.log("测试语句：:"+searchSql);//测试sql语句
     db.query(searchSql,function(err,rows){//执行条件查询语句
         if(err){
-            console.log("查询错误");
-            res.send({success:false,message:'查询错误!'});
+            console.log("查询错误"+err);
+            res.send({success:false,message:'查询失败!'});
         }
         else{
+            var datas=JSON.stringify(rows);
+            var data='{"total":'+rows.length+',"items":'+datas+'}';
             console.log("查询成功");
-            res.send (JSON.stringify(rows));
+            console.log(data);
+            res.send (data);
         }
     });
 
 });
 //查询接口所有信息
-router.get('/', function(req, res, next) {
-    db.query("select * from int_information",function(err, rows){
+router.post('/', function(req, res, next) {
+    console.log(JSON.stringify(req.body));
+    var pageNum=req.body.page;
+    var pagePer=req.body.itemsPerPage;
+    var limitSql="select * from int_information";
+    if(pageNum!=null&&pageNum!=undefined&&pagePer!=null&&pagePer!=undefined){
+        limitSql+=" limit "+(pageNum-1)*pagePer+", "+pagePer;
+    }
+    db.query(limitSql,function(err, rows){
         if(err){
-            console.log("查询错误：select * from int_information"+err);
+            console.log("查询错误："+limitSql+err);
         }
         else{
-            console.log(JSON.stringify(rows));
-            res.send (JSON.stringify(rows));
+            var datas=JSON.stringify(rows);
+            var data='{"total":'+rows.length+',"items":'+datas+'}';
+            console.log(data);
+            res.send (data);
         }
     })
 });
 //新增接口信息
 router.post('/insert',function(req, res, next){
-    var data=req.body;
-    var serviceNum=data.fwbm;
-    var softWare=data.rjcpxtmc;
-    var greatClass=data.bigSpecil;
-    var lessClass=data.smallspec;
-    var state=data.state;
-    var nameCN=data.fuDesc;
-    var nameEN=data.chineName;
-    var description=data.englishName;
-    var URL=data.surl;
-    var remark=data.tips;
-    console.log(JSON.stringify(data));
+    var serviceNum=req.body.int_service_num;
+    var softWare=req.body.software_num;
+    var greatClass=req.body.great_class;
+    var lessClass=req.body.less_class;
+    var state=req.body.state;
+    var nameCN=req.body.int_name_cn;
+    var nameEN=req.body.int_name_en;
+    var description=req.body.description;
+    var URL=req.body.URL;
+    var remark=req.body.remark;
     var insertSql="insert into int_information(software_num,great_class,less_class,"+
-                "state,int_name_cn,int_name_en,description,URL,remark)values("
+                "state,int_name_cn,int_name_en,description,URL,remark)values('"
                     +softWare+
-                ","+greatClass+//','
-                ","+lessClass+
-                ","+state+
-                ","+nameCN+
-                ","+nameEN+
-                ","+description+
-                ","+URL+
-                ","+remark+
-                ")";
+                "','"+greatClass+
+                "','"+lessClass+
+                "','"+state+
+                "','"+nameCN+
+                "','"+nameEN+
+                "','"+description+
+                "','"+URL+
+                "','"+remark+
+                "')";
     db.query(insertSql,function(err,rows){
         if(err){
-            console.log("新增失败！");
+            console.log("新增失败！"+err);
             res.send({success:false,message:'新增失败！'});
         }
         else{
@@ -102,46 +127,62 @@ router.post('/insert',function(req, res, next){
     });
 });
 //删除一条数据
-router.get("/delete/:id",function(req,res,next){
-    var id=req.param.id;
-    var deleteSql="update int_information set state=100 where int_service_num="+id;
+router.delete("/delete/:id",function(req,res,next){
+    var id=req.params.id;
+
+    var deleteSql="update int_information set state='hidden' where int_service_num="+id;//此处进行逻辑删除
     db.query(deleteSql,function(err,rows){
         if(err){
-            console.log("删除失败！");
+            console.log("删除失败！"+err);
         }
-        else{
+        else{ 
             console.log("删除成功！");
+            res.send({success:true,message:"删除成功！"});
         }
     });
-})
+});
+// router.get("/delete/:id",function(req,res,next){
+//     var id=req.params.id;
+
+//     var deleteSql="update int_information set state='hidden' where int_service_num="+id;//此处进行逻辑删除
+//     db.query(deleteSql,function(err,rows){
+//         if(err){
+//             console.log("删除失败！"+err);
+//         }
+//         else{
+//             console.log("删除成功！");
+//             res.send({});
+//         }
+//     });
+// });
 //修改数据
-router.post("/update/:id",function(req,res,next){
-    var id=req.param.id;
-    var serviceNum=req.body.fwbm;
-    var softWare=req.body.rjcpxtmc;
-    var greatClass=req.body.bigSpecil;
-    var lessClass=req.body.smallspec;
+router.post("/update",function(req,res,next){
+    //var id=req.params.id;
+    console.log(JSON.stringify(req.body));
+    var serviceNum=req.body.int_service_num;
+    var softWare=req.body.software_num;
+    var greatClass=req.body.great_class;
+    var lessClass=req.body.less_class;
     var state=req.body.state;
-    var nameCN=req.body.fuDesc;
-    var nameEN=req.body.chineName;
-    var description=req.body.englishName;
-    var URL=req.body.surl;
-    var remark=req.body.tips;
+    var nameCN=req.body.int_name_cn;
+    var nameEN=req.body.int_name_en;
+    var description=req.body.description;
+    var URL=req.body.URL;
+    var remark=req.body.remark;
     var updateSql="update int_information set software_num='"
             +softWare
-            +"',greatClass='"+greatClass
-            +"',lessClass='"+lessClass
+            +"',great_class='"+greatClass
+            +"',less_class='"+lessClass
             +"',state='"+state
-            +"',nameCN='"+nameCN
-            +"',nameEN='"+nameEN
+            +"',int_name_cn='"+nameCN
+            +"',int_name_en='"+nameEN
             +"',description='"+description
             +"',URL='"+URL
             +"',remark='"+remark
-            +"',greatClass='"+greatClass
-            +"'where int_service_num="+id;
+            +"' where int_service_num="+serviceNum;
     db.query(updateSql,function(err,rows){
         if(err){
-            console.log("修改失败！");
+            console.log("修改失败！"+err);
         }
         else{
             console.log("修改成功！");
