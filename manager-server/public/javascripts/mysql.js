@@ -1,7 +1,7 @@
 //mysql数据库连接池工具类
 var mysql=require("mysql");  
 var pool = mysql.createPool({  
-    host: 'localhost',  
+    host: '172.21.21.254',  
     user: 'root',  
     password: '123456',  
     database: 'manager',  

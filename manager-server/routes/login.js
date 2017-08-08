@@ -35,16 +35,34 @@ var opts = { failWithError: true,session:false }
 router.post('/', passport.authenticate('ActiveDirectory', opts), function(req, res) {
   console.log(req.user._json.sAMAccountName);
   var username = req.user._json.sAMAccountName;
+  var password = req.body.password;
+  var ischecked = req.body.ischecked;
+  var account={
+    username:username,
+    password:password,
+  }
   //根据当前的验证的用户名获取所属组别的信息
   ad.getGroupMembershipForUser(username,function(err,groups){
 if (err) {
     console.log('ERROR: ' +JSON.stringify(err));
     return;
   }
-  if (!groups) console.log('User: ' + sAMAccountName + ' not found.');
-  else {console.log("验证成功！"+JSON.stringify(groups));
-
-        res.send(JSON.stringify(groups));
+  if (!groups){
+    console.log('User: ' + sAMAccountName + ' not found.');
+  }else {
+    account.username=req.body.username;
+    account.password=req.body.password;
+    req.session.user=account;
+    req.session.sign=true;
+    console.log("验证成功！"+JSON.stringify(groups));
+ if(ischecked=="true"){
+      res.clearCookie('sessionId');
+      res.cookie("account",account,{maxAge:60*1000*60*24*7});
+    }else{
+      res.clearCookie('account');
+      res.cookie('sessionId',req.session.id);
+    }
+    res.send({'username':username,'password':password,'session':req.session});//返回组别信息 
   }//返回组别信息
   })
   
