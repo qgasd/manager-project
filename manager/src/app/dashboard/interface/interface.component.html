@@ -119,10 +119,10 @@
          <tbody>
            <tr *ngFor='let itemtr of seardata'>
              <td>   
-               <a [routerLink]="['/dashboard/interface/detail',itemtr.id]">详情信息</a>
+               <a [routerLink]="['/dashboard/interface/detail',itemtr.int_service_num]">详情信息</a>
                <a (click)='deleteInt(itemtr)'>删除</a>
                <a>输入输出</a>
-               <a>影响范围</a>
+               <a [routerLink]="['/dashboard/interface/refrence',itemtr.int_service_num]">影响范围</a>
              </td>
              <td>{{itemtr.int_service_num}}</td>
              <td>{{itemtr.software_num}}</td>

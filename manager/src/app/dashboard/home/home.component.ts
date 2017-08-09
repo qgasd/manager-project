@@ -23,17 +23,17 @@ export class HomeComponent implements OnInit {
                     if(!res.sign==true){
                         this.router.navigate(['/login']);
                     }else{
-                        this.router.navigate(['/dashboard/home']);
+                        this.router.navigate(['/dashboard/*']);
                     }
                     if(res.session!=undefined)
                     if(res.session.sign==true){
                         console.log(res.session.sign);
-                        this.router.navigate(['/dashboard/home']);
+                        this.router.navigate(['/dashboard/*']);
                     }else{
                         this.router.navigate(['/login']);
                     }
              }else{
-                 this.router.navigate(['/dashboard/home']);
+                 this.router.navigate(['/dashboard/*']);
              }          
          })
   }

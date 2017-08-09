@@ -29,7 +29,7 @@ export class InterfaceService {
    * 获取全部的数据
    */
   public getSdate():Observable<ofInterface[]>{
-     return this.http.post('http://172.21.21.254:3000/interface',"").map(
+     return this.http.get('http://localhost:3000/interface').map(
      res=>{
        let result = res.json();
        console.log(result)
@@ -40,12 +40,14 @@ export class InterfaceService {
    * 获取选中的id的数据
    */
 public getSelId(id:number):Promise<ofInterface>{
+  console.log(id)
   return  this.getSdate().toPromise().then(
-     res=>res['items'].find(selIdData=>
-     (+selIdData.id)===id)
-     
+     res=>   
+      res.find(selIdData=>
+     (+selIdData.int_service_num)===id)
+
      //返回这个选中的东西
-  ).catch(this.handleError);
+     ).catch(this.handleError);
 }
 private headers = new Headers({'Content-Type':'application/json'});
 deleteInt(id:number):Promise<ofInterface>{

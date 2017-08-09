@@ -57,33 +57,33 @@ private searchTerms = new Subject<string>();
     )
   }
   deleteInt(itemdata: ofInterface) {
-    this.interfaceservice.deleteInt(itemdata.id).then(
+    this.interfaceservice.deleteInt(itemdata.int_service_num).then(
       seardata => this.seardata.filter(h => h !== itemdata)
     )
     console.log(this.seardata)
   }
 
-  advanceSearch(cc: ofInterface) {
-    for (var item in cc) {  //过滤到值为空和没有值的参数，保证参数的有效性
-      if (cc[item] === undefined || cc[item] === " ") {
-        delete cc[item]
-      }
-    }  //保证这个json的有效性
-    console.log(cc)//返回有值的字符串默认的表示没有选择select
-    //这里应该是find一个一个循环，要不是for  //filter没有起作用//|| m.nexdotime || m.validstate || m.nextresult,console.log(m)
-    // 
-    this.interfaceservice.gadsearch().subscribe(res => {
-      //这里filter需要有一个参数来接收这个筛选后的数组
-      //x.fwbm===cc.fwbm && x.rjcpxtmc === cc.rjcpxtmc && x.cpmc === cc.cpmc && x.bigSpecil === cc.bigSpecil && x.smallspec === cc.smallspec && x.state === cc.state && x.chineName === cc.chineName && x.surl === cc.surl && x.englishName === cc.englishName
-      //与 所有条件满足
-      // this.zbdatas =  res.filter(res=>{
-          this.zbdatas = res.filter(x => 
-           (
-            x.fwbm===cc.fwbm || x.rjcpxtmc === cc.rjcpxtmc || x.cpmc === cc.cpmc || x.bigSpecil === cc.bigSpecil || x.smallspec === cc.smallspec || x.state === cc.state || x.chineName === cc.chineName || x.surl === cc.surl || x.englishName === cc.englishName
-            ))
-            console.log(this.zbdatas)
-    }, error => { console.log(error) },
-      () => { }
-    );
-  }
+  // advanceSearch(cc: ofInterface) {
+  //   for (var item in cc) {  //过滤到值为空和没有值的参数，保证参数的有效性
+  //     if (cc[item] === undefined || cc[item] === " ") {
+  //       delete cc[item]
+  //     }
+  //   }  //保证这个json的有效性
+  //   console.log(cc)//返回有值的字符串默认的表示没有选择select
+  //   //这里应该是find一个一个循环，要不是for  //filter没有起作用//|| m.nexdotime || m.validstate || m.nextresult,console.log(m)
+  //   // 
+  //   this.interfaceservice.gadsearch().subscribe(res => {
+  //     //这里filter需要有一个参数来接收这个筛选后的数组
+  //     //x.fwbm===cc.fwbm && x.rjcpxtmc === cc.rjcpxtmc && x.cpmc === cc.cpmc && x.bigSpecil === cc.bigSpecil && x.smallspec === cc.smallspec && x.state === cc.state && x.chineName === cc.chineName && x.surl === cc.surl && x.englishName === cc.englishName
+  //     //与 所有条件满足
+  //     // this.zbdatas =  res.filter(res=>{
+  //         this.zbdatas = res.filter(x => 
+  //          (
+  //           x.fwbm===cc.fwbm || x.rjcpxtmc === cc.rjcpxtmc || x.cpmc === cc.cpmc || x.bigSpecil === cc.bigSpecil || x.smallspec === cc.smallspec || x.state === cc.state || x.chineName === cc.chineName || x.surl === cc.surl || x.englishName === cc.englishName
+  //           ))
+  //           console.log(this.zbdatas)
+  //   }, error => { console.log(error) },
+  //     () => { }
+  //   );
+  // }
 }
