@@ -4,86 +4,176 @@ import { InterfaceService } from './interface-service/interface-service';
 import { FormsModule } from '@angular/forms';
 import { Subject }           from 'rxjs/Subject';
 import { Observable }        from 'rxjs/Observable';
+import { Location }               from '@angular/common';
 @Component({
   selector: 'app-interface',
   templateUrl: './interface.component.html',
   styleUrls: ['./interface.component.css']
 })
 export class InterfaceComponent implements OnInit {
-  public zbdatas: ofInterface;//这是多条件查询的数据
-  public cdatas:Observable<ofInterface[]>;//这是但条件搜索的数据
-  public xc:any;
-  public flag = false;
-  jkfwt: string;
-  public seardata: ofInterface[];
-  public selId: ofInterface[];
-private searchTerms = new Subject<string>();
-//实现对象的观察
-  constructor(public interfaceservice: InterfaceService) { }
+  public interdatas:ofInterface[];
+  public zbdatas: ofInterface[];//这是多条件查询的数据
+ // public cdatas:Observable<ofInterface[]>;//这是单条件搜索的数据
+  public cdatass:ofInterface[];//这是单条件搜索的数据
+  public flag2 = false;//状态码
+  public seardata: ofInterface[];//获取全部的数据
+  public selId: ofInterface[];//选中相对应的id
+private searchTerms = new Subject<string>();//获取subject对象
 
+/**
+ * 分页参数
+ */
+  public totalItems: number =  this.totalItems; //所有数据
+  public maxSize:number = 10;
+  public currentPage: number = 1;//当前页
+  public smallnumPages: number = 0;
+  public itemsPerPage:number = 1;//当前选择10条一页
+  public eventData:any;
+//实现对象的观察1
+  constructor(public interfaceservice: InterfaceService,public location:Location) { 
+  
+  }
+/**
+ *搜索一个
+ */
+/**
+ * 需不需要判断当单选框的值为空的时候主页面显示哪个数据，感觉有点问题
+ */
   searchInter(jkfw: string) {
-  /*  this.interfaceservice.searchIn(jkfw).subscribe(res => {
-      for(var i=0;i<res['items'].length;i++){
-          this.xc = res['items'][i].chineName;
-      }       
-    //this.xc是数组中所有这个字段的值，然后让这个值和jkfw进行循环对比然后返回值相等的函数 
-    //通过循环 
-    for(var i=0;i<this.xc.length;i++){
-       if(jkfw === this.xc[i]){
-           console.log(jkfw)
-       }
-    }
-  })*/
-  this.searchTerms.next(jkfw)
-  }
-  ngOnInit():void {
-    this.searchInter(this.jkfwt);
-    this.getALLdata();
- /*   this.cdatas = this.searchTerms.debounceTime(2000).distinctUntilChanged().switchMap(
+    //this.searchTerms.next(jkfw);
+   /* this.cdatas = this.searchTerms.debounceTime(2000).distinctUntilChanged().switchMap(
+
       jkfw=>jkfw?this.interfaceservice.searchIn(jkfw):Observable.of<ofInterface[]>([])
+
     ).catch(error=>{console.log(error);return Observable.of<ofInterface[]>([])})*/
+    this.interfaceservice.searchIn(jkfw).subscribe(res=>{
+      this.cdatass=res['items'];
+      this.totalItems = res['total'];
+      console.log(this.cdatass)
+     if(jkfw==undefined || jkfw ==""){
+        // this.loadData();
+       }//设置这边的当输入框中的内容为空的时候全部数据出发
+       
+       if(this.cdatass && this.seardata){
+       this.interdatas = this.cdatass;
+        this.totalItems = this.interdatas.length;
+        console.log(this.interdatas.length)
+        console.log(this.totalItems)
+       }
+    }) 
+ // console.log(this.interdatas)
+  //console.log(this.cdatass)
+  }
+   /**
+ *多条件查询
+ */
+  advanceSearch(cc: any) {
+    this.interfaceservice.gadsearch(cc).subscribe(res=>{
+      this.zbdatas =res['items'];
+     if(this.zbdatas && this.seardata || this.cdatass){
+       this.interdatas = this.zbdatas;
+       this.totalItems = res['total'];
+      console.log(this.interdatas)
+    }
+      console.log(this.totalItems)});
+  }
+  /**
+   *初始化实现的方法
+   */
+  ngOnInit():void {
+    this.getALLdata();
+    //this.loadData();
   }
 
-  search() {
-    this.flag = !this.flag;
-  }
+
+  /**
+ *获取全部的东西
+ */
   getALLdata() {
     this.interfaceservice.getSdate().subscribe(res => {
-      this.seardata = res;
+      this.seardata = res['items'];
+      console.log(this.eventData)
       console.log(this.seardata)
+       this.interdatas = this.seardata ;
+       console.log(this.interdatas)
+       this.totalItems = res['total'];
       //获取全部的搜索值
     }, error => { console.log(error) },
       () => { }
     )
   }
-  deleteInt(itemdata: ofInterface) {
-    this.interfaceservice.deleteInt(itemdata.int_service_num).then(
-      seardata => this.seardata.filter(h => h !== itemdata)
+ /**
+ *删除
+ */
+ deleteInt(itemdata: ofInterface):void { 
+    this.interfaceservice.deleteInt(itemdata.int_service_num).then(()=>
+     this.seardata = this.seardata.filter(h => h !== itemdata)
     )
-    console.log(this.seardata)
-  }
+   // if (this.selectedHero === hero) { this.selectedHero = null; }
+    console.log(itemdata.int_service_num)
+    console.log(this.seardata);
+    location.reload();
+}
 
-  // advanceSearch(cc: ofInterface) {
-  //   for (var item in cc) {  //过滤到值为空和没有值的参数，保证参数的有效性
-  //     if (cc[item] === undefined || cc[item] === " ") {
-  //       delete cc[item]
-  //     }
-  //   }  //保证这个json的有效性
-  //   console.log(cc)//返回有值的字符串默认的表示没有选择select
-  //   //这里应该是find一个一个循环，要不是for  //filter没有起作用//|| m.nexdotime || m.validstate || m.nextresult,console.log(m)
-  //   // 
-  //   this.interfaceservice.gadsearch().subscribe(res => {
-  //     //这里filter需要有一个参数来接收这个筛选后的数组
-  //     //x.fwbm===cc.fwbm && x.rjcpxtmc === cc.rjcpxtmc && x.cpmc === cc.cpmc && x.bigSpecil === cc.bigSpecil && x.smallspec === cc.smallspec && x.state === cc.state && x.chineName === cc.chineName && x.surl === cc.surl && x.englishName === cc.englishName
-  //     //与 所有条件满足
-  //     // this.zbdatas =  res.filter(res=>{
-  //         this.zbdatas = res.filter(x => 
-  //          (
-  //           x.fwbm===cc.fwbm || x.rjcpxtmc === cc.rjcpxtmc || x.cpmc === cc.cpmc || x.bigSpecil === cc.bigSpecil || x.smallspec === cc.smallspec || x.state === cc.state || x.chineName === cc.chineName || x.surl === cc.surl || x.englishName === cc.englishName
-  //           ))
-  //           console.log(this.zbdatas)
-  //   }, error => { console.log(error) },
-  //     () => { }
-  //   );
-  // }
+ /**
+ *新增
+ */
+addSave(addDatas:ofInterface):void{
+   // console.log(this.Interfaces.push(addDatas))
+  if(!addDatas){return}
+    this.interfaceservice.AddDatas(addDatas)
+   .then(ofInterface=>{this.seardata.push(ofInterface);location.reload();console.log(addDatas),console.log(this.interdatas)})
+}
+/**
+ * 编辑里面的更新事件
+ */
+EditUpdatec(SSdatas:ofInterface){
+   this.interfaceservice.EditUpdate(SSdatas).then( 
+       ()=>{this.goBack(),location.reload()}         
+   )
+   this.flag2=!this.flag2;
+}
+/**
+ * 返回
+ */
+goBack():void{
+  this.location.back();
+}
+/**
+ * 表示编辑的时候input框出现
+ */
+editCon(){
+  this.flag2 = !this.flag2;
+}
+/***
+ * 分页
+ */
+	public loadData(){
+		let offset = (this.currentPage-1)*this.itemsPerPage;
+		let end = (this.currentPage)*this.itemsPerPage;
+   //跑了全部的数据
+		return this.interfaceservice.getSdate().subscribe(
+			res=>{
+       this.interdatas=res['items'].slice(offset,end>this.totalItems?this.totalItems:end);
+        console.log(res)
+				//TODO.正式环境中，需要去掉slice
+		//		this.interdatas = res.slice(offset,end>this.totalItems?this.totalItems:end);
+			},
+			error => {console.log(error)},
+			() => {}
+		);
+	}
+  public pageChanged(event: any): void {
+    console.log('Page changed to: ' + event.page);
+    console.log('Number items per page: ' + event.itemsPerPage);
+    if(event == undefined){
+          event.page=1;
+          event.itemsPerPage=10;
+    }
+    this.eventData= event;
+    //不能通过这个截取 
+    // this.interfaceservice.getSdate(event).subscribe(res=>this.interdatas=res['items']);   
+    // this.interfaceservice.gadsearch(this.eventData).subscribe(res=>this.interdatas=res['items']);  
+        
+  }
 }
