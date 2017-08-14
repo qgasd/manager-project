@@ -1,5 +1,9 @@
 import { Component, OnInit,EventEmitter,ElementRef,HostListener,ViewChild,Renderer } from '@angular/core';
 import {dIomock } from "../interface-mock-data/inputD3";
+import { ActivatedRoute, Params,Router} from '@angular/router';
+import { InterfaceService } from "../interface-service/interface-service";
+import { ofInterface } from '../interface-mock-data/mock-data';
+
 import * as d3 from "d3";
 @Component({
   selector: 'app-interface-inpd3',
@@ -7,14 +11,26 @@ import * as d3 from "d3";
   styleUrls: ['./interface-inpd3.component.css']
 })
 export class InterfaceInpd3Component implements OnInit {
-
-  constructor() { }
+  public selIdDate:ofInterface;
+  public id : number;
+  public url = 'http://localhost:3000/interfaceRefrence/serach';
+  constructor(public interfaceservice:InterfaceService,public route:ActivatedRoute ) { 
+      //this.route.params.switchMap((params:Params)=>this.interfaceservice.getSelId(+params['id'])).subscribe(selIdDate=>{this.selIdDate=selIdDate;this.dMethod();console.log(this.selIdDate)})
+   
+    
+    }
 @ViewChild('dcontainer')
 private d3Container:ElementRef
   ngOnInit() {
-    this.dMethod();
+  this.route.params.forEach((params:Params) => {
+    this.id = +params['id'];
+    console.log(this.id);
+  })
+  this.dMethod()
   }
- 
+ /*getinpID(){s
+    this.interfaceservice.getSelId().
+ }*/
  dMethod():void{
 var width = 600;
 var height = 500;
@@ -33,19 +49,18 @@ var svg = d3.select(".contain")
 //树状图布局
 var tree = d3.layout.tree()
             .size([height, width]);
-
+var sd = `${this.url}/${this.id}`;
+console.log(sd);
 //对角线生成器
 var diagonal = d3.svg.diagonal()
     .projection(function(d) { return [d.y, d.x]; });
-
-
-d3.json("assets/mock-data/city.json",function(error,root){
+d3.json(`${this.url}/${this.id}`,function(error,root){
 
   //给第一个节点添加初始坐标x0和x1
-
+console.log(root)
   root.x0 = height / 2;
   root.y0 = 0;
- 
+ console.log(root.x0)
   //以第一个节点为起始节点，重绘
   redraw(root);
 
@@ -91,7 +106,7 @@ d3.json("assets/mock-data/city.json",function(error,root){
         .attr("x", function(d:dIomock) { return d.children || d._children ? -14 : 14; })
         .attr("dy", ".35em")
         .attr("text-anchor", function(d:dIomock) { return d.children || d._children ? "end" : "start"; })
-        .text(function(d:dIomock) {return d.name; })
+        .text(function(d:dIomock) {return d.int_service_num; })
         .style("fill-opacity", 0);
 
 

@@ -226,7 +226,7 @@
         <thead>
          <tr>
            <th>操作</th>
-        <!--   <th>接口服务编号</th> -->
+           <th>接口服务编号</th> 
            <th>软件产品编号</th>
            <th>大类</th>
            <th>小类</th>
@@ -246,11 +246,15 @@
                <a (click)='deleteInt(itemtr)'>删除</a>
                <a>输入输出</a>
                <a [routerLink]="['/dashboard/interface/refrence',itemtr.int_service_num]">影响范围</a>
-               <button class='btn btn-info' (click)="editCon()"><span class="glyphicon glyphicon-pencil"></span></button>
-               <button class='btn btn-info' (click)='deleteInt(itemtr);$event.stopPropagation()'><span class="glyphicon glyphicon-remove-circle"></span></button>
-               <button class='btn btn-info'>I/O</button>
-               <button class='btn btn-info' [routerLink]="['/dashboard/interface/detail',itemtr.int_service_num]">影响范围</button>
-               <button class='btn btn-info' (click)="EditUpdatec(itemtr)">保存</button>
+               <button class='btn btn-info' type="button" (click)="editCon()"><span class="glyphicon glyphicon-pencil"></span></button>
+               <button class='btn btn-info' type="button" (click)='deleteInt(itemtr);$event.stopPropagation()'><span class="glyphicon glyphicon-remove-circle"></span></button>
+               <button class='btn btn-info' type="button">I/O</button>
+               <button class='btn btn-info' type="button" [routerLink]="['/dashboard/interface/inputD3',itemtr.int_service_num]">影响范围</button>
+               <button class='btn btn-info' type="button" (click)="EditUpdatec(itemtr)">保存</button>
+             </td>
+              <td>
+               <span name="int_service_num">{{itemtr.int_service_num}}</span>
+                <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtr.int_service_num' name="int_service_num">
              </td>
              <td>
                <span name="software_num">{{itemtr.software_num}}</span>

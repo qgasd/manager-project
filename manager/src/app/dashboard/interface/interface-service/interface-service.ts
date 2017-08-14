@@ -14,6 +14,7 @@ export class InterfaceService {
   public interfaceUrld = "http://172.21.21.254:3000/interface/delete";
   public interfaceurlS= "http://172.21.21.254:3000/interface/search";
   public interfaceurlU= "http://172.21.21.254:3000/interface/update";
+  public interfaceurl = "http://localhost:3000/interfaceRefrence/serach";
   public selIdData:ofInterface;
 
   constructor(private http: Http,private location:Location){ }
@@ -36,7 +37,7 @@ export class InterfaceService {
    * 获取全部的数据
    */
   public getSdate():Observable<ofInterface[]>{
-     return this.http.get('http://localhost:3000/interface').map(
+     return this.http.post('http://localhost:3000/interface',"").map(
      res=>{
        let result = res.json();
        console.log(result)      
@@ -46,15 +47,23 @@ export class InterfaceService {
   /**
    * 获取选中的id的数据
    */
-public getSelId(id:number):Promise<ofInterface>{
-  console.log(id)
-  return  this.getSdate().toPromise().then(
-     res=>   
-      res.find(selIdData=>
-     (+selIdData.int_service_num)===id)
+public getSelId(id:number):Observable<ofInterface>{
+  console.log(id);
+  var url = `${this.interfaceurl}/${id}`;
+   console.log(url);
+  return this.http.get(url).map(
+    res=>{
+      let result = res.json();
+      console.log(result);
+      return result;
+    });
+  // return  this.getSdate().toPromise().then(
+  //    res=>   
+  //     res.find(selIdData=>
+  //    (+selIdData.int_service_num)===id)
 
-     //返回这个选中的东西
-     ).catch(this.handleError);
+  //    //返回这个选中的东西
+  //    ).catch(this.handleError);
 }
 /**
  * 删除功能 

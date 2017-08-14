@@ -1,5 +1,5 @@
 export class dIomock {
-    name:string;
+    int_service_num:string;
     _children:Array<string>;
     children:Array<string>;
     depth:number;
