@@ -30,12 +30,18 @@ router.get("/serach/:id",function(req,res,next){
              console.log("查询错误："+err);
          }else {
              console.log(JSON.stringify(rows));
-             var str = JSON.stringify(convert(rows,num));
-             console.log("str:"+str);
-             
-             var jsonstr =  '{"int_service_num":'+num+","+str.substring(1,str.length);
-             console.log("jsonstr:"+jsonstr);            
-             res.send(jsonstr);
+             if(rows.length>0){
+                var str = JSON.stringify(convert(rows,num));
+                console.log("str:"+str);
+                if(str!='undefined')
+                var jsonstr =  '{"int_service_num":'+num+","+str.substring(1,str.length);
+                console.log("jsonstr:"+jsonstr);            
+                res.send(jsonstr);
+             }else{
+                 var str = '{"int_service_num":'+num+'}'
+                res.send(str);
+             }
+            
          }
      });
  });
