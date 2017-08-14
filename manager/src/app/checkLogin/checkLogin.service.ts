@@ -15,7 +15,7 @@ export class CheckLoginService {
        withCredentials:true,
      }).map(
      res=>{
-         console.log(res.json());
+       
        return res.json();
      });
   }

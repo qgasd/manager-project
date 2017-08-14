@@ -33,7 +33,7 @@ router.use(passport.session());
 var opts = { failWithError: true,session:false }
 //passport验证
 router.post('/', passport.authenticate('ActiveDirectory', opts), function(req, res) {
-  console.log(req.user._json.sAMAccountName);
+  
   var username = req.user._json.sAMAccountName;
   var password = req.body.password;
   var ischecked = req.body.ischecked;

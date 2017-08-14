@@ -49,7 +49,7 @@ private searchTerms = new Subject<string>();
   }
   getALLdata() {
     this.interfaceservice.getSdate().subscribe(res => {
-      this.seardata = res;
+      this.seardata = res['items'];
       console.log(this.seardata)
       //获取全部的搜索值
     }, error => { console.log(error) },

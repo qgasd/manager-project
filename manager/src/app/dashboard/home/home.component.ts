@@ -16,9 +16,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
      this.checkLoginService.checkLogin().subscribe(res=>{
-             console.log(res.cookie==null);
-             console.log(res);
-             console.log(res.session);
+            
               if(res.cookie==null){
                     if(!res.sign==true){
                         this.router.navigate(['/login']);
@@ -27,7 +25,6 @@ export class HomeComponent implements OnInit {
                     }
                     if(res.session!=undefined)
                     if(res.session.sign==true){
-                        console.log(res.session.sign);
                         this.router.navigate(['/dashboard/home']);
                     }else{
                         this.router.navigate(['/login']);

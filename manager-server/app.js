@@ -11,13 +11,15 @@ var users = require('./routes/users');
 var interfaceService = require('./routes/InterfaceController');
 var basicParameterService = require('./routes/BasicParameterController');
 var employeesService = require('./routes/EmployeesController');
-var softwareProductService = require('./routes/SoftwareProductController'); 
+var softwareProductService = require('./routes/SoftwareProductController');
+var relationTree = require('./routes/relationTree'); 
 var app = express();
 //设置跨域访问
 app.all("*", function (req,res,next) {
   let allowedOrigins = [
     "http://localhost:4200",
     "http://172.21.21.254:4200"
+
   ];
 　// 这里是允许跨域的的domain列表
   let origin = req.headers.origin;
@@ -55,18 +57,12 @@ app.post('/checkLogin',function(req, res, next) {
     var sessionId = req.cookies.sessionId;
     var cookie = req.cookies;
     var session = req.session;
-    console.log(sessionId);
-    console.log('---------------------');
-    console.log(JSON.stringify(cookie));
-    console.log('---------------------');
-    console.log(session); 
 
       if(cookie.account!=undefined){
         res.send({'cookie':cookie});
       }else{
         if(sessionId==undefined){
           session.destroy();
-          console.log("销毁后："+req.session);
           res.send({'sign':false});
         }else{
           res.send({"session":session});
@@ -75,15 +71,11 @@ app.post('/checkLogin',function(req, res, next) {
   next();
 });
 app.get('/logoout',function(req,res,next){
-  console.log('+++++++++++++');
-  console.log(req.session);
-  console.log("asdasdad");
-  //console.log(req.cookies);
+
   req.session.destroy();
   res.clearCookie('account');
   res.clearCookie('sessionId');
-  console.log(req.cookies.account);
-  console.log(req.cookies.sessionId);
+
   if(req.session == null )
   res.send({"message":"清除成功"});
   next();
@@ -95,7 +87,8 @@ app.use('/loginAuthentication',login);
 app.use('/basicParameter',basicParameterService);
 app.use('/employees',employeesService);
 app.use('/softwareProduct',softwareProductService);
-app.use('/interface',interfaceService)
+app.use('/interface',interfaceService);
+app.use('/relationTree',relationTree)
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //   var err = new Error('Not Found');
