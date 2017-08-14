@@ -14,7 +14,7 @@
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
-      "test": "test.ts",
+      "test": "test.ts", 
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "styles": [
@@ -24,14 +24,14 @@
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
-         "../node_modules/js-base64/base64.js"             
+        "../node_modules/js-base64/base64.js",
+        "../node_modules/d3/d3.js"               
       ], 
-    
-      "environments": {     
-         "source": "environments/environment.ts",   
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      }
+"environments": {
+  "source": "environments/environment.ts",
+  "dev": "environments/environment.ts",
+  "prod": "environments/environment.prod.ts"
+}
     }
   ],
   "e2e": {

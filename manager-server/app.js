@@ -9,6 +9,7 @@ var login = require('./routes/login');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var interfaceService = require('./routes/InterfaceController');
+var interfaceRefrenceService = require('./routes/interfaceRefrenceController');
 var basicParameterService = require('./routes/BasicParameterController');
 var employeesService = require('./routes/EmployeesController');
 var softwareProductService = require('./routes/SoftwareProductController');
@@ -88,7 +89,7 @@ app.use('/basicParameter',basicParameterService);
 app.use('/employees',employeesService);
 app.use('/softwareProduct',softwareProductService);
 app.use('/interface',interfaceService);
-app.use('/relationTree',relationTree)
+app.use('/interfaceRefrence',interfaceRefrenceService);
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //   var err = new Error('Not Found');
