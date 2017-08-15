@@ -13,7 +13,7 @@ var interfaceRefrenceService = require('./routes/interfaceRefrenceController');
 var basicParameterService = require('./routes/BasicParameterController');
 var employeesService = require('./routes/EmployeesController');
 var softwareProductService = require('./routes/SoftwareProductController');
-var relationTree = require('./routes/relationTree'); 
+var interfaceRefrenceService = require('./routes/interfaceRefrenceController'); 
 var app = express();
 //设置跨域访问
 app.all("*", function (req,res,next) {
