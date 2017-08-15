@@ -7,6 +7,7 @@ import { InterfaceComponent } from './interface/interface.component';
 import { InterfaceDetaileComponent } from './interface/interface-detaile/interface-detaile.component';
 import { InterfaceRefrenceComponent } from './interface/interface-refrence/interface-refrence.component';
 import { InterfaceInpd3Component } from './interface/interface-inpd3/interface-inpd3.component';
+import {InterfaceIoComponent} from './interface/interface-io/interface-io.component';
 export const dashroutes:Routes= [
 
     {
@@ -18,7 +19,8 @@ export const dashroutes:Routes= [
             {path:'interface',component:InterfaceComponent},
             {path:'interface/detail/:id',component:InterfaceDetaileComponent},
             {path:'interface/refrence/:id',component:InterfaceRefrenceComponent},
-            {path:'interface/inputD3/:id',component:InterfaceInpd3Component} 
+            {path:'interface/inputD3/:id',component:InterfaceInpd3Component},
+            {path:'interface/io/:id',component:InterfaceIoComponent} 
         ]  
     }
 ]

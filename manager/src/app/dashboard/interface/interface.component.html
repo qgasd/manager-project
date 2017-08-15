@@ -248,7 +248,7 @@
                <a [routerLink]="['/dashboard/interface/refrence',itemtr.int_service_num]">影响范围</a> -->
                <button class='btn btn-info' type="button" (click)="editCon()"><span class="glyphicon glyphicon-pencil"></span></button>
                <button class='btn btn-info' type="button" (click)='deleteInt(itemtr);$event.stopPropagation()'><span class="glyphicon glyphicon-remove-circle"></span></button>
-               <button class='btn btn-info' type="button">I/O</button>
+               <button class='btn btn-info' type="button" [routerLink]="['/dashboard/interface/io',itemtr.int_service_num]">I/O</button>
                <button class='btn btn-info' type="button" [routerLink]="['/dashboard/interface/inputD3',itemtr.int_service_num]">影响范围</button>
                <button class='btn btn-info' type="button" (click)="EditUpdatec(itemtr)">保存</button>
              </td>
