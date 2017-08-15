@@ -13,21 +13,21 @@ var interfaceRefrenceService = require('./routes/interfaceRefrenceController');
 var basicParameterService = require('./routes/BasicParameterController');
 var employeesService = require('./routes/EmployeesController');
 var softwareProductService = require('./routes/SoftwareProductController');
-var interfaceRefrenceService = require('./routes/interfaceRefrenceController'); 
+var interfaceRefrence = require('./routes/interfaceRefrenceController');
+var interfaceIOService = require('./routes/interfaceIOController');
 var app = express();
 //设置跨域访问
 app.all("*", function (req,res,next) {
   let allowedOrigins = [
     "http://localhost:4200",
-    "http://172.21.21.254:4200"
-
+    "http://172.21.21.254:4200",
   ];
 　// 这里是允许跨域的的domain列表
   let origin = req.headers.origin;
   if(allowedOrigins.indexOf(origin) > -1){
     res.setHeader('Access-Control-Allow-Origin', origin);
   }
-  res.header('Access-Control-Allow-Credentials', true);// Allow Cookie
+  res.header("Access-Control-Allow-Credentials", true);// Allow Cookie
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
   res.header("Content-Type", "application/json;charset=utf-8");
@@ -90,6 +90,7 @@ app.use('/employees',employeesService);
 app.use('/softwareProduct',softwareProductService);
 app.use('/interface',interfaceService);
 app.use('/interfaceRefrence',interfaceRefrenceService);
+app.use('/interfaceIO',interfaceIOService)
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //   var err = new Error('Not Found');
