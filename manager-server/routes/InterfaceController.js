@@ -75,7 +75,7 @@ router.post('/', function(req, res, next) {
     console.log(JSON.stringify(req.body));
     var pageNum=req.body.page;
     var pagePer=req.body.itemsPerPage;
-    var limitSql="select * from int_information";
+    var limitSql="select * from int_information where state='active'";
     if(pageNum!=null&&pageNum!=undefined&&pagePer!=null&&pagePer!=undefined){
         limitSql+=" limit "+(pageNum-1)*pagePer+", "+pagePer;
     }
