@@ -1,4 +1,84 @@
-<div class='contain' #dcontainer>
-   
 
-</div>
+    <div class="searchAlertcontainer">
+        <button type="button" class="btn btn-danger pull-right" (click)="goBack()">返回</button>
+        <form>
+          <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+             <tr>
+               <th>输入/输出</th>
+               <th>输入输出字段英文名称</th>
+               <th>输入输出字段中文名称</th>
+               <th>输入输出字段类型</th>
+               <th>输入字段是否必输</th>
+               <th>字段示列</th>
+               <th>描述</th>
+             </tr>
+             </thead>
+             <tbody>
+               <tr *ngFor='let itemtr of ioinputdata'>
+                 <td>
+                   <span name="type">{{itemtr.type}}</span>
+                    <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtr.type' name="type">
+                 </td>
+                  <td>
+                   <span name="name_en">{{itemtr.name_en}}</span>
+                    <input type='text'  class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.name_en' name="name_en">
+                 </td>
+                  <td>
+                   <span name="name_cn">{{itemtr.name_cn}}</span>
+                    <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.name_cn' name="name_cn">
+                 </td>
+                  <td>
+                   <span name="field_type">{{itemtr.field_type}}</span>
+                    <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.field_type' name="field_type">
+                 </td>
+                  <td>
+                   <span name="lob">{{itemtr.lob}}</span>
+                    <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.lob' name="lob">
+                 </td>
+                  <td>
+                   <span name="example">{{itemtr.example}}</span>
+                    <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.example' name="example">
+                 </td>
+                  <td>
+                   <span name="describe">{{itemtr.describe}}</span>
+                    <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.describe' name="describe">
+                 </td>
+               </tr>
+               <tr *ngFor='let itemtrs of iooutdata'>
+                    <td>
+                      <span name="type">{{itemtrs.type}}</span>
+                       <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtrs.type' name="type">
+                    </td>
+                     <td>
+                      <span name="name_en">{{itemtrs.name_en}}</span>
+                       <input type='text'  class='flagclass' *ngIf="flag2" [(ngModel)]='itemtrs.name_en' name="name_en">
+                    </td>
+                     <td>
+                      <span name="name_cn">{{itemtrs.name_cn}}</span>
+                       <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtrs.name_cn' name="name_cn">
+                    </td>
+                     <td>
+                      <span name="field_type">{{itemtrs.field_type}}</span>
+                       <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtrs.field_type' name="field_type">
+                    </td>
+                     <td>
+                      <span name="lob">{{itemtrs.lob}}</span>
+                       <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtrs.lob' name="lob">
+                    </td>
+                     <td>
+                      <span name="example">{{itemtrs.example}}</span>
+                       <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtrs.example' name="example">
+                    </td>
+                     <td>
+                      <span name="describe">{{itemtrs.describe}}</span>
+                       <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtrs.describe' name="describe">
+                    </td>
+                  </tr>
+             </tbody>
+          </table>
+          </div>
+        </form>
+    </div> 
+

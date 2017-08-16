@@ -11,7 +11,7 @@ export class CheckLoginService {
       var params = {
 
       }
-     return this.http.post('http://localhost:3000/checkLogin',params,{
+     return this.http.post('http://172.21.21.223:3000/checkLogin',params,{
        withCredentials:true,
      }).map(
      res=>{

@@ -11,7 +11,7 @@ export class LoginService {
       params.set('username',username);
       params.set('password',base64.Base64.encode(password));
       params.set('ischecked', ischecked);
-     return this.http.post('http://localhost:3000/loginAuthentication',params,{
+     return this.http.post('http://172.21.21.223:3000/loginAuthentication',params,{
         withCredentials:true,
      }).map(//ad验证
      res=>{
@@ -20,7 +20,7 @@ export class LoginService {
      });
   }
   logoout(){
-    return this.http.get('http://localhost:3000/logoout',{
+    return this.http.get('http://172.21.21.223:3000/logoout',{
         withCredentials:true,
      }).map(//ad验证
      res=>{
