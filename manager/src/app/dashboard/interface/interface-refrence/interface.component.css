@@ -1,0 +1,21 @@
+.multsearch{
+    padding:30px 0;
+}
+.searchAlertcontainer{
+    margin-top:20px;
+}
+
+.malert .control-label{
+    color:#000;
+    
+}
+.malert .modal-footer button{
+   margin-left:10px;
+}
+.searchAlertcontainer td{position:relative;}
+.flagclass{position:absolute;left:0;vertical-align: top;z-index:3;text-align: center;}
+
+.checkbox{display:inline-block}
+.table td{text-align: center;}
+
+.table th{text-align: center;}
