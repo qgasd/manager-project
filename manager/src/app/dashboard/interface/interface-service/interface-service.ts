@@ -4,17 +4,18 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 import { ofInterface } from '../interface-mock-data/mock-data';
 import { Location }    from '@angular/common';
+import { Ipconfigs } from "app/checkLogin/ipconfigs";
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 @Injectable()
 export class InterfaceService {
   public interfaceUrl ="assets/mock-data/interface.json";
-  public interfaceUrla = "http://172.21.21.223:3000/interface";
-  public interfaceUrld = "http://172.21.21.223:3000/interface/delete";
-  public interfaceurlS= "http://172.21.21.223:3000/interface/search";
-  public interfaceurlU= "http://172.21.21.223:3000/interface/update";
-  public interfaceurl = "http://172.21.21.223:3000/interfaceRefrence/serach";
+  public interfaceUrla = new Ipconfigs().localhostUrl+"/interface";
+  public interfaceUrld = new Ipconfigs().localhostUrl+"/interface/delete";
+  public interfaceurlS= new Ipconfigs().localhostUrl+"/interface/search";
+  public interfaceurlU= new Ipconfigs().localhostUrl+"/interface/update";
+  public interfaceurl = new Ipconfigs().localhostUrl+"/interfaceRefrence/serach";
   public selIdData:ofInterface;
 
   constructor(private http: Http,private location:Location){ }
@@ -37,7 +38,7 @@ export class InterfaceService {
    * 获取全部的数据
    */
   public getSdate():Observable<ofInterface[]>{
-     return this.http.post('http://172.21.21.223:3000/interface',"").map(
+     return this.http.post(new Ipconfigs().localhostUrl+'/interface',"").map(
      res=>{
        let result = res.json();
        console.log(result)      
