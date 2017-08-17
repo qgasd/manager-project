@@ -252,7 +252,7 @@
              <td>   
                <a href="javascript:void(0);"  (click)="editCon()"><span class="glyphicon glyphicon-pencil"></span></a>
                <!--<a href="javascript:void(0);"  (click)='deleteInt(itemtr);$event.stopPropagation()'><span class="glyphicon glyphicon-remove-circle"></span></a>-->
-               <a href="javascript:void(0);"[routerLink]="['/dashboard/interface/io',itemtr.int_service_num]">I/O</a>
+               <a href="javascript:void(0);" [routerLink]="['/dashboard/interface/io',itemtr.int_service_num]">I/O</a>
                <a href="javascript:void(0);" [routerLink]="['/dashboard/interface/inputD3',itemtr.int_service_num]"><span class="glyphicon glyphicon-link"></span></a>
                <a href="javascript:void(0);" (click)="EditUpdatec(itemtr)"><span class="glyphicon glyphicon-saved"></span></a>
                <!--<input type='checkbox' [(ngModel)]='itemtr.isChecked' name="isChecked">-->

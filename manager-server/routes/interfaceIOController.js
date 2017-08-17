@@ -16,12 +16,10 @@ router.get("/serach/:id",function(req,res,next){
             console.log(err);
         }
         else{
-            console.log(rows);
             var input = [];
             var output = [];
-            var interface = [];
-            for(r in rows){
-                console.log(rows[r].name_cn+":"+rows[r].name_en);
+            if(rows.length>0)
+            for( r in rows){
                 if(rows[r].type=='input'){
                     input.push(rows[r]);
                 }else if(rows[r].type=='output'){
@@ -29,10 +27,9 @@ router.get("/serach/:id",function(req,res,next){
                 }
           
             }
-            console.log("输入："+JSON.stringify(input));
-            console.log("输出："+JSON.stringify(output));
+
             var jsonstr = '{"input":'+JSON.stringify(input)+',"output":'+JSON.stringify(output)+'}'
-            console.log(jsonstr);
+            
             res.send(jsonstr);
         }
     })

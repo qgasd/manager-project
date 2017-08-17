@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Ipconfigs } from "app/checkLogin/ipconfigs";
 @Component({
     moduleId: module.id,
     selector: 'my-dashboard',
