@@ -17,7 +17,7 @@ router.post('/search',function(req,res,next){
     
     var pageNum=req.body.page;
     var pagePer=req.body.itemsPerPage;
-    var searchSql="select * from int_information where 1=1 ";
+    var searchSql="select * from int_information where state='active'";
     if(serviceNum!=undefined&&serviceNum!=null&&serviceNum!=''){
         searchSql+=" and int_service_num = "+serviceNum+"";
     }

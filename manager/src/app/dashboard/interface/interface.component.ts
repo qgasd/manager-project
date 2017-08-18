@@ -35,7 +35,7 @@ public choseItem:ofInterface;
   public maxSize:number = 10;
   public currentPage: number = 1;//当前页
   public smallnumPages: number = 0;
-  public itemsPerPage:number = 2;//当前选择10条一页
+  public itemsPerPage:number = 10;//当前选择10条一页
   public eventData:any;
   public choosedata:ofInterface;
 //实现对象的观察1
