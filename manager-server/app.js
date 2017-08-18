@@ -21,6 +21,10 @@ app.all("*", function (req,res,next) {
   let allowedOrigins = [
     "http://localhost:4200",
     "http://172.21.21.254:4200",
+    "http://172.21.21.68",
+    "http://172.21.21.210",
+    "http://172.21.21.254",
+    "http://172.21.21.223"
   ];
 　// 这里是允许跨域的的domain列表
   let origin = req.headers.origin;

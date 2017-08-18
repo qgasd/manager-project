@@ -3,8 +3,9 @@ import {dIomock } from "../interface-mock-data/inputD3";
 import { ActivatedRoute, Params,Router} from '@angular/router';
 import { InterfaceService } from "../interface-service/interface-service";
 import { ofInterface } from '../interface-mock-data/mock-data';
-
+import { Ipconfigs } from "app/checkLogin/ipconfigs";
 import * as d3 from "d3";
+import {Location} from "@angular/common";
 @Component({
   selector: 'app-interface-inpd3',
   templateUrl: './interface-inpd3.component.html',
@@ -13,12 +14,8 @@ import * as d3 from "d3";
 export class InterfaceInpd3Component implements OnInit {
   public selIdDate:ofInterface;
   public id : number;
-  public url = 'http://localhost:3000/interfaceRefrence/serach';
-  constructor(public interfaceservice:InterfaceService,public route:ActivatedRoute ) { 
-      //this.route.params.switchMap((params:Params)=>this.interfaceservice.getSelId(+params['id'])).subscribe(selIdDate=>{this.selIdDate=selIdDate;this.dMethod();console.log(this.selIdDate)})
-   
-    
-    }
+  public url = new Ipconfigs().localhostUrl+'/interfaceRefrence/serach';
+  constructor(public interfaceservice:InterfaceService,public route:ActivatedRoute,public location :Location ) { }
 @ViewChild('dcontainer')
 private d3Container:ElementRef
   ngOnInit() {
@@ -196,4 +193,7 @@ console.log(root)
   
 });
  }
+ goBack(){
+  this.location.back()
+}
 }
