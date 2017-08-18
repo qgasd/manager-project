@@ -4,13 +4,14 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 import { ofBasicParameter } from '../basicParameter-mock-data/mock-data';
 import { Location }               from '@angular/common';
+import { Ipconfigs } from "app/checkLogin/ipconfigs";
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 @Injectable()
 export class BasicParameterService {
-  public basicParameterUrla = "http://localhost:3000/basicParameter";
-  public basicParameterUrld = "http://localhost:3000/basicParameter/del";
+  public basicParameterUrla = new Ipconfigs().localhostUrl+"/basicParameter";
+  public basicParameterUrld = new Ipconfigs().localhostUrl+"/basicParameter/del";
   public selIdData:ofBasicParameter;
 
   constructor(private http: Http,private location:Location){ }
@@ -19,7 +20,7 @@ export class BasicParameterService {
    * 新增数据
    * */
   public AddDatas(Adatas:ofBasicParameter):Promise<ofBasicParameter>{
-   return this.http.post('http://localhost:3000/basicParameter/add',Adatas,{headers:this.headers})
+   return this.http.post( new Ipconfigs().localhostUrl+'/basicParameter/add',Adatas,{headers:this.headers})
                   .toPromise()
                   .then(res=>{res.json().data as ofBasicParameter;
                     if(res.json().success){                       
@@ -32,7 +33,7 @@ export class BasicParameterService {
    * 获取全部的数据
    */
   public getSdate():Observable<ofBasicParameter[]>{
-     return this.http.post('http://localhost:3000/basicParameter',"").map(
+     return this.http.post( new Ipconfigs().localhostUrl+'/basicParameter',"").map(
      res=>{
        let result = res.json();
        console.log(result)      
