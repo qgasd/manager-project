@@ -10,13 +10,13 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 @Injectable()
 export class InterfaceService {
-  public interfaceUrl ="assets/mock-data/interface.json";
   public ipurl = new Ipconfigs().localhostUrl;
-  public interfaceUrla = this.ipurl+"/interface";
-  public interfaceUrld = this.ipurl+"/interface/delete";
-  public interfaceurlS= this.ipurl+"/interface/search";
-  public interfaceurlU= this.ipurl+"/interface/update";
-  public interfaceurl = this.ipurl+"/interfaceRefrence/serach";
+  public interfaceUrl = "assets/mock-data/interface.json";
+  public interfaceUrla = this.ipurl + "/interface";
+  public interfaceUrld = this.ipurl + "/interface/delete";
+  public interfaceurlS= this.ipurl + "/interface/search";
+  public interfaceurlU= this.ipurl + "/interface/update";
+  public interfaceurl = this.ipurl + "/interfaceRefrence/serach";
   public selIdData:ofInterface;
 
   constructor(private http: Http,private location:Location){ }
