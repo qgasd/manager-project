@@ -14,6 +14,8 @@ import { InterfaceRefrenceComponent } from './interface/interface-refrence/inter
 import { InterfaceInpd3Component } from './interface/interface-inpd3/interface-inpd3.component';
 import {InterfaceIoComponent} from './interface/interface-io/interface-io.component';
 import { PaginationModule } from 'ng2-bootstrap/pagination';
+import { BasicParameterComponent } from './basicParameter/basicParameter.component';
+import { BasicParameterService } from './basicParameter/basicParameter-service/basicParameter-service';
 @NgModule({
   imports: [
     CommonModule,
@@ -21,7 +23,22 @@ import { PaginationModule } from 'ng2-bootstrap/pagination';
     RouterModule.forChild(dashroutes),
     PaginationModule.forRoot()
   ],
-  declarations: [DashboardComponent,InterfaceInpd3Component,InterfaceIoComponent,HomeComponent,MenuComponent, InterfaceComponent, InterfaceDetaileComponent,InterfaceRefrenceComponent ],
-  providers:[InterfaceService,InterfaceIoService]
+  declarations: [
+    DashboardComponent,
+    InterfaceInpd3Component,
+    HomeComponent,
+    MenuComponent, 
+    InterfaceComponent, 
+    InterfaceDetaileComponent,
+    InterfaceRefrenceComponent,
+    BasicParameterComponent,
+    InterfaceIoComponent 
+  ],
+  providers:[
+    InterfaceService,
+    BasicParameterService,
+    InterfaceIoService
+  ]
+  
 })
 export class DashboardModule { }

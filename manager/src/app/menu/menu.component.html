@@ -1,23 +1,4 @@
- <!--<nav class="navbar navbar-default" role="navigation">
-	<div class="container-fluid"> 
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">导航</a>
-    </div>
-    <div>
-         <ul class="nav navbar-nav" *ngFor="let m of menus">
-            <li class=""><a href="javascript:void(0)" *ngIf="m.children.length<1">{{m.title}}</a></li>
-            <li class="dropdown" ngbDropdown>
-                <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle *ngIf="m.children.length>0">
-                    {{m.title}} <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right" *ngFor="let c of m.children">
-                    <li class="dropdown-item" ><a href="javascript:void(0)">{{c.title}}</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-	</div>
-</nav>-->
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -37,8 +18,8 @@
         <li class="dropdown" *ngFor="let list of menulist">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{list.name}} <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/dashboard/interface">111</a></li>
-            <li *ngFor="let item of list.ncontent"><a [href]="item.url">{{item.pname}}</a></li>
+            <li><a [routerLink]="['/dashboard/interface']">接口</a></li>
+            <li *ngFor="let item of list.ncontent"><a [routerLink]="item.url">{{item.pname}}</a></li>
           </ul>
         </li>
       </ul>
@@ -47,7 +28,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{name}} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="">个人资料</a></li>
-            <li><a href="/resetpassword">重置密码</a></li>
+            <li><a [routerLink]="['/resetpassword']">重置密码</a></li>
             <li role="separator" class="divider"></li>
             <li><a  (click)="logoout()">注销</a></li>
           </ul>

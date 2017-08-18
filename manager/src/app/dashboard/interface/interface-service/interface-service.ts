@@ -59,26 +59,19 @@ public getSelId(id:number):Observable<ofInterface>{
       console.log(result);
       return result;
     });
-  // return  this.getSdate().toPromise().then(
-  //    res=>   
-  //     res.find(selIdData=>
-  //    (+selIdData.int_service_num)===id)
-
-  //    //返回这个选中的东西
-  //    ).catch(this.handleError);
 }
 /**
  * 删除功能 
  */
 private headers = new Headers({'Content-Type':'application/json'});
-deleteInt(id:number):Promise<void>{
-   const url = `${this.interfaceUrld}/${id}`;
-   console.log(url)
-   console.log(`${this.interfaceUrld}`)
-   return this.http.delete(url,{headers: this.headers})
-   .toPromise()
-   .then(()=>null)
-   .catch(this.handleError)
+deleteCbox(arrayDate:Array<string>):Promise<void>{
+  const url = `${this.interfaceUrld}/${arrayDate}`;
+  console.log(url)
+  //console.log(`${this.interfaceUrld}`)
+  return this.http.delete(url,{headers: this.headers})
+  .toPromise()
+  .then(()=>null)
+  .catch(this.handleError)
 }
 /**
  * 多条件搜索

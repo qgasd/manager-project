@@ -6,13 +6,14 @@ var db = require('../public/javascripts/mysql.js');
 /**
  * 查询基础参数列表页
  */
-router.get("/",function(req,res,next){
-    db.query("select * from basic_parameter",function(err,rows){
+router.post("/",function(req,res,next){
+    db.query("select * from bas_parameter",function(err,rows){
         if(err){
             console.log("查询错误："+err);
         }else {
-            console.log(JSON.stringify(rows));
-            res.send (JSON.stringify(rows));
+            var data = JSON.stringify(rows);
+            console.log(data);           
+            res.send (data);
         }
     });
 });
@@ -20,20 +21,16 @@ router.get("/",function(req,res,next){
 /**
  * 添加参数
  */
-// router.get("/add",function(req,res,next){
-//     res.render("add");
-// });
-router.get("/add",function(req,res,next){
-    var type = 'w';//req.body.type;
-    var parent = 'e';//req.body.parent;
-    var key = 't';//req.body.key;
-    var value = 'o';//req.body.value;
-    db.query("insert into basic_parameter(type,parent,`key`,`value`) values('"+type+"','"+parent+"','"+key+"','"+value+"')",function(err,rows){
+router.post("/add",function(req,res,next){
+    var type = req.body.Type;
+    var parent = req.body.Parent;
+    var key = req.body.Key;
+    var value = req.body.Value;
+    db.query("insert into bas_parameter(type,parent,`key`,`value`) values('"+type+"','"+parent+"','"+key+"','"+value+"')",function(err,rows){
         if(err){
             console.log("添加错误："+err);
         }else {
-           // console.log(JSON.stringify(rows));
-            res.redirect("/basicParameter");
+            console.log("添加成功！");
         }
     });
 });
@@ -41,15 +38,14 @@ router.get("/add",function(req,res,next){
 /**
  * 删除参数
  */
-router.get("/del/id",function(req,res){
+router.delete("/del/:id",function(req,res){
     var id = req.params.id;
-    db.query("delete from basic_parameter where ID = " + id,function(err,rows){
+    db.query("delete from bas_parameter where ID = " + id,function(err,rows){
         if(err){
             console.log("删除失败",err);
-            //res.send("删除失败"+err);
         }else {
-            //console.log(JSON.stringify(rows));
-            res.redirect("/basicParameter");
+            console.log("删除成功！");
+            res.send({success:true,message:"删除成功！"});
         }
     });
 });
@@ -64,7 +60,6 @@ router.get("/toUpdate/:id",function(req,res,next){
     db.query(sql,function(err,rows){
         if(err){
             console.log("修改页面跳转失败"+err);
-            //res.send("修改页面跳转失败");
         }else {
             res.render("update",{datas:rows});
         }

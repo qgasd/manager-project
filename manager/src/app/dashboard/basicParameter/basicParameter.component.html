@@ -1,0 +1,127 @@
+<div class="">
+  <form class="form-inline">
+  <div class="form-group">
+    <div class="input-group" col-md-8>
+      <input type="text" #seachInterface (keyup)="searchInter(seachInterface.value)" class="form-control" id="exampleInputAmount" placeholder="类型或者父级参数">
+    </div>
+  </div>
+  <button type='button' class="btn btn-primary"  data-toggle="modal" data-target="#myModal">高级搜索</button>
+  <button type='button' class="btn btn-primary"  data-toggle="modal" data-target="#myModal2">新增</button>
+</form>
+<div class="searchAlertcontainer">
+    <form>
+      <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+         <tr>
+           <th>操作</th>
+           <th>基础参数编号</th> 
+           <th>基础参数类型</th>
+           <th>父级参数</th>
+           <th>键</th>
+           <th>值</th>
+         </tr>
+         </thead>
+         <tbody>
+         
+           <tr *ngFor='let basic of basicdatas'>
+             <td>
+               <button class='btn btn-info' type="button" (click)="editCon()"><span class="glyphicon glyphicon-pencil"></span></button>
+               <button class='btn btn-info' type="button" (click)='deleteInt(basic);$event.stopPropagation()'><span class="glyphicon glyphicon-remove-circle"></span></button>
+               <button class='btn btn-info' type="button" (click)="EditUpdatec(basic)">保存</button>
+             </td>
+              <td>
+               <span name="ID">{{basic.ID}}</span>
+                <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='basic.ID' name="ID">
+             </td>
+             <td>
+               <span name="Type">{{basic.Type}}</span>
+                <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='basic.Type' name="Type">
+             </td>
+              <td>
+               <span name="Parent">{{basic.Parent}}</span>
+                <input type='text'  class='flagclass' *ngIf="flag2" [(ngModel)]='basic.Parent' name="Parent">
+             </td>
+              <td>
+               <span name="Key">{{basic.Key}}</span>
+                <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='basic.Key' name="Key">
+             </td>
+              <td>
+               <span name="Value">{{basic.Value}}</span>
+                <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='basic.Value' name="Value">
+             </td>             
+           </tr>
+         </tbody>
+      </table>
+      </div>
+    </form>
+</div> 
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel2"></h4>
+      </div>
+      <div class="modal-body">
+        <div class="malert">
+              <form class="form-horizontal" #mulSearchAdd="ngForm"  (ngSubmit)="mulSearchAdd.form.valid && onsubmit(mulSearchAdd)" novalidate class="form-horizontal" role="form">
+                <div  ngModelGroup="AddMultS" #AddMultS="ngModelGroup">
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">类型</label>
+                  <div class="col-sm-10">
+                    <input type="text" [(ngModel)]='AddMultS.Type' name="Type" #Type='ngModel' class="form-control" required maxlength="10"  placeholder="基础参数类型">
+                       <div [hidden]="Type.valid || Type.pristine" class="text-danger">
+                        <p *ngIf="Type.errors?.maxlength">基础参数类型为10</p>
+                        <p *ngIf="Type.errors?.required">必须输入基础参数类型</p>
+                      </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">父级参数</label>
+                  <div class="col-sm-10">
+                    <input type="text" [(ngModel)]='AddMultS.Parent' name="Parent" #Parent='ngModel' class="form-control" required maxlength="10"  placeholder="父级参数">
+                      <div [hidden]="Parent.valid ||Parent.pristine" class="text-danger">
+                        <p *ngIf="Parent?.maxlength">父级参数最大字符为10</p>
+                        <p *ngIf="Parent.errors?.required">必须输入父级参数</p>
+                      </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">键</label>
+                  <div class="col-sm-10">
+                    <input type="text"  [(ngModel)]='AddMultS.Key' name="Key" #Key='ngModel' class="form-control" required maxlength="10"  placeholder="键">
+                      <div [hidden]="Key.valid || Key.pristine" class="text-danger">
+                        <p *ngIf="Key?.maxlength">小键最大字符为10</p>
+                        <p *ngIf="Key?.required">必须输入键</p>
+                      </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">值</label>
+                  <div class="col-sm-10"> 
+                    <input type="text"  [(ngModel)]='AddMultS.Value' name="Value" #Value='ngModel' class="form-control" required maxlength="10"  placeholder="值">
+                      <div [hidden]="Value.valid || Value.pristine" class="text-danger">
+                        <p *ngIf="Value.errors?.maxlength">值最大字符为10</p>
+                        <p *ngIf="Value.errors?.required">必须输入值</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="modal-footer">  
+                  <button type="button" class="btn btn-danger pull-right" [disabled]="mulSearchAdd.invalid" (click)="addSave(AddMultS.value)" data-dismiss="modal" aria-label="Close">保存</button>
+                  <!-- 实现添加数据后文本框中的内容为空-->
+                 <button type="button" class="btn btn-danger pull-right"  data-dismiss="modal" aria-label="Close" aria-hidden="true">取消</button>
+                </div>
+                </div>
+                 
+              </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</div> 
+<pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage" class="pagination-sm"
+            previousText="&lsaquo;" [maxSize]='maxSize' [itemsPerPage]='itemsPerPage' nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (click)="loadData()"  (pageChanged)="pageChanged($event)"></pagination>
+</div>

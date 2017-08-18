@@ -5,7 +5,7 @@
                 <div class="row">    
                     <div class="col-md-12">          
                         <h1  class='htitle'>研发管理门户</h1>
-                        <form name="form" >
+                        <form name="form" (keyup.enter)="keyEnter(name.value,password.value,ischecked.checked)">
                             <div class="form-content">
                                 <div class="form-group" >
                                     <input type="text"  name="name" class="form-control input-underline input-lg"  placeholder="账号"  #name required />                        

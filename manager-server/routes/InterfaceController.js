@@ -126,18 +126,28 @@ router.post('/insert',function(req, res, next){
 });
 //删除一条数据
 router.delete("/delete/:id",function(req,res,next){
-    var id=req.params.id;
-
-    var deleteSql="update int_information set state='hidden' where int_service_num="+id;//此处进行逻辑删除
+    const id=req.params.id+'';
+    var sid = id.split(',');
+    console.log(sid.length);
+    var num;
+    for(var n in sid){
+        console.log(sid[n]);
+    
+    var deleteSql="update int_information set state='hidden' where int_service_num="+sid[n];//此处进行逻辑删除
     db.query(deleteSql,function(err,rows){
         if(err){
             console.log(new Date()+"删除失败！"+err);
         }
         else{ 
             console.log(new Date()+"删除成功！");
-            res.send({success:true,message:"删除成功！"});
+            console.log(rows);
+            num++;
         }
     });
+    if(num==sid.length){
+        res.send({success:"cg"});
+    }
+}
 });
 // router.get("/delete/:id",function(req,res,next){
 //     var id=req.params.id;
@@ -184,6 +194,7 @@ router.post("/update",function(req,res,next){
         }
         else{
             console.log(new Date()+"修改成功！");
+            
         }
     })
 });
