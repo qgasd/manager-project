@@ -1,0 +1,30 @@
+.multsearch{
+    padding:30px 0;
+}
+.searchAlertcontainer{
+    margin-top:20px;
+}
+
+.malert{
+
+ 
+
+}
+.malert .control-label{
+    color:#000;
+    
+}
+.malert .modal-footer button{
+   margin-left:10px;
+}
+.searchAlertcontainer td{position:relative;}
+.flagclass{position:absolute;left:0;vertical-align: middle;z-index:3;}
+
+
+/*@media (max-width: 767px)
+.main-sidebar {
+    -webkit-transform: translate(-230px, 0);
+    -ms-transform: translate(-230px, 0);
+    -o-transform: translate(-230px, 0);
+    transform: translate(-230px, 0);
+}*/

@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { InterfaceRefrenceComponent } from './interface/interface-refrence/interface-refrence.component';
 import { InterfaceInpd3Component } from './interface/interface-inpd3/interface-inpd3.component';
 import { PaginationModule } from 'ng2-bootstrap/pagination';
+import { BasicParameterComponent } from './basicParameter/basicParameter.component';
+import { BasicParameterService } from './basicParameter/basicParameter-service/basicParameter-service';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +21,7 @@ import { PaginationModule } from 'ng2-bootstrap/pagination';
     RouterModule.forChild(dashroutes),
     PaginationModule.forRoot()
   ],
-  declarations: [DashboardComponent,InterfaceInpd3Component,HomeComponent,MenuComponent, InterfaceComponent, InterfaceDetaileComponent,InterfaceRefrenceComponent ],
-  providers:[InterfaceService]
+  declarations: [DashboardComponent,InterfaceInpd3Component,HomeComponent,MenuComponent, InterfaceComponent, InterfaceDetaileComponent,InterfaceRefrenceComponent,BasicParameterComponent ],
+  providers:[InterfaceService,BasicParameterService]
 })
 export class DashboardModule { }
