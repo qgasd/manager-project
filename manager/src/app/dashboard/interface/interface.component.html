@@ -9,6 +9,7 @@
   <button type='button' class="btn btn-primary"  data-toggle="modal" data-target="#myModal2">新增</button>
   <!--- 这里一定要改为button如果是submit他会提交并且跳转页面然后报错-->
 </form>
+<!-- 搜索-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -106,6 +107,7 @@
     </div>
   </div>
 </div>
+<!-- 新增-->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -120,7 +122,8 @@
                 <div class="form-group">
                   <label  class="col-sm-2 control-label">软件产品编号</label>
                   <div class="col-sm-10">
-                    <input type="text" [(ngModel)]='AddMultS.software_num' name="software_num" #software_num='ngModel' class="form-control" required maxlength="20"  placeholder="软件产品条线名称">
+                        <input type="number" [(ngModel)]='AddMultS.software_num' name="software_num" #software_num='ngModel' class="form-control" required maxlength="20"  placeholder="软件产品条线名称">
+               
                        <div [hidden]="software_num.valid || software_num.pristine" class="text-danger">
                         <p *ngIf="software_num.errors?.maxlength">软件产品编号最大字符为20</p>
                         <p *ngIf="software_num.errors?.required">必须输入软件产品编号</p>
@@ -150,20 +153,24 @@
                 <div class="form-group">
                   <label  class="col-sm-2 control-label">状态</label>
                   <div class="col-sm-10"> 
-                    <input type="text"  [(ngModel)]='AddMultS.state' name="state" #state='ngModel' class="form-control" required maxlength="10"  placeholder="状态">
+                    <select   [(ngModel)]='AddMultS.state' name="state" #state='ngModel' class="form-control" required maxlength="10"  placeholder="状态">
+                       <option (ngModel)="state">active</option>
+                       <option (ngModel)="state">hidden</option>
+                    </select>
+              
                       <div [hidden]="state.valid || state.pristine" class="text-danger">
-                        <p *ngIf="state.errors?.maxlength">状态最大字符为10</p>
                         <p *ngIf="state.errors?.required">必须输入状态</p>
                     </div>
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group"><!--  && !submitted  当美誉通过验证的时候让用户输入中文或者英文-->
                   <label  class="col-sm-2 control-label">接口中文名称</label>
                   <div class="col-sm-10">
                     <input type="text" [(ngModel)]='AddMultS.int_name_cn' name="int_name_cn" #int_name_cn='ngModel' class="form-control"  required maxlength="200" pattern="^[\u4E00-\u9FA5\uF900-\uFA2D]*"  placeholder="中文名称">
-                    <div [hidden]="int_name_cn.valid || int_name_cn.pristine" class="text-danger">
+                    <div [hidden]="int_name_cn.valid || (int_name_cn.pristine && !submitted)" class="text-danger">
                         <p *ngIf="int_name_cn.errors?.maxlength">接口中文名称最大字符为200</p>
                         <p *ngIf="int_name_cn.errors?.required">必须输入中文名称</p>
+                        <p *ngIf="!submitted">请输入中文</p>
                     </div>
                   </div>
                 </div>
@@ -171,9 +178,10 @@
                   <label  class="col-sm-2 control-label">接口英文名称</label>
                   <div class="col-sm-10">
                     <input type="text" [(ngModel)]='AddMultS.int_name_en' name="int_name_en" #int_name_en='ngModel' class="form-control" required maxlength="100" pattern="^[a-zA-Z]*" placeholder="int_name_en">
-                    <div [hidden]="int_name_en.valid || int_name_en.pristine" class="text-danger">
+                    <div [hidden]="int_name_en.valid || (int_name_en.pristine && !submitted)" class="text-danger">
                         <p *ngIf="int_name_en.errors?.maxlength">接口英文名称最大字符为200</p>
                         <p *ngIf="int_name_en.errors?.required">必须输入英文名称</p>
+                        <p *ngIf="!submitted">请输入英文</p>
                     </div>
                   </div>
                 </div>
@@ -226,78 +234,83 @@
         <thead>
          <tr>
            <th>操作</th>
-           <th>接口服务编号</th> 
-           <th>软件产品编号</th>
-           <th>大类</th>
-           <th>小类</th>
+        <!--   <th>接口服务编号</th> -->
+           <th *ngIf="flag4">软件产品编号</th>
+           <th *ngIf="flag4">大类</th>
+           <th *ngIf="flag4">小类</th>
            <th>状态</th>
            <th>接口中文名称</th>
            <th>接口英文名称</th>
-           <th>功能描述</th>
-           <th>URL</th>
-           <th>备注</th>
+           <th *ngIf="flag4">功能描述</th>
+           <th *ngIf="flag4">URL</th>
+           <th *ngIf="flag4">备注</th>
          </tr>
          </thead>
          <tbody>
-           <!--  -->
-           <tr *ngFor='let itemtr of interdatas'>
+           <!-- 设置当state==hidden的时候着一行tr隐藏 -->
+           <tr  *ngFor='let itemtr of interdatas'> 
              <td>   
-               <!-- <a [routerLink]="['/dashboard/interface/detail',itemtr.int_service_num]">详情信息</a>
-               <a (click)='deleteInt(itemtr)'>删除</a>
-               <a>输入输出</a>
-               <a [routerLink]="['/dashboard/interface/refrence',itemtr.int_service_num]">影响范围</a> -->
-               <button class='btn btn-info' type="button" (click)="editCon()"><span class="glyphicon glyphicon-pencil"></span></button>
-               <button class='btn btn-info' type="button" (click)='deleteInt(itemtr);$event.stopPropagation()'><span class="glyphicon glyphicon-remove-circle"></span></button>
-               <button class='btn btn-info' type="button">I/O</button>
-               <button class='btn btn-info' type="button" [routerLink]="['/dashboard/interface/inputD3',itemtr.int_service_num]">影响范围</button>
-               <button class='btn btn-info' type="button" (click)="EditUpdatec(itemtr)">保存</button>
+               <a href="javascript:void(0);"  (click)="editCon()"><span class="glyphicon glyphicon-pencil"></span></a>
+               <!--<a href="javascript:void(0);"  (click)='deleteInt(itemtr);$event.stopPropagation()'><span class="glyphicon glyphicon-remove-circle"></span></a>-->
+               <a href="javascript:void(0);" [routerLink]="['/dashboard/interface/io',itemtr.int_service_num]">I/O</a>
+               <a href="javascript:void(0);" [routerLink]="['/dashboard/interface/inputD3',itemtr.int_service_num]"><span class="glyphicon glyphicon-link"></span></a>
+               <a href="javascript:void(0);" (click)="EditUpdatec(itemtr)"><span class="glyphicon glyphicon-saved"></span></a>
+               <!--<input type='checkbox' [(ngModel)]='itemtr.isChecked' name="isChecked">-->
+               <input type='checkbox' class="checkboxdete" [ngModel]="checkBox"  (click)="deleteCheck($event.target.checked,itemtr)" name="isChecked">
              </td>
-              <td>
-               <span name="int_service_num">{{itemtr.int_service_num}}</span>
-                <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtr.int_service_num' name="int_service_num">
-             </td>
-             <td>
+             <td *ngIf="flag4">
                <span name="software_num">{{itemtr.software_num}}</span>
-                <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtr.software_num' name="software_num">
+                <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtr.software_num' name="software_num" placeholder="itemtr.software_num">
              </td>
-              <td>
+              <td *ngIf="flag4">
                <span name="great_class">{{itemtr.great_class}}</span>
-                <input type='text'  class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.great_class' name="great_class">
+                <input type='text'  class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.great_class' name="great_class" placeholder="itemtr.great_class">
              </td>
-              <td>
+              <td *ngIf="flag4">
                <span name="less_class">{{itemtr.less_class}}</span>
-                <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.less_class' name="less_class">
+                <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.less_class' name="less_class" placeholder="itemtr.less_class">
              </td>
               <td>
                <span name="state">{{itemtr.state}}</span>
-                <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.state' name="state">
+                <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.state' name="state" placeholder="itemtr.state">
              </td>
               <td>
                <span name="int_name_cn">{{itemtr.int_name_cn}}</span>
-                <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.int_name_cn' name="int_name_cn">
+                <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.int_name_cn' name="int_name_cn" placeholder="itemtr.int_name_cn">
              </td>
               <td>
                <span name="int_name_en">{{itemtr.int_name_en}}</span>
-                <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.int_name_en' name="int_name_en">
+                <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.int_name_en' name="int_name_en" placeholder="itemtr.int_name_en">
              </td>
-              <td>
+              <td *ngIf="flag4">
                <span name="description">{{itemtr.description}}</span>
-                <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.description' name="description">
+                <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.description' name="description" placeholder="itemtr.description">
              </td>
-              <td>
+              <td *ngIf="flag4">
                <span name="URL">{{itemtr.URL}}</span>
                 <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.URL' name="URL">
              </td>
-               <td>
+               <td *ngIf="flag4">
                <span name="sremark">{{itemtr.remark}}</span>
-                <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtr.remark' name="remark">
+                <input type='text' class='flagclass' *ngIf="flag2" [(ngModel)]='itemtr.remark' name="remark">
              </td>
+           </tr>
+           <tr>
+            <div class="checkbox">
+                    <label>
+                      <input type="checkbox" (click)="choseALL(interdatas)"> 全选
+                    </label>
+                  </div>
+            <button class="btn btn-success"  type="button"  (click)="deleteCC(interdatas)">删除</button>
            </tr>
          </tbody>
       </table>
       </div>
+     
+ 
     </form>
 </div> 
+<!-- (click)="loadData()"  -->
 <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage" class="pagination-sm"
-            previousText="&lsaquo;" [maxSize]='maxSize' [itemsPerPage]='itemsPerPage' nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (click)="loadData()"  (pageChanged)="pageChanged($event)"></pagination>
+            previousText="&lsaquo;" [maxSize]='maxSize' (numPages)="smallnumPages = $event" [itemsPerPage]='itemsPerPage' nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (click)="loadData()" (pageChanged)="pageChanged($event)"></pagination>
 </div>

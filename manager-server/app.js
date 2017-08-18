@@ -13,7 +13,8 @@ var interfaceRefrenceService = require('./routes/interfaceRefrenceController');
 var basicParameterService = require('./routes/BasicParameterController');
 var employeesService = require('./routes/EmployeesController');
 var softwareProductService = require('./routes/SoftwareProductController');
-var interfaceRefrence = require('./routes/interfaceRefrenceController'); 
+var interfaceRefrence = require('./routes/interfaceRefrenceController');
+var interfaceIOService = require('./routes/interfaceIOController');
 var app = express();
 //设置跨域访问
 app.all("*", function (req,res,next) {
@@ -89,6 +90,7 @@ app.use('/employees',employeesService);
 app.use('/softwareProduct',softwareProductService);
 app.use('/interface',interfaceService);
 app.use('/interfaceRefrence',interfaceRefrenceService);
+app.use('/interfaceIO',interfaceIOService)
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //   var err = new Error('Not Found');

@@ -4,7 +4,6 @@ var db = require('../public/javascripts/mysql.js');
 //搜索功能
 router.post('/search',function(req,res,next){
     var data=req.body;
-    console.log(JSON.stringify(data));
     var serviceNum=req.body.int_service_num;
     var softWare=req.body.software_num;
     var greatClass=req.body.great_class;
@@ -57,14 +56,13 @@ router.post('/search',function(req,res,next){
     console.log("测试语句：:"+searchSql);//测试sql语句
     db.query(searchSql,function(err,rows){//执行条件查询语句
         if(err){
-            console.log("查询错误"+err);
+            console.log(new Date()+"查询错误"+err);
             res.send({success:false,message:'查询失败!'});
         }
         else{
             var datas=JSON.stringify(rows);
             var data='{"total":'+rows.length+',"items":'+datas+'}';
-            console.log("查询成功");
-            console.log(data);
+            console.log(new Date()+"查询成功");
             res.send (data);
         }
     });
@@ -75,18 +73,18 @@ router.post('/', function(req, res, next) {
     console.log(JSON.stringify(req.body));
     var pageNum=req.body.page;
     var pagePer=req.body.itemsPerPage;
-    var limitSql="select * from int_information";
+    var limitSql="select * from int_information where state='active'";
     if(pageNum!=null&&pageNum!=undefined&&pagePer!=null&&pagePer!=undefined){
         limitSql+=" limit "+(pageNum-1)*pagePer+", "+pagePer;
     }
     db.query(limitSql,function(err, rows){
         if(err){
-            console.log("查询错误："+limitSql+err);
+            console.log(new Date()+"查询错误："+limitSql+err);
         }
         else{
             var datas=JSON.stringify(rows);
             var data='{"total":'+rows.length+',"items":'+datas+'}';
-            console.log(data);
+            console.log(new Date()+data);
             res.send (data);
         }
     })
@@ -117,29 +115,39 @@ router.post('/insert',function(req, res, next){
                 "')";
     db.query(insertSql,function(err,rows){
         if(err){
-            console.log("新增失败！"+err);
+            console.log(new Date()+"新增失败！"+err);
             res.send({success:false,message:'新增失败！'});
         }
         else{
-            console.log("新增成功！");
+            console.log(new Date()+"新增成功！");
             res.send({success:true,message:'新增成功！'});
         }
     });
 });
 //删除一条数据
 router.delete("/delete/:id",function(req,res,next){
-    var id=req.params.id;
-
-    var deleteSql="update int_information set state='hidden' where int_service_num="+id;//此处进行逻辑删除
+    const id=req.params.id+'';
+    var sid = id.split(',');
+    console.log(sid.length);
+    var num;
+    for(var n in sid){
+        console.log(sid[n]);
+    
+    var deleteSql="update int_information set state='hidden' where int_service_num="+sid[n];//此处进行逻辑删除
     db.query(deleteSql,function(err,rows){
         if(err){
-            console.log("删除失败！"+err);
+            console.log(new Date()+"删除失败！"+err);
         }
         else{ 
-            console.log("删除成功！");
-            res.send({success:true,message:"删除成功！"});
+            console.log(new Date()+"删除成功！");
+            console.log(rows);
+            num++;
         }
     });
+    if(num==sid.length){
+        res.send({success:"cg"});
+    }
+}
 });
 // router.get("/delete/:id",function(req,res,next){
 //     var id=req.params.id;
@@ -182,10 +190,11 @@ router.post("/update",function(req,res,next){
             +"' where int_service_num="+serviceNum;
     db.query(updateSql,function(err,rows){
         if(err){
-            console.log("修改失败！"+err);
+            console.log(new Date()+"修改失败！"+err);
         }
         else{
-            console.log("修改成功！");
+            console.log(new Date()+"修改成功！");
+            
         }
     })
 });

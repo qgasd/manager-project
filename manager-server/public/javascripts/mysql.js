@@ -2,7 +2,7 @@
 var mysql=require("mysql");  
 var pool = mysql.createPool({  
     //host: '172.21.21.254',  
-    host: 'localhost',  
+    host: '172.21.21.210',  
     user: 'root',  
     password: '123456',  
     database: 'manager',  
