@@ -23,11 +23,11 @@ export class LoginService {
   logoout(){
     return this.http.get(new Ipconfigs().localhostUrl+'/logoout',{
         withCredentials:true,
-     }).map(//ad验证
+     }).map(
      res=>{
      this.mess = res.json().message;
      console.log(this.mess);
-    return this.mess;
+     return this.mess;
      });
   }  
 }

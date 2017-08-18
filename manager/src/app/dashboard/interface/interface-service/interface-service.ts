@@ -11,11 +11,12 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class InterfaceService {
   public interfaceUrl ="assets/mock-data/interface.json";
-  public interfaceUrla = new Ipconfigs().localhostUrl+"/interface";
-  public interfaceUrld = new Ipconfigs().localhostUrl+"/interface/delete";
-  public interfaceurlS= new Ipconfigs().localhostUrl+"/interface/search";
-  public interfaceurlU= new Ipconfigs().localhostUrl+"/interface/update";
-  public interfaceurl = new Ipconfigs().localhostUrl+"/interfaceRefrence/serach";
+  public ipurl = new Ipconfigs().localhostUrl;
+  public interfaceUrla = this.ipurl+"/interface";
+  public interfaceUrld = this.ipurl+"/interface/delete";
+  public interfaceurlS= this.ipurl+"/interface/search";
+  public interfaceurlU= this.ipurl+"/interface/update";
+  public interfaceurl = this.ipurl+"/interfaceRefrence/serach";
   public selIdData:ofInterface;
 
   constructor(private http: Http,private location:Location){ }
@@ -38,7 +39,7 @@ export class InterfaceService {
    * 获取全部的数据
    */
   public getSdate():Observable<ofInterface[]>{
-     return this.http.post(new Ipconfigs().localhostUrl+'/interface',"").map(
+     return this.http.post(this.ipurl+'/interface',"").map(
      res=>{
        let result = res.json();
        console.log(result)      
@@ -58,26 +59,19 @@ public getSelId(id:number):Observable<ofInterface>{
       console.log(result);
       return result;
     });
-  // return  this.getSdate().toPromise().then(
-  //    res=>   
-  //     res.find(selIdData=>
-  //    (+selIdData.int_service_num)===id)
-
-  //    //返回这个选中的东西
-  //    ).catch(this.handleError);
 }
 /**
  * 删除功能 
  */
 private headers = new Headers({'Content-Type':'application/json'});
-deleteInt(id:number):Promise<void>{
-   const url = `${this.interfaceUrld}/${id}`;
-   console.log(url)
-   console.log(`${this.interfaceUrld}`)
-   return this.http.delete(url,{headers: this.headers})
-   .toPromise()
-   .then(()=>null)
-   .catch(this.handleError)
+deleteCbox(arrayDate:Array<string>):Promise<void>{
+  const url = `${this.interfaceUrld}/${arrayDate}`;
+  console.log(url)
+  //console.log(`${this.interfaceUrld}`)
+  return this.http.delete(url,{headers: this.headers})
+  .toPromise()
+  .then(()=>null)
+  .catch(this.handleError)
 }
 /**
  * 多条件搜索
@@ -108,7 +102,7 @@ EditUpdate(Edatas:ofInterface):Promise<ofInterface>{
  * 新增数据
  * */
  public AddDatas(Adatas:ofInterface):Promise<ofInterface>{
-  return this.http.post('http://172.21.21.223:3000/interface/insert',Adatas,{headers:this.headers})
+  return this.http.post(this.ipurl+'/interface/insert',Adatas,{headers:this.headers})
                   .toPromise()
                   .then(res=>{res.json().data as ofInterface;
                     if(res.json().success){                       

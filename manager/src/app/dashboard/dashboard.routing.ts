@@ -13,7 +13,7 @@ export const dashroutes:Routes= [
     {
         path:"dashboard",component:DashboardComponent,
         children:[
-            {path:'',redirectTo:"/home",pathMatch:'full'},
+            {path:'',redirectTo:"/interface",pathMatch:'full'},
             //这里默认的是home这组件所以下面不写二级页面他默认的是home/detail所以在页面找interface是找不到的
             {path:'home',component:HomeComponent},
             {path:'interface',component:InterfaceComponent},

@@ -30,5 +30,10 @@ export class LoginComponent implements OnInit {
          });
             
     }
-
+    keyEnter(name: string, password: string, ischecked: any){
+        this.onLoggedin(name,password,ischecked)
+    }
+    // onLoginout(){
+    //     this.loginService.logoout()
+    // }
 }

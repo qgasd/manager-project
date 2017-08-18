@@ -12,6 +12,7 @@ import { Location }    from '@angular/common';
 })
 export class InterfaceComponent implements OnInit {
   public interdatas:ofInterface[];//通用的数组
+  public dedata:ofInterface;//shanc
   public cc:ofInterface[];
   public filterDatas:ofInterface[];
   public zbdatas: ofInterface[];//这是多条件查询的数据
@@ -26,7 +27,8 @@ export class InterfaceComponent implements OnInit {
 private searchTerms = new Subject<string>();//获取subject对象
 public jkfwdata:string;
 public flag3=false;//这是单条件查询的
-public choseItem:ofInterface;
+public choseItem=[];
+public chdates:ofInterface[];
 /**
  * 分页参数
  */
@@ -35,7 +37,7 @@ public choseItem:ofInterface;
   public maxSize:number = 10;
   public currentPage: number = 1;//当前页
   public smallnumPages: number = 0;
-  public itemsPerPage:number = 2;//当前选择10条一页
+  public itemsPerPage:number = 10;//当前选择10条一页
   public eventData:any;
   public choosedata:ofInterface;
 //实现对象的观察1
@@ -60,11 +62,6 @@ onResize(event) {
         this.flag4 = true;
       }
 }
-
-
- 
-
-
 
   searchInter(jkfw: string) {
     this.jkfwdata = jkfw;
@@ -107,6 +104,7 @@ onResize(event) {
     //this.loadData();
      //  console.log(this.interdatas)
     //console.log(this.checkVal.nativeElement.style.text) 
+   
   }
    /**
    * 过滤禁用状态的数据
@@ -124,6 +122,7 @@ onResize(event) {
                 this.interdatas = this.seardata;//隐藏状态被标记为禁用的数据
                // this.interdatas= this.interdatas.filter(h=>h.state !=='hidden') ;
                 this.totalItems = res['total'];
+                console.log(34324)
               }, error => { console.log(error) },
                 () => { }
               )
@@ -133,33 +132,18 @@ onResize(event) {
  /**
  *删除
  */
- deleteInt(itemdata: ofInterface):void { 
-    this.interfaceservice.deleteInt(itemdata.int_service_num).then(()=>
-     this.seardata = this.seardata.filter(h => h !== itemdata)
-    )
-    location.reload();
-}
-isCheck(item) {
-      return this.seardata.findIndex(value => value == item) > 0;      
-    }
+//  deleteInt(itemdata: ofInterface):void { 
+//     this.interfaceservice.deleteInt(itemdata.int_service_num).then(()=>
+//      this.seardata = this.seardata.filter(h => h !== itemdata)
+//     )
+//     location.reload();
+// }
+
 choseBox(item){
    this.choseItem = item;
    console.log(this.choseItem)
 }
-/*
-删除2
 
-*/ 
-deleteCheck(ac:ofInterface){
-  /*ac.forEach(element => {
-    this.interfaceservice.deleteCbox(element.isChecked).then(()=>{
-      this.seardata = this.seardata.filter()
-    })
-  });
-  */
-  this.seardata.splice(this.seardata.findIndex(value => value == ac), 1);
-  console.log(ac)
-}
  /**
  *新增
  */
@@ -195,15 +179,57 @@ goBack():void{
  * 表示编辑的时候input框出现
  */
 editCon(){
-  //获取当前的数据
   this.flag2 = true;
-  //this.flag2=!this.flag2;
   console.log(this.flag2)
- // console.log(selecdata)
-  //  selecdata.isEdit=!selecdata.isEdit;
-  //  location.reload();  
- //实现点击当前的按钮让当前input框能够呈编辑状态
+}
+  /*
+  批量删除2
+  这个方法是获取说有的选中的数据并且将他们作为一个数组
+  */
+  deleteCheck(check: boolean, cc: ofInterface) {
+    // this.isChecked = cc.isChecked;
+    // //先判断选中的数组里面是否包括当前值,includes目前不支持
+    var index: number = this.choseItem.indexOf(cc.int_service_num)//首次出现的位置
+    ////当前选择的就追加否则就移除
+     this.ArrayWay(check,cc);
+     console.log(check)
+    console.log(this.choseItem)
+    //如果选中的参数长度等于当前每一页显示的数量那么就设置全选的状态为真 
+  }
 
+  /**
+   * 数组去重
+   */
+  ArrayWay(check: boolean, aw: ofInterface) {
+     var index: number = this.choseItem.indexOf(aw.int_service_num)
+    if (check) {
+      if (index < 0) {
+        this.choseItem.push(aw.int_service_num)
+        console.log(this.choseItem)
+      }
+    } else {
+      if (index > -1) {//如果要检索的字符串值没有出现，则该方法返回 -1
+        this.choseItem = this.choseItem.filter((el, index) => {
+          return el != aw.int_service_num
+        })
+      }
+    }
+  }
+
+deleteCC(cc: ofInterface[]) {
+  console.log(cc)//cc是所有的数据
+  console.log(this.choseItem)
+  cc.forEach((el,index)=>{this.dedata = el})
+    this.interfaceservice.deleteCbox(this.choseItem).then(() => {
+  
+      this.seardata=this.seardata.filter((h)=>{h.int_service_num !==this.dedata.int_service_num})
+      console.log(this.seardata)
+  })
+  //this.getALLdata();
+ // console.log(this.seardata)
+  this.seardata = this.seardata
+  //location.reload();
+ 
 }
 /***
  * 
