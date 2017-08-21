@@ -1,7 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 a{color:red;}
 /*div{background:pink;}*/
-.node circle {
+.contentBox,.box{width:100%;}
+   .searchAlertcontainer .table>tbody>tr>td,.searchAlertcontainer  .table>tbody>tr>th, .searchAlertcontainer .table>tfoot>tr>td, .searchAlertcontainer .table>tfoot>tr>th,.searchAlertcontainer  .table>thead>tr>td, .table>thead>tr>th{
+    vertical-align: middle;
+}
+.node rect {
     cursor: pointer;
     fill: #fff;
     stroke: steelblue;
@@ -18,5 +22,24 @@ a{color:red;}
     stroke-width: 1.5px;
   }
 
+JavaScript
 
+.tooltip{
+position: absolute;
+width: 120;
+height: auto;
+font-family: simsun;
+font-size: 14px;
+text-align: center;
+border-style: solid; 
+border-width: 1px;
+background-color: white;
+border-radius: 5px;
+}
+.table td input[type="text"],.table td input[type="number"]{padding:0;width:100%;}
+.table td select{width:100%;height:23.43px;}/*这个设置select的宽高和input一样*/
+/*错误页面*/
+.error_box{width:40%;height: 40%;margin:16% auto 0;text-align: center;}
+.error_box img{width:100%;height:100%;}
+.error_box h2{padding-top:.5rem;font-size:1em;}
 
