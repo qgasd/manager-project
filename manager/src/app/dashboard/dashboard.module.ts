@@ -9,13 +9,13 @@ import { InterfaceComponent } from './interface/interface.component';
 import { InterfaceService } from './interface/interface-service/interface-service';
 import { InterfaceDetaileComponent } from './interface/interface-detaile/interface-detaile.component';
 import { FormsModule } from '@angular/forms';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { PaginationModule } from 'ng2-bootstrap/pagination';
 import { InterfaceInpd3Component } from './interface/interface-inpd3/interface-inpd3.component';
-import { PermissionGuard } from "app/guard/permission.guard";
-  import { focuss } from "app/guard/focus.guard";  
-  import { PostsComponent } from "app/dashboard/posts/posts.component";
+//import { PermissionGuard } from "app/guard/permission.guard";
+  //import { focuss } from "app/guard/focus.guard";  
+  //import { PostsComponent } from "app/dashboard/posts/posts.component";
   import { MenuService } from "app/menu/menu.service/menu.service";
-  import { selectDatasService } from "app/common-service/select-service";
+  //import { selectDatasService } from "app/common-service/select-service";
   import { InterfaceIoService } from "app/dashboard/interface/interface-io/interfaceIo-service";
   import { InterfaceIoComponent } from "app/dashboard/interface/interface-io/interface-io.component";
 //import { InterfaceDirective } from './interface/interface.directive';
@@ -27,7 +27,7 @@ import { PermissionGuard } from "app/guard/permission.guard";
     RouterModule.forChild(dashroutes),
     PaginationModule.forRoot()
   ],
-  declarations: [PostsComponent,DashboardComponent,HomeComponent,MenuComponent, InterfaceComponent, InterfaceDetaileComponent, InterfaceInpd3Component,InterfaceIoComponent],
-  providers:[InterfaceService,PermissionGuard,focuss,MenuService,selectDatasService,InterfaceIoService]
+  declarations: [DashboardComponent,HomeComponent,MenuComponent, InterfaceComponent, InterfaceDetaileComponent, InterfaceInpd3Component,InterfaceIoComponent],
+  providers:[InterfaceService,MenuService,InterfaceIoService]
 })
 export class DashboardModule { }

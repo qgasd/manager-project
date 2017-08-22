@@ -6,9 +6,9 @@ import { DashboardComponent } from "./dashboard.component";
 import { InterfaceComponent } from './interface/interface.component';
 import { InterfaceDetaileComponent } from './interface/interface-detaile/interface-detaile.component';
 import { InterfaceInpd3Component } from './interface/interface-inpd3/interface-inpd3.component';
-import {PermissionGuard} from '../guard/permission.guard';
-import { PostsComponent } from "app/dashboard/posts/posts.component";
-import { focuss } from "app/guard/focus.guard";
+//import {PermissionGuard} from '../guard/permission.guard';
+//import { PostsComponent } from "app/dashboard/posts/posts.component";
+//import { focuss } from "app/guard/focus.guard";
 import { InterfaceIoComponent } from "app/dashboard/interface/interface-io/interface-io.component";
 //import { AuthGuard } from "app/auth-guard.service";
 
@@ -27,7 +27,7 @@ export const dashroutes: Routes = [
             {path:'interface/detail/:id',component:InterfaceDetaileComponent},
             {path:'interface/inputD3',component:InterfaceInpd3Component},
             {path:'interface/io/:id',component:InterfaceIoComponent},
-            {path: 'posts', component: PostsComponent,canDeactivate:[focuss]}     
+            //{path: 'posts', component: PostsComponent,canDeactivate:[focuss]}     
         ]  
     }
 ]

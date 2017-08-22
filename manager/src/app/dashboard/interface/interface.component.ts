@@ -6,15 +6,15 @@ import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Location } from '@angular/common';
-import { selectDatasService } from "app/common-service/select-service";
+//import { selectDatasService } from "app/common-service/select-service";
 // import {MultiSelectModule} from 'primeng/primeng';
-import { ConfirmationService } from 'primeng/primeng';
+//import { ConfirmationService } from 'primeng/primeng';
 declare var $: any;
 @Component({
   selector: 'app-interface',
   templateUrl: './interface.component.html',
   styleUrls: ['./interface.component.css'],
-  providers: [ConfirmationService]
+  providers: []
 })
 export class InterfaceComponent implements OnInit {
   public interdatas: ofInterface[];//通用的数组
@@ -70,7 +70,7 @@ export class InterfaceComponent implements OnInit {
   public alertEdit = false;
   public alertAdd = false;
   //,private cdr: ChangeDetectorRef  ,private window: Window
-  constructor(public interfaceservice: InterfaceService, public location: Location, public sservice: selectDatasService, public confirmationService: ConfirmationService,public router:Router) {
+  constructor(public interfaceservice: InterfaceService, public location: Location, public router:Router) {
     //  let getWindow = () => {
     //       return window.innerWidth;
     //    };
@@ -326,9 +326,9 @@ export class InterfaceComponent implements OnInit {
 
   //这里是从后台获取删除后的数据，点击删除后的操作
   deleteCC(cc: ofInterface[]){
-    console.log(this.choseItem)
+    console.log(this.choseItem);
     this.interfaceservice.deleteCbox(this.choseItem).subscribe(res=>{
-      console.log(res)
+      console.log(res);
        this.deletdata = res['items']
        console.log(this.deletdata)
     }
