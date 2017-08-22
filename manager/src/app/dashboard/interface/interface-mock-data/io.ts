@@ -7,4 +7,6 @@ export class interfaceIO {
     field_type:string;
     example:string;
     describe:string;
+    int_name_cn:string;
+    int_name_en:string;
 }

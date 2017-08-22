@@ -1,11 +1,21 @@
     <div class="searchAlertcontainer">
+<<<<<<< HEAD
         <button type="button" class="btn btn-danger pull-right" (click)="goBack()">返回</button>       
         <button type='button' class="btn btn-primary"  data-toggle="modal" data-target="#myModal2">新增</button>
+=======
+      <div *ngIf="selIdDate2">
+          <h4 >{{selIdDate2.name_en}}</h4>
+          <button type="button" class="btn btn-danger pull-right" (click)="goBack()">返回</button>  
+      </div>   
+          
+>>>>>>> 2037288ddfaf6c705989ecccab9a1fbd3fae08cb
         <form>
           <div class="table-responsive">
           <table class="table table-striped">
             <thead>
              <tr>
+               <th>接口中文名称</th>
+               <th>接口英文名称</th>      
                <th>输入/输出</th>
                <th>输入输出字段英文名称</th>
                <th>输入输出字段中文名称</th>
@@ -17,6 +27,14 @@
              </thead>
              <tbody>
                <tr *ngFor='let itemtr of ioinputdata'>
+                  <td>
+                      <span name="int_name_cn">{{itemtr.int_name_cn}}</span>
+                       <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtr.int_name_cn' name="int_name_cn">
+                  </td>
+                  <td>
+                      <span name="int_name_en">{{itemtr.int_name_en}}</span>
+                       <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtr.int_name_en' name="int_name_en">
+                  </td>
                  <td>
                    <span name="type">{{itemtr.type}}</span>
                     <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtr.type' name="type">
@@ -47,6 +65,14 @@
                  </td>
                </tr>
                <tr *ngFor='let itemtrs of iooutdata'>
+                  <td>
+                      <span name="int_name_cn">{{itemtrs.int_name_cn}}</span>
+                       <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtrs.int_name_cn' name="int_name_cn">
+                  </td>
+                  <td>
+                      <span name="int_name_en">{{itemtrs.int_name_en}}</span>
+                       <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtrs.int_name_en' name="int_name_en">
+                  </td>
                     <td>
                       <span name="type">{{itemtrs.type}}</span>
                        <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtrs.type' name="type">
@@ -82,116 +108,7 @@
         </form>
     </div> 
 
-    <!-- <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel2"></h4>
-          </div>
-          <div class="modal-body">
-            <div class="malert">
-                  <form class="form-horizontal" #mulSearchAdd="ngForm"  (ngSubmit)="mulSearchAdd.form.valid && onsubmit(mulSearchAdd)" novalidate class="form-horizontal" role="form">
-                    <div  ngModelGroup="AddMultS" #AddMultS="ngModelGroup">
-                    <div class="form-group">
-                      <label  class="col-sm-2 control-label">接口编号</label>
-                      <div class="col-sm-10">
-                            <input type="number" [(ngModel)]='AddMultS.int_service_num' name="int_service_num" #int_service_num='ngModel' class="form-control" required maxlength="20"  placeholder="软件产品条线名称">
-                   
-                           <div [hidden]="software_num.valid || software_num.pristine" class="text-danger">
-                            <p *ngIf="int_service_num.errors?.required">必须输入接口编号</p>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label  class="col-sm-2 control-label">输入输出类型</label>
-                      <div class="col-sm-10">
-                        <input type="text" [(ngModel)]='AddMultS.type' name="type" #type='ngModel' class="form-control" required maxlength="10"  placeholder="输入输出类型">
-                          <div [hidden]="type.valid || type.pristine" class="text-danger">
-                            <p *ngIf="type.errors?.maxlength">最大字符为10</p>
-                            <p *ngIf="type.errors?.required">必须输入</p>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label  class="col-sm-2 control-label">输入输出字段英文名称</label>
-                      <div class="col-sm-10">
-                        <input type="text"  [(ngModel)]='AddMultS.name_en' name="name_en" #name_en='ngModel' class="form-control" required  placeholder="输入输出字段英文名称">
-                          <div [hidden]="name_en.valid || name_en.pristine" class="text-danger">
-                            <p *ngIf="name_en.errors?.required">必须输入</p>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label  class="col-sm-2 control-label">输入输出字段中文名称</label>
-                      <div class="col-sm-10">
-                        <input type="text"  [(ngModel)]='AddMultS.name_cn' name="name_cn" #name_cn='ngModel' class="form-control" required  placeholder="输入输出字段中文名称">
-                          <div [hidden]="name_cn.valid || name_cn.pristine" class="text-danger">
-                            <p *ngIf="name_cn.errors?.required">必须输入</p>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label  class="col-sm-2 control-label">输入输出字段类型</label>
-                      <div class="col-sm-10">
-                        <input type="text"  [(ngModel)]='AddMultS.field_type' name="field_type" #field_type='ngModel' class="form-control" required  placeholder="输入输出字段类型">
-                          <div [hidden]="field_type.valid || field_type.pristine" class="text-danger">
-                            <p *ngIf="field_type.errors?.required">必须输入</p>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label  class="col-sm-2 control-label">输入字段是否必输</label>
-                      <div class="col-sm-10"> 
-                        <select   [(ngModel)]='AddMultS.lob' name="lob" #lob='ngModel' class="form-control" required maxlength="10"  placeholder="输入字段是否必输">
-                           <option (ngModel)="lob">是</option>
-                           <option (ngModel)="lob">否</option>
-                        </select>
-                  
-                          <div [hidden]="lob.valid || lob.pristine" class="text-danger">
-                            <p *ngIf="lob.errors?.required">必须输入状态</p>
-                        </div>
-                      </div>
-                    </div>
-                     
-                    <div class="form-group">
-                      <label  class="col-sm-2 control-label">字段示例</label>
-                      <div class="col-sm-10">
-                        <input type="text" [(ngModel)]='AddMultS.example' name="example" #example='ngModel' class="form-control" required maxlength="200"  placeholder="字段示例">
-                          <div [hidden]="example.valid || example.pristine" class="text-danger">
-                            <p *ngIf="example.errors?.maxlength">字段示例最大字符为200</p>
-                            <p *ngIf="example.errors?.required">必须输入</p>
-                         </div>
-                      </div>
-                    </div>
-                     
-                      <div class="form-group">
-                      <label  class="col-sm-2 control-label">描述</label>
-                      <div class="col-sm-10">
-                        <input type="text" [(ngModel)]='AddMultS.describe' name="describe" #describe='ngModel' class="form-control" required maxlength="200"  placeholder="描述">
-                          <div [hidden]="describe.valid || describe.pristine" class="text-danger">
-                            <p *ngIf="describe.errors?.maxlength">描述最大字符为200</p>
-                            <p *ngIf="describe.errors?.required">必须输入</p>
-                         </div>
-                      </div>
-                    </div>
-                    
-                    
-                    <div class="modal-footer">  
-                      <button type="button" class="btn btn-danger pull-right" [disabled]="mulSearchAdd.invalid" (click)="addSave(AddMultS.value)" data-dismiss="modal" aria-label="Close">保存</button>
-                      
-                      <button type="button" class="btn btn-danger pull-right"  data-dismiss="modal" aria-label="Close" aria-hidden="true">取消</button>
-                    </div>
-                    </div>
-                     
-                  </form>
-              </div>
-              <div>{{AddMultS.value | json}}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    -->
+   
     <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">

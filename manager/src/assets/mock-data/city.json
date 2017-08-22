@@ -1,94 +1,53 @@
+
+
 {
-"name":"如何学习D3",
+    
+"int_name_cn":"学习D3",
+"int_name_en": "hello",
+"description": "test",
 "children":
 [
     { 
-      "name":"预备知识" , 
-        "children":
+      "int_name_cn":"预备知识" , 
+      "int_name_en": "dfafda",
+      "description": "test",
+      "children":
         [
-                {"name":"HTML & CSS" },
-                {"name":"JavaScript" },
-                {"name":"DOM" },
-                {"name":"SVG" }
+            { "int_name_cn":"服务器软件",
+              "int_name_en": "adfd",
+              "description": "test"
+              }    
         ] 
       },
       
     { 
-        "name":"安装" , 
+        "int_name_cn":"安装" , 
+        "int_name_en": "adfdsa",
+        "description": "test",
         "children":
         [
             {
-                "name":"记事本软件",
-                "children":
-                [
-                    {"name":"Notepad++"},
-                    {"name":"EditPlus"},
-                    {"name":"Sublime Text"}
-                ]
+                "int_name_cn":"记事本软件",
+                "int_name_en": "adsfa",
+                "description": "test"
+             
             },
             {
-                "name":"服务器软件",
+                "int_name_cn":"服务器软件",
+                "int_name_en": "fafdsa",
+                  "description": "test",
                 "children":
                 [
-                    {"name":"Apache Http Server"},
-                    {"name":"Tomcat"}
+                    { "int_name_cn":"服务器软件",
+                "int_name_en": "fasfdas",
+                  "description": "test"}
                 ]
             },
-            {"name":"下载D3.js"}
+            { "int_name_cn":"服务器软件",
+              "int_name_en": "dasfd",
+              "description": "test"
+              }
         ] 
-    },
-    
-    { 
-        "name":"入门",
-        "children":
-        [
-            {
-                "name":"选择集",
-                "children":
-                [
-                    {"name":"select"},
-                    {"name":"selectAll"}
-                ]
-            },
-            {
-                "name":"绑定数据",
-                "children":
-                [
-                    {"name":"datum"},
-                    {"name":"data"}
-                ]
-            },
-            {"name":"添加删除元素"},
-            {
-                "name":"简单图形",
-                "children":
-                [
-                    {"name":"柱形图"},
-                    {"name":"折线图"},
-                    {"name":"散点图"}
-                ]
-            },
-            {"name":"比例尺"},
-            {"name":"生成器"},
-            {"name":"过渡"}
-        ] 
-    },
-    
-    { 
-        "name":"进阶" , 
-        "children":
-        [
-            {
-                "name":"布局的应用",
-                "children":
-                [
-                    {"name":"饼状图"},
-                    {"name":"树状图"},
-                    {"name":"矩阵树图"}
-                ]
-            },
-            {"name":"地图"}
-        ]
     }
 ]
 }

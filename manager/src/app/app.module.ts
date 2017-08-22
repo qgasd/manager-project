@@ -6,7 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
 import { PostsComponent } from './posts/posts.component';
 // Imports commented out for brevity
-import { AccordionModule } from 'ng2-bootstrap/accordion';
+
 import { MenuService } from './menu/menu.service/menu.service';
 import { RouterModule } from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
@@ -25,8 +25,9 @@ import { ResetPasswordComponent} from './reset-password/reset-password.component
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    DashboardModule,
- AccordionModule.forRoot()
+    DashboardModule
+    
+
   ],
   providers: [MenuService],
   bootstrap: [AppComponent]

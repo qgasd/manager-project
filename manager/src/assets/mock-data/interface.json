@@ -1,29 +1,48 @@
 
 {
+    "total":3,
 "items":[
     {
         "id": 1,
-        "fwbm": "22312",
-        "rjcpxtmc": "12312",
-        "cpmc": "12312",
-        "bigSpecil": "12312",
-        "smallspec": "12312",
+        "software_num": "111111",
+        "great_class": "12312",
+        "less_class": "12312",
         "state": "12312",
-        "chineName": "12312",
-        "englishName": "12312",
-        "surl": "12312"
+        "description":"dfsdss",
+        "int_name_cn": "12312",
+        "int_name_en": "12312",
+        "URL": "12312",
+        "remark":"fdfd",
+        "isEdit":false,
+        "isChecked":false
     },
      {
         "id": 2,
-        "fwbm": "12312",
-        "rjcpxtmc": "12312",
-        "cpmc": "12312",
-        "bigSpecil": "12312",
-        "smallspec": "12312",
+         "software_num": "222222",
+        "great_class": "12312",
+        "less_class": "12312",
+        "state": "hidden",
+        "description":"dfsdss",
+        "int_name_cn": "12312",
+        "int_name_en": "12312",
+        "URL": "12312",
+        "remark":"fdfd",
+        "isEdit":false,
+        "isChecked":false
+    },
+     {
+        "id": 3,
+         "software_num": "3333333",
+        "great_class": "12312",
+        "less_class": "12312",
         "state": "12312",
-        "chineName": "7772",
-        "englishName": "12312",
-        "surl": "12312"
+        "description":"dfsdss",
+        "int_name_cn": "12312",
+        "int_name_en": "12312",
+        "URL": "12312",
+        "remark":"fdfd",
+        "isEdit":false,
+        "isChecked":false
     }
 ]
 }
