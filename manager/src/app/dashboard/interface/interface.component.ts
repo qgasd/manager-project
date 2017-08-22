@@ -6,25 +6,15 @@ import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Location } from '@angular/common';
-<<<<<<< HEAD
-// import { selectDatasService } from "app/common-service/select-service";
-// // import {MultiSelectModule} from 'primeng/primeng';
-// import { ConfirmationService } from 'primeng/primeng';
-=======
 //import { selectDatasService } from "app/common-service/select-service";
 // import {MultiSelectModule} from 'primeng/primeng';
 //import { ConfirmationService } from 'primeng/primeng';
->>>>>>> 37ad2722b24eb7e011a53808f851d6bb5460dd7f
 declare var $: any;
 @Component({
   selector: 'app-interface',
   templateUrl: './interface.component.html',
-<<<<<<< HEAD
-  styleUrls: ['./interface.component.css']
-=======
   styleUrls: ['./interface.component.css'],
   providers: []
->>>>>>> 37ad2722b24eb7e011a53808f851d6bb5460dd7f
 })
 export class InterfaceComponent implements OnInit {
   public interdatas: ofInterface[];//通用的数组
@@ -80,11 +70,7 @@ export class InterfaceComponent implements OnInit {
   public alertEdit = false;
   public alertAdd = false;
   //,private cdr: ChangeDetectorRef  ,private window: Window
-<<<<<<< HEAD
-  constructor(public interfaceservice: InterfaceService, public location: Location,public router:Router) {
-=======
   constructor(public interfaceservice: InterfaceService, public location: Location, public router:Router) {
->>>>>>> 37ad2722b24eb7e011a53808f851d6bb5460dd7f
     //  let getWindow = () => {
     //       return window.innerWidth;
     //    };
