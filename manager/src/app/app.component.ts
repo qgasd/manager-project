@@ -3,13 +3,13 @@ import { Menu } from './menu/menu';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { CheckLoginService } from './checkLogin/checkLogin.service';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
+//import { CookieService } from 'angular2-cookie/services/cookies.service';
 @Component({
   moduleId: module.id,
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
-  providers: [CheckLoginService,CookieService]
+  providers: [CheckLoginService]
   
 })
 export class AppComponent implements OnInit{
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
   constructor(
     private checkLoginService : CheckLoginService,
     public router: Router,
-    private _cookieService:CookieService
+    //private _cookieService:CookieService
   ) { }
 
   ngOnInit() {

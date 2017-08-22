@@ -3,6 +3,36 @@ var router = express.Router();
 
 var db = require('../public/javascripts/mysql.js'); 
 
+//搜索功能
+router.post('/search',function(req,res,next){
+    var data=req.body;
+    var type=req.body.Type;
+    var parent=req.body.Parent;
+
+    var searchSql="select * from bas_parameter where 1 = 1";
+    if(type!=undefined&&type!=null&&type!=''){
+        searchSql+=" and type = '"+type+"'";
+    }
+    if(parent!=undefined&&parent!=null&&parent!=''){
+        searchSql+=" and parent = '"+parent+"'";
+    }
+ 
+    console.log("测试语句：:"+searchSql);//测试sql语句
+    db.query(searchSql,function(err,rows){//执行条件查询语句
+        if(err){
+            console.log(new Date()+"查询错误"+err);
+            res.send({success:false,message:'查询失败!'});
+        }
+        else{
+            var datas=JSON.stringify(rows);
+            var data='{"total":'+rows.length+',"items":'+datas+'}';
+            console.log(new Date()+"查询成功");
+            res.send (data);
+        }
+    });
+
+});
+
 /**
  * 查询基础参数列表页
  */
@@ -11,8 +41,8 @@ router.post("/",function(req,res,next){
         if(err){
             console.log("查询错误："+err);
         }else {
-            var data = JSON.stringify(rows);
-            console.log(data);           
+            var datas = JSON.stringify(rows);
+            var data='{"total":'+rows.length+',"items":'+datas+'}';         
             res.send (data);
         }
     });
@@ -83,29 +113,5 @@ router.post("/update",function(req,res,next){
     });
 });
 
-/**
- * 条件查询
- */
-router.post("/search",function(req,res,next){
-    var type = req.body.type;
-    var parent = req.body.parent;
-    var sql = "select * from basic_parameter";
-    if(type){
-        sql += " where Type = '"+ type +"'";
-    }
-    if(parent){
-        sql += " and Parent = '" + parent + "'";
-    }
 
-    sql.replace("and","where");
-    db.query(sql,function(err,rows){
-        if(err){
-            console.log("查询失败: "+err);
-            //res.send("查询失败: "+err);
-        }else{
-            res.send (JSON.stringify(rows));
-            //res.render("users",{title:"用户列表",datas:rows,s_name:name,s_age:age});
-        }
-    });
-})
 module.exports = router;
