@@ -29,7 +29,7 @@ export class InterfaceIoComponent implements OnInit {
   getSelection(){
     this.interfaceioservice.getSelect(this.id).subscribe(
       res => {
-        console.log (res['input']);
+       console.log(res)
        this.ioinputdata= res['input'];
         console.log(this.ioinputdata)
         this.selIdDate2=res['input'][0];

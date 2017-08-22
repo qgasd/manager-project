@@ -1,4 +1,5 @@
 export class ofInterface {
+    id:number;
     int_service_num:number;
     software_num: string;
     great_class: string;
@@ -9,5 +10,8 @@ export class ofInterface {
     description:string;
     URL: string;
     remark:string;
-     
+    isEdit:boolean;
+    isChecked:boolean;  
+    checked?:boolean=true
+       // fwbm: string;
 }
