@@ -370,6 +370,10 @@
     </form>
 </div> 
 <!-- (click)="loadData()"  -->
-<nav class="paginations"><pagination class="text-center" [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage" class="pagination-sm"
-            previousText="&lsaquo;" [maxSize]='maxSize' (numPages)="smallnumPages = $event" [itemsPerPage]='itemsPerPage' nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (click)="loadData()" (pageChanged)="pageChanged($event)"></pagination></nav>
+<!-- <nav class="paginations">
+  <pagination class="text-center" [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage" class="pagination-sm"
+    previousText="&lsaquo;" [maxSize]='maxSize' (numPages)="smallnumPages = $event" [itemsPerPage]='itemsPerPage' nextText="&rsaquo;"
+    firstText="&laquo;" lastText="&raquo;" (click)="loadData()" (pageChanged)="pageChanged($event)">
+  </pagination>
+</nav> -->
 </div>

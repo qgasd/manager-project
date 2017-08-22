@@ -6,15 +6,14 @@ import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Location } from '@angular/common';
-import { selectDatasService } from "app/common-service/select-service";
-// import {MultiSelectModule} from 'primeng/primeng';
-import { ConfirmationService } from 'primeng/primeng';
+// import { selectDatasService } from "app/common-service/select-service";
+// // import {MultiSelectModule} from 'primeng/primeng';
+// import { ConfirmationService } from 'primeng/primeng';
 declare var $: any;
 @Component({
   selector: 'app-interface',
   templateUrl: './interface.component.html',
-  styleUrls: ['./interface.component.css'],
-  providers: [ConfirmationService]
+  styleUrls: ['./interface.component.css']
 })
 export class InterfaceComponent implements OnInit {
   public interdatas: ofInterface[];//通用的数组
@@ -70,7 +69,7 @@ export class InterfaceComponent implements OnInit {
   public alertEdit = false;
   public alertAdd = false;
   //,private cdr: ChangeDetectorRef  ,private window: Window
-  constructor(public interfaceservice: InterfaceService, public location: Location, public sservice: selectDatasService, public confirmationService: ConfirmationService,public router:Router) {
+  constructor(public interfaceservice: InterfaceService, public location: Location,public router:Router) {
     //  let getWindow = () => {
     //       return window.innerWidth;
     //    };
