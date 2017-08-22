@@ -7,6 +7,8 @@ import { HomeComponent } from "./home/home.component";
 import { MenuComponent } from '../menu/menu.component';
 import { InterfaceComponent } from './interface/interface.component';
 import { InterfaceService } from './interface/interface-service/interface-service';
+import { BasicParameterComponent } from './basicParameter/basicParameter.component';
+import { BasicParameterService } from './basicParameter/basicParameter-service/basicParameter-service';
 import { InterfaceDetaileComponent } from './interface/interface-detaile/interface-detaile.component';
 import { FormsModule } from '@angular/forms';
 import { PaginationModule } from 'ng2-bootstrap/pagination';
@@ -25,9 +27,8 @@ import { InterfaceInpd3Component } from './interface/interface-inpd3/interface-i
     CommonModule,
     FormsModule,
     RouterModule.forChild(dashroutes),
-    PaginationModule.forRoot()
   ],
-  declarations: [DashboardComponent,HomeComponent,MenuComponent, InterfaceComponent, InterfaceDetaileComponent, InterfaceInpd3Component,InterfaceIoComponent],
-  providers:[InterfaceService,MenuService,InterfaceIoService]
+  declarations: [DashboardComponent,HomeComponent,MenuComponent, InterfaceComponent, BasicParameterComponent,InterfaceDetaileComponent, InterfaceInpd3Component,InterfaceIoComponent],
+  providers:[InterfaceService,MenuService,InterfaceIoService,BasicParameterService]
 })
 export class DashboardModule { }

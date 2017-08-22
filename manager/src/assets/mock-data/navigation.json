@@ -46,7 +46,7 @@
     {
         "name":"架构管理",
         "ncontent":[
-           {"id":1,"pname":"数据标准","url":""},
+           {"id":1,"pname":"数据标准","url":"/dashboard/basicParameter"},
            {"id":2,"pname":"元数据","url":""},
            {"id":3,"pname":"接口及服务","url":"/dashboard/interface"},
            {"id":4,"pname":"数据质量","url":""},
