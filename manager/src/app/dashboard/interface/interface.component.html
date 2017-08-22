@@ -252,7 +252,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">  
-                  <button type="button" class="btn btn-danger pull-right" *ngIf="alertSearch" (click)="advanceSearch(multS.value)" data-dismiss="modal" aria-label="Close">搜索</button>
+                  <button type="button" class="btn btn-danger pull-right" *ngIf="alertSearch" (click)="advanceSearch(itemtr.value)" data-dismiss="modal" aria-label="Close">搜索</button>
                   <button type="button" class="btn btn-danger pull-right"  *ngIf="alertEdit" [disabled]="mulSearchAdd.invalid" (click)="EditUpdatec(itemtr,inx)" data-dismiss="modal" aria-label="Close">保存</button>
                    <button type="button" class="btn btn-danger pull-right"  *ngIf="alertAdd" [disabled]="mulSearchAdd.invalid" (click)="addSave(itemtr.value)" data-dismiss="modal" aria-label="Close">新增</button>
                   <!-- 实现添加数据后文本框中的内容为空-->

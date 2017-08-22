@@ -7,9 +7,15 @@ import { InterfaceComponent } from './interface/interface.component';
 import { BasicParameterComponent } from './basicParameter/basicParameter.component';
 import { InterfaceDetaileComponent } from './interface/interface-detaile/interface-detaile.component';
 import { InterfaceInpd3Component } from './interface/interface-inpd3/interface-inpd3.component';
+<<<<<<< HEAD
 // import {PermissionGuard} from '../guard/permission.guard';
 // import { PostsComponent } from "app/dashboard/posts/posts.component";
 // import { focuss } from "app/guard/focus.guard";
+=======
+//import {PermissionGuard} from '../guard/permission.guard';
+//import { PostsComponent } from "app/dashboard/posts/posts.component";
+//import { focuss } from "app/guard/focus.guard";
+>>>>>>> 37ad2722b24eb7e011a53808f851d6bb5460dd7f
 import { InterfaceIoComponent } from "app/dashboard/interface/interface-io/interface-io.component";
 //import { AuthGuard } from "app/auth-guard.service";
 
@@ -28,7 +34,12 @@ export const dashroutes: Routes = [
             {path:'basicParameter',component:BasicParameterComponent},
             {path:'interface/detail/:id',component:InterfaceDetaileComponent},
             {path:'interface/inputD3',component:InterfaceInpd3Component},
+<<<<<<< HEAD
             {path:'interface/io/:id',component:InterfaceIoComponent}   
+=======
+            {path:'interface/io/:id',component:InterfaceIoComponent},
+            //{path: 'posts', component: PostsComponent,canDeactivate:[focuss]}     
+>>>>>>> 37ad2722b24eb7e011a53808f851d6bb5460dd7f
         ]  
     }
 ]

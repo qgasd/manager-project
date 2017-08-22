@@ -101,9 +101,20 @@ router.post('/insert',function(req, res, next){
     var description=req.body.description;
     var URL=req.body.URL;
     var remark=req.body.remark;
-    var insertSql="insert into int_information(software_num,great_class,less_class,"+
+        //从序列表中获取interface序列一个可用的序列值
+        var seqSql=" select seq_nextval('interface') as seq";//取别名为seq
+        var seqNum=0;
+        db.query(seqSql,function(err,rows){
+            if(err){
+                console.log((new Date())+err);
+            }
+            else{
+                seqNum=rows[0].seq;
+                //插入语句
+                var insertSql="insert into int_information(int_service_num,software_num,great_class,less_class,"+
                 "state,int_name_cn,int_name_en,description,URL,remark)values('"
-                    +softWare+
+                    +seqNum+
+                "','"+softWare+
                 "','"+greatClass+
                 "','"+lessClass+
                 "','"+state+
@@ -113,17 +124,20 @@ router.post('/insert',function(req, res, next){
                 "','"+URL+
                 "','"+remark+
                 "')";
-    db.query(insertSql,function(err,rows){
-        if(err){
-            console.log(new Date()+"新增失败！"+err);
-            res.send({success:false,message:'新增失败！'});
-        }
-        else{
-            console.log(new Date()+"新增成功！");
-            res.send({success:true,message:'新增成功！'});
-        }
+                //执行插入
+                db.query(insertSql,function(err,rows){
+                    if(err){
+                        console.log(new Date()+"新增失败！"+err);
+                        res.send({success:false,message:'新增失败！'});
+                    }
+                    else{
+                        console.log(new Date()+"新增成功！");
+                        res.send({success:true,message:'新增成功！'});
+                    }
+                });
+            }
+        });
     });
-});
 //删除一条数据
 router.delete("/delete/:id",function(req,res,next){
     const id=req.params.id+'';

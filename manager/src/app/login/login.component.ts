@@ -24,8 +24,11 @@ export class LoginComponent implements OnInit {
      }
     onLoggedin(name: string, password: string, ischecked: any) {
          this.loginService.getLogin(name, password, ischecked).subscribe(res =>{
-             if(res){
+             var trag = res.json().isok;
+             if(trag){
                  this.router.navigate(['/dashboard/home']);
+             }else{
+                 alert("用户名或密码错误");
              }
          });
             
