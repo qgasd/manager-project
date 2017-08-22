@@ -6,6 +6,7 @@ import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Location } from '@angular/common';
+import { NgForm } from '@angular/forms';
 import { selectDatasService } from "app/common-service/select-service";
 // import {MultiSelectModule} from 'primeng/primeng';
 import { ConfirmationService } from 'primeng/primeng';
@@ -69,6 +70,8 @@ export class InterfaceComponent implements OnInit {
   public alertSearch = false;
   public alertEdit = false;
   public alertAdd = false;
+  //表示选中的编辑的数据
+  public itemtr:ofInterface;
   //,private cdr: ChangeDetectorRef  ,private window: Window
   constructor(public interfaceservice: InterfaceService, public location: Location, public sservice: selectDatasService, public confirmationService: ConfirmationService,public router:Router) {
     //  let getWindow = () => {
@@ -82,7 +85,10 @@ export class InterfaceComponent implements OnInit {
   }
   //获取页面的元素
   @ViewChild('checkvalue')
+
   checkVal: ElementRef
+    @ViewChild('itemtr')
+    itemtrvalue:ElementRef
   /**
    * 需不需要判断当单选框的值为空的时候主页面显示哪个数据，感觉有点问题
    */
@@ -169,80 +175,102 @@ export class InterfaceComponent implements OnInit {
     this.flag10 = false;
   }
   //获取select数组数据
-  //  public getselctDate(){
-  //     this.sservice.getSelectdata()
-  //     .subscribe(
-  //       res=>{
-  //           this.selectstate =res["state"];
-  //       },error=>{console.log(error)},
-  //     ()=>{}
-  //     );
-  //   }
+   public getselctDate(){
+      this.sservice.getSelectdata()
+      .subscribe(
+        res=>{
+            this.selectstate =res["state"];
+        },error=>{console.log(error)},
+      ()=>{}
+      );
+    }
   //单条件搜索
-  searchInter(jkfw: string) {
-    this.cancel();
-    $(".waiting").show();
-    this.jkfwdata = jkfw;
-    this.interfaceservice.searchIn(jkfw).subscribe(res => {
-      $(".waiting").hide();
-      this.cdatass = res['items'];
-      this.totalItems = res['total']//this.interdatas.length;
-      if (jkfw == undefined || jkfw == "") {
-        this.loadData();
-      }//设置这边的当输入框中的内容为空的时候全部数据出发      
-      if (this.cdatass && this.seardata) {
-        this.interdatas = this.cdatass;
-        //   this.interdatas=this.interdatas.filter(h=>h.state!=='hidden')
-      }
-    })
-    this.flag3 = !this.flag3;
-  }
+  // searchInter(jkfw: string) {
+  //   this.cancel();
+  //   $(".waiting").show();
+  //   this.jkfwdata = jkfw;
+  //   this.interfaceservice.searchIn(jkfw).subscribe(res => {
+  //     $(".waiting").hide();
+  //     this.cdatass = res['items'];
+  //     this.totalItems = res['total']//this.interdatas.length;
+  //     if (jkfw == undefined || jkfw == "") {
+  //       this.loadData();
+  //     }//设置这边的当输入框中的内容为空的时候全部数据出发      
+  //     if (this.cdatass && this.seardata) {
+  //       this.interdatas = this.cdatass;
+  //       //   this.interdatas=this.interdatas.filter(h=>h.state!=='hidden')
+  //     }
+  //   })
+  //   this.flag3 = !this.flag3;
+  // }
   /**
 *多条件查询
 */
-  advanceSearch(cc: ofInterface) {
-    $(".waiting").show();
-    console.log(this.alertSearch)
-    this.alertSearch = true;
-    this.alertEdit = false;
-    this.alertAdd = false;
-    this.getAlertTitle();
-    console.log(this.alertSearch)
-    this.choosedata = cc;
-    this.interfaceservice.gadsearch(cc).subscribe(res => {
-      this.zbdatas = res['items'];
-      if (this.zbdatas && this.seardata || this.cdatass) {
-        this.interdatas = this.zbdatas;
-        // this.interdatas=this.interdatas.filter(h=>h.state!=='hidden')
-        this.totalItems = res['total']  //this.interdatas.length;
-        console.log(this.interdatas)
-      }
-      console.log(this.totalItems)
-      $(".waiting").hide();
-    });
-    this.flag1 = !this.flag1;
-  }
+  // advanceSearch(cc: ofInterface) {
+  //   $(".waiting").show();
+  //   console.log(this.alertSearch)
+  //   this.alertSearch = true;
+  //   this.alertEdit = false;
+  //   this.alertAdd = false;
+  //   this.getAlertTitle();
+  //   this.choosedata = cc;
+  //   this.interfaceservice.gadsearch(cc).subscribe(res => {
+  //     this.zbdatas = res['items'];
+  //     if (this.zbdatas && this.seardata || this.cdatass) {
+  //       this.interdatas = this.zbdatas;
+  //       // this.interdatas=this.interdatas.filter(h=>h.state!=='hidden')
+  //       this.totalItems = res['total']  //this.interdatas.length;
+  //       console.log(this.interdatas)
+  //     }
+  //     console.log(this.totalItems)
+  //     $(".waiting").hide();
+  //   });
+  //   this.flag1 = !this.flag1;
+  // }
   /**
    *初始化实现的方法
    */
+
   ngOnInit(): void {
-    this.getALLdata();
+    // this.getALLdata();
     this.loadData();
     this.getAlertTitle();
     this.screen();
-  }
+    this.getselctDate();
+  }  
+
   changeSearch() {
      this.alertSearch=true;
     this.alertAdd=false;
     this.alertEdit=false;
-    this.alertTitle='搜索'
+    this.alertTitle='搜索';
   }
   //
   changeAdd(){
       this.alertSearch=false;
     this.alertAdd=true;
     this.alertEdit=false;
-    this.alertTitle='新增'
+    this.alertTitle='新增';
+
+  }
+   onsubmit(f:NgForm){
+     if(this.alertEdit){
+f.value =this.itemtr 
+     }
+          
+       }
+  //  
+  changeEdit(cedit:ofInterface){
+    this.alertSearch=false;
+    this.alertAdd=false;
+    this.alertEdit=true;
+    this.alertTitle='编辑';
+    this.itemtr = cedit;
+
+    console.log(this.itemtr)
+
+    
+
   }
   
   getAlertTitle() {
@@ -261,27 +289,19 @@ export class InterfaceComponent implements OnInit {
   /**
  *获取全部的东西
  */
-  getALLdata() {
-    $(".waiting").show();
-    console.log(this.alertTitle)
-    this.interfaceservice.getSdate().subscribe(res => {
-      this.seardata = res['items']//.slice(offset, end > this.totalItems ? this.totalItems : end);
-      this.interdatas = this.seardata;//隐藏状态被标记为禁用的数据
-      this.totalItems = res['total'];
-      $(".waiting").hide();
-    }, error => {  $(".waiting").hide();alert("网络错误,请稍后重试！"); },
-      () => { }
-    )
-  }
-  /**
-  *删除
-  */
-  // deleteInt(itemdata: ofInterface): void {
+  // getALLdata() {
   //   $(".waiting").show();
-  //   this.interfaceservice.deleteInt(itemdata.int_service_num).then(() =>
-  //     this.seardata = this.seardata.filter(h => h !== itemdata)
+  //   console.log(this.alertTitle)
+  //   this.interfaceservice.getSdate().subscribe(res => {
+  //     this.seardata = res['items']//.slice(offset, end > this.totalItems ? this.totalItems : end);
+  //     this.interdatas = this.seardata;//隐藏状态被标记为禁用的数据
+  //     this.totalItems = res['total'];
+  //     $(".waiting").hide();
+  //   }, error => {  $(".waiting").hide();alert("网络错误,请稍后重试！"); },
+  //     () => { }
   //   )
   // }
+
     /**
    * 单选删除
    */
@@ -303,8 +323,7 @@ export class InterfaceComponent implements OnInit {
     }
       this.ArrayWay(check, cc);
       console.log(this.choseItem)
-  }
-  
+  }  
   /**
    * 传给后台的数据 数组去重
    */
@@ -323,7 +342,6 @@ export class InterfaceComponent implements OnInit {
       }
     }
   }
-
   //这里是从后台获取删除后的数据，点击删除后的操作
   deleteCC(cc: ofInterface[]){
     console.log(this.choseItem)
@@ -339,7 +357,7 @@ export class InterfaceComponent implements OnInit {
   *新增   //刷新问题
   */
   addSave(addDatas: ofInterface): void {
-   
+   console.log(addDatas)
     $(".waiting").show();
     this.alertAdd = true;
     console.log(this.alertAdd)
@@ -362,16 +380,16 @@ export class InterfaceComponent implements OnInit {
     $(".waiting").show();
     //console.log(SSdatas)
     //this.indexw = index + 1.7976931348623157E+10308;//这里给一个无限的数字表示不管怎么递增都不能达到这个数字
-    this.interfaceservice.EditUpdate(SSdatas).subscribe(
+    // this.interfaceservice.EditUpdate(SSdatas).subscribe(
          
-      (h) => {
-          $(".waiting").hide();
-             this.deletdata = h['items']//确定这个是否存在，存在再换成this.seardata
-       console.log(this.deletdata)
+    //   (h) => {
+    //       $(".waiting").hide();
+    //          this.deletdata = h['items']//确定这个是否存在，存在再换成this.seardata
+    //    console.log(this.deletdata)
 
-      }, error => {  $(".waiting").hide();alert("网络错误,请稍后重试！"); },
-      () => { }
-    )
+    //   }, error => {  $(".waiting").hide();alert("网络错误,请稍后重试！"); },
+    //   () => { }
+    // )
   }
   /**
    * 返回
@@ -432,7 +450,5 @@ export class InterfaceComponent implements OnInit {
   public pageChanged(event: any): void {
     this.currentPage = event.page;
     console.log(this.currentPage)
-    console.log('Page changed to: ' + event.page);
-    console.log('Number items per page: ' + event.itemsPerPage);
   }
 }
