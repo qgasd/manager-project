@@ -5,11 +5,6 @@
     margin-top:20px;
 }
 
-.malert{
-
- 
-
-}
 .malert .control-label{
     color:#000;
     
@@ -18,13 +13,9 @@
    margin-left:10px;
 }
 .searchAlertcontainer td{position:relative;}
-.flagclass{position:absolute;left:0;vertical-align: middle;z-index:3;}
+.flagclass{position:absolute;left:0;vertical-align: top;z-index:3;text-align: center;}
 
+.checkbox{display:inline-block}
+.table td{text-align: center;}
 
-/*@media (max-width: 767px)
-.main-sidebar {
-    -webkit-transform: translate(-230px, 0);
-    -ms-transform: translate(-230px, 0);
-    -o-transform: translate(-230px, 0);
-    transform: translate(-230px, 0);
-}*/
+.table th{text-align: center;}

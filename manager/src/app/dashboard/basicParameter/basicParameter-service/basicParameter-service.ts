@@ -3,18 +3,51 @@ import { Http, Response,URLSearchParams, Headers, RequestOptions } from '@angula
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 import { ofBasicParameter } from '../basicParameter-mock-data/mock-data';
+import { Ipconfigs } from "app/checkLogin/ipconfigs";
 import { Location }               from '@angular/common';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 @Injectable()
 export class BasicParameterService {
-  public basicParameterUrla = "http://localhost:3000/basicParameter";
-  public basicParameterUrld = "http://localhost:3000/basicParameter/del";
+  public ipurl = new Ipconfigs().localhostUrl;
+  public basicParameterUrla = this.ipurl + "/basicParameter";
+  public basicParameterUrld = this.ipurl + "/basicParameter/del";
+  public basicParameterurlS = this.ipurl + "/basicParameter/search";
   public selIdData:ofBasicParameter;
 
   constructor(private http: Http,private location:Location){ }
+
+  /**
+ * 多条件搜索
+ */
+gadsearch(pagedata:any):Observable<ofBasicParameter[]>{
+  return this.http
+  .post(this.basicParameterurlS,pagedata,{headers:this.headers})
+  .map((res:Response)=>{
+                  let selecteddatas = res.json();//从后台服务器里面获取数据
+                  console.log(pagedata)
+                  return selecteddatas;
+                })
+                .catch(this.handleError);
+}
   
+  /***
+   * 查询后获取数据
+   */
+
+ public searchIn(ParentN: string):Observable<ofBasicParameter[]>{
+      var params = new URLSearchParams();
+       params.set('Parent',ParentN);
+       console.log(params)
+ return this.http.post(this.basicParameterurlS,params).map(
+     res=>{  
+          let result = res.json();
+          console.log(res.json())
+          return result;     
+     });
+}
+
   /***
    * 新增数据
    * */
