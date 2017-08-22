@@ -6,11 +6,11 @@ router.get("/serach/:id",function(req,res,next){
     var serviceNum=req.params.id;
     var searchSql=`
         SELECT
-        a.*
+        a.*,b.int_name_cn,b.int_name_en
         FROM
-        int_io_params a
-        WHERE a.int_service_num=
-    `+serviceNum;
+        int_io_params a,int_information b
+        WHERE a.int_service_num=`+serviceNum+` and b.int_service_num=`+serviceNum;
+    console.log(searchSql)
     db.query(searchSql,function(err,rows){
         if(err){
             console.log(err);
@@ -29,7 +29,7 @@ router.get("/serach/:id",function(req,res,next){
             }
 
             var jsonstr = '{"input":'+JSON.stringify(input)+',"output":'+JSON.stringify(output)+'}'
-            
+            console.log(jsonstr)
             res.send(jsonstr);
         }
     })

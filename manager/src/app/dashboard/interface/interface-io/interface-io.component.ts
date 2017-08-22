@@ -9,10 +9,15 @@ import { interfaceIO } from "../interface-mock-data/io";
   styleUrls: ['./interface-io.component.css']
 })
 export class InterfaceIoComponent implements OnInit {
-  public id : number;
+  interfaceservice: any;
+  public id: number;
+  public selIdDate2:interfaceIO;
+
   public ioinputdata:interfaceIO[];
   public iooutdata:interfaceIO[];
-  constructor(public interfaceioservice:InterfaceIoService,public route:ActivatedRoute,public location :Location ) { } 
+  constructor(public interfaceioservice:InterfaceIoService,public route:ActivatedRoute,public location :Location ) {
+
+   }
   ngOnInit() {
     this.route.params.forEach((params:Params) => {
       this.id = +params['id'];
@@ -27,6 +32,9 @@ export class InterfaceIoComponent implements OnInit {
         console.log (res['input']);
        this.ioinputdata= res['input'];
         console.log(this.ioinputdata)
+        this.selIdDate2=res['input'][0];
+        console.log(this.selIdDate2.int_name_en)
+        
        this.iooutdata= res['output'];
        console.log(this.iooutdata);
       }

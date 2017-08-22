@@ -3,56 +3,105 @@
 {
    "waitTodo":[
    {
-       "name":"模块1",
+       "name":"需求管理",
         "ncontent":[
            {"id":1,"pname":"home","url":"dashboard/home"},
-           {"id":2,"pname":"菜单1","url":""},
-           {"id":3,"pname":"菜单1","url":""},
-           {"id":4,"pname":"菜单1","url":""}
+           {"id":2,"pname":"需求概况","url":""},
+           {"id":3,"pname":"需求跟踪","url":""},
+           {"id":4,"pname":"需求条目","url":""},
+           {"id":5,"pname":"需求变更","url":""},
+           {"id":6,"pname":"需求分析","url":""},
+           {"id":7,"pname":"需求调查","url":""}
        ]
      },
     {
-        "name":"模块2",
+        "name":"研发管理",
         "ncontent":[
-           {"id":1,"pname":"菜单2","url":""},
-           {"id":2,"pname":"菜单2","url":""}
+           {"id":1,"pname":"研发变更","url":""},
+           {"id":2,"pname":"代码审查","url":""},
+           {"id":3,"pname":"影响分析","url":""},
+           {"id":4,"pname":"交付","url":""},
+           {"id":5,"pname":"任务","url":""},
+           {"id":6,"pname":"看板","url":""}
         ]
     },
     {
-        "name":"主模块1",
+        "name":"测试管理",
         "ncontent":[
-           {"id":1,"pname":"主页","url":"/dashboard"},
-           {"id":2,"pname":"菜单3","url":""}
+           {"id":1,"pname":"测试用例","url":""},
+           {"id":2,"pname":"测试计划","url":""},
+           {"id":3,"pname":"缺陷管理","url":""},
+           {"id":4,"pname":"测试报告","url":""}
         ]
     },
     {
-        "name":"模块4",
+        "name":"运维管理",
         "ncontent":[
-           {"id":1,"pname":"菜单4","url":""}
+           {"id":1,"pname":"变更发布","url":""},
+           {"id":2,"pname":"事件","url":""},
+           {"id":3,"pname":"服务质量","url":""},
+           {"id":4,"pname":"知识库","url":""}
         ]
     },
     {
-        "name":"模块5",
+        "name":"架构管理",
         "ncontent":[
-           {"id":1,"pname":"菜单5","url":""},
-           {"id":2,"pname":"菜单5","url":""}
+           {"id":1,"pname":"数据标准","url":""},
+           {"id":2,"pname":"元数据","url":""},
+           {"id":3,"pname":"接口及服务","url":"/dashboard/interface"},
+           {"id":4,"pname":"数据质量","url":""},
+           {"id":5,"pname":"架构规划","url":""},
+           {"id":6,"pname":"标准规划","url":""}
         ]
     },
     {
-        "name":"模块6",
+        "name":"版本管理",
         "ncontent":[
-           {"id":1,"pname":"菜单6","url":""},
-           {"id":2,"pname":"菜单6","url":""}
+           {"id":1,"pname":"发布窗口","url":""},
+           {"id":2,"pname":"发布单元","url":""}
         ]
     },
     {
-        "name":"模块7",
+        "name":"配置管理",
         "ncontent":[
-           {"id":1,"pname":"菜单7","url":""},
-           {"id":2,"pname":"菜单7","url":""},
-           {"id":3,"pname":"菜单7","url":""},
-           {"id":4,"pname":"菜单7","url":""}
+           {"id":1,"pname":"配置库","url":""},
+           {"id":2,"pname":"持续集成","url":""},
+           {"id":3,"pname":"持续交付","url":""},
+           {"id":4,"pname":"文档库","url":""}
+        ]
+    },
+    {
+        "name":"项目管理",
+        "ncontent":[
+           {"id":1,"pname":"提案","url":""},
+           {"id":2,"pname":"项目","url":""},
+           {"id":3,"pname":"项目组合","url":""},
+           {"id":4,"pname":"会议","url":""},
+           {"id":5,"pname":"资源","url":""},
+           {"id":6,"pname":"供应商","url":""},
+           {"id":7,"pname":"合同","url":""},
+           {"id":8,"pname":"费用及预算","url":""}
+        ]
+    },
+    {
+        "name":"工时及资源",
+        "ncontent":[
+           {"id":1,"pname":"任务","url":""},
+           {"id":2,"pname":"项目","url":""},
+           {"id":3,"pname":"项目周报","url":""}
+
         ]
     }
+
+
     ]
 }
+
+
+
+
+
+
+
+
+
