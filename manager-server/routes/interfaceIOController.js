@@ -6,11 +6,11 @@ router.get("/serach/:id",function(req,res,next){
     var serviceNum=req.params.id;
     var searchSql=`
         SELECT
-        a.*
+        a.*,b.int_name_cn,b.int_name_en
         FROM
-        int_io_params a
-        WHERE a.int_service_num=
-    `+serviceNum;
+        int_io_params a,int_information b
+        WHERE a.int_service_num=`+serviceNum+` and b.int_service_num=`+serviceNum;
+    console.log(searchSql)
     db.query(searchSql,function(err,rows){
         if(err){
             console.log(err);
@@ -29,9 +29,75 @@ router.get("/serach/:id",function(req,res,next){
             }
 
             var jsonstr = '{"input":'+JSON.stringify(input)+',"output":'+JSON.stringify(output)+'}'
-            
+            console.log(jsonstr)
             res.send(jsonstr);
         }
     })
+});
+
+
+//新增
+router.post("/add",function(req,res,next){
+    var int_service_num = req.body.int_service_num;
+    var type = req.body.type;
+    var name_en = req.body.name_en;
+    var name_cn = req.body.name_cn;
+    var field_type = req.body.field_type;
+    var lob = req.body.lob;
+    var example = req.body.example;
+    var describe = req.body.describe;
+    // var addSql = `
+    // INSERT INTO int_io_params (
+    //     int_service_num,
+    //     type,
+    //     name_en,
+    //     name_cn,
+    //     field_type,
+    //     lob,
+    //     example,
+    //     describe
+    // ) 
+    // values (
+    //     '`+int_service_num+`','`
+    //     +type+`','`
+    //     +name_en+`','`
+    //     +name_cn+`','`
+    //     +field_type+`','`
+    //     +lob+`','`
+    //     +example+`','`
+    //     +describe+`'
+    // ) 
+    // `;
+    var addSql = "INSERT INTO int_io_params("
+        +"int_service_num,"
+        +"`type`,"
+        +"name_en,"
+        +"name_cn,"
+        +"field_type,"
+        +"lob,"
+        +"`example`,"
+        +"`describe`"
+    +")"+ 
+    "values ('"
+    +int_service_num+"','"
+    +type+"','"
+    +name_en+"','"
+    +name_cn+"','"
+    +field_type+"','"
+    +lob+"','"
+    +example+"','"
+    +describe
+    +"')";
+    console.log(addSql);
+    db.query(addSql,function(err,rows){
+        if(err){
+            console.log(new Date()+"新增失败！"+err);
+            res.send({success:false,message:'新增失败！'});
+        }
+        else{
+            console.log(new Date()+"新增成功！");
+            res.send({success:true,message:'新增成功！'});
+        }
+    });
 });
 module.exports = router;

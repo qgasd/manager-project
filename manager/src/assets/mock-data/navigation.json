@@ -5,7 +5,7 @@
    {
        "name":"需求管理",
         "ncontent":[
-           {"id":1,"pname":"需求概况","url":"dashboard/home"},
+           {"id":1,"pname":"需求概况","url":""},
            {"id":2,"pname":"需求跟踪","url":""},
            {"id":3,"pname":"需求条目","url":""},
            {"id":4,"pname":"需求变更","url":""},
@@ -27,9 +27,9 @@
     {
         "name":"测试管理",
         "ncontent":[
-           {"id":1,"pname":"测试用例","url":"dashboard/dashboard"},
+           {"id":1,"pname":"测试用例","url":""},
            {"id":2,"pname":"测试计划","url":""},
-           {"id":3,"pname":"缺陷管理","url":"dashboard/dashboard"},
+           {"id":3,"pname":"缺陷管理","url":""},
            {"id":4,"pname":"测试报告","url":""}
         ]
     },
@@ -37,18 +37,18 @@
     {
         "name":"运维管理",
         "ncontent":[
-           {"id":1,"pname":"事件","url":"dashboard/dashboard"},
-           {"id":2,"pname":"服务质量","url":"dashboard/dashboard"},
-           {"id":3,"pname":"变更发布","url":"dashboard/dashboard"},
-           {"id":4,"pname":"知识库","url":"dashboard/dashboard"}
+           {"id":1,"pname":"事件","url":""},
+           {"id":2,"pname":"服务质量","url":""},
+           {"id":3,"pname":"变更发布","url":""},
+           {"id":4,"pname":"知识库","url":""}
         ]
     },
     {
         "name":"架构管理",
         "ncontent":[
-           {"id":1,"pname":"数据标准","url":""},
+           {"id":1,"pname":"数据标准","url":"/dashboard/basicParameter"},
            {"id":2,"pname":"元数据","url":""},
-           {"id":3,"pname":"接口及服务","url":""},
+           {"id":3,"pname":"接口及服务","url":"/dashboard/interface"},
            {"id":4,"pname":"数据质量","url":""},
            {"id":5,"pname":"架构规划","url":""},
            {"id":6,"pname":"标准规划","url":""}
@@ -91,5 +91,16 @@
            {"id":3,"pname":"项目周报","url":""}
         ]
     }
+
+
     ]
 }
+
+
+
+
+
+
+
+
+
