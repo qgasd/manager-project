@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import * as base64 from 'js-base64';
 @Injectable()
 export class LoginService {
-  public mess : string
+  public mess : any
   constructor(private http: Http) { }
   getLogin(username: string, password:string, ischecked: any){
       var params = new URLSearchParams();
@@ -16,7 +16,7 @@ export class LoginService {
         withCredentials:true,
      }).map(//ad验证
      res=>{
-     this.mess = res.json();
+     this.mess = res;
     return this.mess;
      });
   }
