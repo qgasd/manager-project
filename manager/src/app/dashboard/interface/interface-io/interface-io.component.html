@@ -1,11 +1,17 @@
 
     <div class="searchAlertcontainer">
-        <button type="button" class="btn btn-danger pull-right" (click)="goBack()">返回</button>
+      <div *ngIf="selIdDate2">
+          <h4 >{{selIdDate2.name_en}}</h4>
+          <button type="button" class="btn btn-danger pull-right" (click)="goBack()">返回</button>  
+      </div>   
+          
         <form>
           <div class="table-responsive">
           <table class="table table-striped">
             <thead>
              <tr>
+               <th>接口中文名称</th>
+               <th>接口英文名称</th>      
                <th>输入/输出</th>
                <th>输入输出字段英文名称</th>
                <th>输入输出字段中文名称</th>
@@ -17,6 +23,14 @@
              </thead>
              <tbody>
                <tr *ngFor='let itemtr of ioinputdata'>
+                  <td>
+                      <span name="int_name_cn">{{itemtr.int_name_cn}}</span>
+                       <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtr.int_name_cn' name="int_name_cn">
+                  </td>
+                  <td>
+                      <span name="int_name_en">{{itemtr.int_name_en}}</span>
+                       <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtr.int_name_en' name="int_name_en">
+                  </td>
                  <td>
                    <span name="type">{{itemtr.type}}</span>
                     <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtr.type' name="type">
@@ -47,6 +61,14 @@
                  </td>
                </tr>
                <tr *ngFor='let itemtrs of iooutdata'>
+                  <td>
+                      <span name="int_name_cn">{{itemtrs.int_name_cn}}</span>
+                       <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtrs.int_name_cn' name="int_name_cn">
+                  </td>
+                  <td>
+                      <span name="int_name_en">{{itemtrs.int_name_en}}</span>
+                       <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtrs.int_name_en' name="int_name_en">
+                  </td>
                     <td>
                       <span name="type">{{itemtrs.type}}</span>
                        <input type='text' class='flagclass'  *ngIf="flag2" [(ngModel)]='itemtrs.type' name="type">

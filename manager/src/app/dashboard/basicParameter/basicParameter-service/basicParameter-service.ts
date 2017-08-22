@@ -3,17 +3,16 @@ import { Http, Response,URLSearchParams, Headers, RequestOptions } from '@angula
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 import { ofBasicParameter } from '../basicParameter-mock-data/mock-data';
+import { Location }     from '@angular/common';
 import { Ipconfigs } from "app/checkLogin/ipconfigs";
-import { Location }               from '@angular/common';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 @Injectable()
 export class BasicParameterService {
-  public ipurl = new Ipconfigs().localhostUrl;
-  public basicParameterUrla = this.ipurl + "/basicParameter";
-  public basicParameterUrld = this.ipurl + "/basicParameter/del";
-  public basicParameterurlS = this.ipurl + "/basicParameter/search";
+  public basicParameterUrla = new Ipconfigs().localhostUrl+"/basicParameter";
+  public basicParameterUrld = new Ipconfigs().localhostUrl+"/basicParameter/del";
+  public basicParameterurlS = new Ipconfigs().localhostUrl+"/basicParameter/search";
   public selIdData:ofBasicParameter;
 
   constructor(private http: Http,private location:Location){ }
@@ -52,7 +51,7 @@ gadsearch(pagedata:any):Observable<ofBasicParameter[]>{
    * 新增数据
    * */
   public AddDatas(Adatas:ofBasicParameter):Promise<ofBasicParameter>{
-   return this.http.post('http://localhost:3000/basicParameter/add',Adatas,{headers:this.headers})
+   return this.http.post( new Ipconfigs().localhostUrl+'/basicParameter/add',Adatas,{headers:this.headers})
                   .toPromise()
                   .then(res=>{res.json().data as ofBasicParameter;
                     if(res.json().success){                       
@@ -65,7 +64,7 @@ gadsearch(pagedata:any):Observable<ofBasicParameter[]>{
    * 获取全部的数据
    */
   public getSdate():Observable<ofBasicParameter[]>{
-     return this.http.post('http://localhost:3000/basicParameter',"").map(
+     return this.http.post( new Ipconfigs().localhostUrl+'/basicParameter',"").map(
      res=>{
        let result = res.json();
        console.log(result)      

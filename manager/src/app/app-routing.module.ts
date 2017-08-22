@@ -15,9 +15,10 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'},
     {path: 'resetpassword', component: ResetPasswordComponent},
+    
   ];
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes),],
     exports: [RouterModule]
 })
 export class AppRoutingModule {
