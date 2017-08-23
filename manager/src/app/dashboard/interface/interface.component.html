@@ -133,7 +133,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary" (click)="deleteCC(interdatas)" data-dismiss="modal">确认删除</button>
+        <button type="button" class="btn btn-primary" (click)="deleteCC()" data-dismiss="modal">确认删除</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -252,7 +252,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">  
-                  <button type="button" class="btn btn-danger pull-right" *ngIf="alertSearch" (click)="advanceSearch(multS.value)" data-dismiss="modal" aria-label="Close">搜索</button>
+                  <button type="button" class="btn btn-danger pull-right" *ngIf="alertSearch" (click)="advanceSearch(itemtr.value)" data-dismiss="modal" aria-label="Close">搜索</button>
                   <button type="button" class="btn btn-danger pull-right"  *ngIf="alertEdit" [disabled]="mulSearchAdd.invalid" (click)="EditUpdatec(itemtr,inx)" data-dismiss="modal" aria-label="Close">保存</button>
                    <button type="button" class="btn btn-danger pull-right"  *ngIf="alertAdd" [disabled]="mulSearchAdd.invalid" (click)="addSave(itemtr.value)" data-dismiss="modal" aria-label="Close">新增</button>
                   <!-- 实现添加数据后文本框中的内容为空-->
@@ -347,7 +347,7 @@
                 <a href="javascript:void(0);" title="编辑" (click)="alertEdit=true;alertSearch=false;alertAdd=false;alertTitle='编辑';itemtr" data-toggle="modal" data-target="#myModal2" class="editclass"><span class="glyphicon glyphicon-pencil"></span></a>
                <!--<a href="javascript:void(0);"  (click)='deleteInt(itemtr);$event.stopPropagation()'><span class="glyphicon glyphicon-remove-circle"></span></a>-->
               <a href="javascript:void(0);"  title="输入输出" [routerLink]="['/dashboard/interface/io',itemtr.int_service_num]">I/O</a>
-               <a href="javascript:void(0);" title="其他" [routerLink]="['/dashboard/interface/inputD3']"><span class="glyphicon glyphicon-link"></span></a>
+               <a href="javascript:void(0);" title="其他" [routerLink]="['/dashboard/interface/inputD3',itemtr.int_service_num]"><span class="glyphicon glyphicon-link"></span></a>
                <!--<a href="javascript:void(0);" title="保存"  (click)="EditUpdatec(itemtr,inx)"><span class="glyphicon glyphicon-saved"></span></a>-->
                <!--<input type='checkbox' class="checkboxdete"  [ngModel]="checkBox"  (click)="deleteCheck($event.target.checked,itemtr)" name="isChecked">-->
                

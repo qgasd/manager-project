@@ -8,7 +8,7 @@ export class CheckLoginService {
   constructor(private http: Http) { }
 
   checkLogin(){
-      var params = {
+      var params = {          
         
       }
      return this.http.post(new Ipconfigs().localhostUrl+'/checkLogin',params,{

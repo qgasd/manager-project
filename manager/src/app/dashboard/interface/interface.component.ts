@@ -6,15 +6,15 @@ import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Location } from '@angular/common';
-import { selectDatasService } from "app/common-service/select-service";
+//import { selectDatasService } from "app/common-service/select-service";
 // import {MultiSelectModule} from 'primeng/primeng';
-import { ConfirmationService } from 'primeng/primeng';
+//import { ConfirmationService } from 'primeng/primeng';
 declare var $: any;
 @Component({
   selector: 'app-interface',
   templateUrl: './interface.component.html',
   styleUrls: ['./interface.component.css'],
-  providers: [ConfirmationService]
+  providers: []
 })
 export class InterfaceComponent implements OnInit {
   public interdatas: ofInterface[];//通用的数组
@@ -56,7 +56,7 @@ export class InterfaceComponent implements OnInit {
   public maxSize: number = 10;
   public currentPage: number = 1;//当前页
   public smallnumPages: number = 0;
-  public itemsPerPage: number = 4;//当前选择10条一页
+  public itemsPerPage: number = 10;//当前选择10条一页
   public eventData: any;
   public choosedata: ofInterface;
   //实现对象的观察1
@@ -70,7 +70,7 @@ export class InterfaceComponent implements OnInit {
   public alertEdit = false;
   public alertAdd = false;
   //,private cdr: ChangeDetectorRef  ,private window: Window
-  constructor(public interfaceservice: InterfaceService, public location: Location, public sservice: selectDatasService, public confirmationService: ConfirmationService,public router:Router) {
+  constructor(public interfaceservice: InterfaceService, public location: Location, public router:Router) {
     //  let getWindow = () => {
     //       return window.innerWidth;
     //    };
@@ -140,7 +140,7 @@ export class InterfaceComponent implements OnInit {
   /**
    * 全选
    */
-  choseALL(cb: ofInterface, c: boolean) {
+  choseALLs(cb: ofInterface, c: boolean) {
     var checkboxs = $(".j_tbc input");
     for (var i = 0; i < checkboxs.length; i++) {
       var checkbox = checkboxs[i];
@@ -239,6 +239,7 @@ export class InterfaceComponent implements OnInit {
   }
   //
   changeAdd(){
+   
       this.alertSearch=false;
     this.alertAdd=true;
     this.alertEdit=false;
@@ -301,8 +302,11 @@ export class InterfaceComponent implements OnInit {
     } else {
       j_cbAllinput[0].checked = false;
     }
+    // this.choseItem = [];
       this.ArrayWay(check, cc);
+      //this.choseItem = [];
       console.log(this.choseItem)
+      
   }
   
   /**
@@ -323,17 +327,32 @@ export class InterfaceComponent implements OnInit {
       }
     }
   }
+  getStatus(){
+    this.interfaceservice
+  }
 
   //这里是从后台获取删除后的数据，点击删除后的操作
-  deleteCC(cc: ofInterface[]){
+  deleteCC(){
     console.log(this.choseItem)
     this.interfaceservice.deleteCbox(this.choseItem).subscribe(res=>{
-      console.log(res)
-       this.deletdata = res['items']
-       console.log(this.deletdata)
-    }
-)    
-    console.log(this.deletdata)
+      console.log('3333333+++++++')
+      if(res){
+        this.choseItem = []
+        console.log('========:'+res)
+        this.interfaceservice.getSdate().subscribe(res => {
+          //this.seardata = res['items']//.slice(offset, end > this.totalItems ? this.totalItems : end);
+          this.interdatas =  res['items'];//隐藏状态被标记为禁用的数据
+          this.totalItems = res['total'];
+          console.log(this.totalItems)
+          this.loadData()
+          //$(".waiting").hide();
+        }, error => {  $(".waiting").hide();alert("网络错误,请稍后重试！"); },
+          () => { }
+        )
+      }
+      
+    })    
+   
   }
   /**
   *新增   //刷新问题
@@ -346,6 +365,9 @@ export class InterfaceComponent implements OnInit {
     this.alertEdit = false;
     this.alertSearch = false;
     if (!addDatas) { return }
+    if(addDatas.software_num == undefined){
+      addDatas.software_num = "100";
+    }
     if (addDatas.URL == undefined) {
       addDatas.URL = "";//新增的时候去除两个空的undefinded的数据
     }
@@ -353,7 +375,19 @@ export class InterfaceComponent implements OnInit {
       addDatas.remark = "";
     }
     this.interfaceservice.AddDatas(addDatas)
-      .then(ofInterface => { this.seardata.push(ofInterface); $(".waiting").hide();console.log(addDatas), console.log(this.interdatas) })
+      .then(ofInterface => { this.seardata.push(ofInterface); $(".waiting").hide();
+      this.interfaceservice.getSdate().subscribe(res => {
+        //this.seardata = res['items']//.slice(offset, end > this.totalItems ? this.totalItems : end);
+        this.interdatas =  res['items'];//隐藏状态被标记为禁用的数据
+        this.totalItems = res['total'];
+        console.log(this.totalItems)
+        this.loadData()
+        //$(".waiting").hide();
+      }, error => {  $(".waiting").hide();alert("网络错误,请稍后重试！"); },
+        () => { }
+      );
+      
+      console.log(addDatas), console.log(this.interdatas) })
   }
   /**
    * 编辑里面的更新事件

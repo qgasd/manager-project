@@ -7,21 +7,35 @@ import { Location }               from '@angular/common';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { Ipconfigs } from "app/checkLogin/ipconfigs";
 declare var $:any;
 @Injectable()
 export class InterfaceService {
+  public ipurl = new Ipconfigs().localhostUrl;
   public interfaceUrl ="assets/mock-data/interface.json";
-  public interfaceUrla = "http://172.21.21.254:3000/interface";
-  public interfaceUrlaa = "http://172.21.21.223:3000/interface";
-  public interfaceUrlss = "http://172.21.21.223:3000/interfaceRefrence/serach";
-  public interfaceUrld = "http://172.21.21.223:3000/interface/delete";
-  public interfaceurlS= "http://172.21.21.223:3000/interface/search";
-  public interfaceurlU= "http://172.21.21.223:3000/interface/update";
-  public interfaceurlac= "http://172.21.21.223:3000/interface/search";
+  public interfaceUrla = this.ipurl+"/interface";
+  public interfaceUrlss = this.ipurl+"/interfaceRefrence/serach";
+  public interfaceUrld = this.ipurl+"/interface/delete";
+  public interfaceurlS= this.ipurl+"/interface/search";
+  public interfaceurlU= this.ipurl+"/interface/update";
+  public interfaceurlac= this.ipurl+"/interface/search";
+  public interfaceurlst= this.ipurl+"/interface/searchstate";
   public selIdData:ofInterface;
 
   constructor(private http: Http,private location:Location){ }
 
+  /**
+   * 新增、搜索、删除后查询数据
+   */
+  public searcshState():Observable<ofInterface[]>{
+    return this.http.get(this.interfaceurlst).map(
+      res=>{
+        let result = res.json();
+        console.log(result)      
+        return result;
+      }
+    )
+  }
 
   /***
    * 查询后获取数据,默认查询是英文名称
@@ -42,7 +56,7 @@ export class InterfaceService {
    */
   public getSdate():Observable<ofInterface[]>{
     
-     return this.http.get(this.interfaceUrl).map(
+     return this.http.post(this.interfaceUrla,"").map(
      res=>{
        let result = res.json();
        console.log(result)      
@@ -63,14 +77,14 @@ public getSelId(id:number):Promise<ofInterface>{
  * 删除功能 单个删除
  */
 private headers = new Headers({'Content-Type':'application/json'});
-deleteInt(id:number):Promise<void>{
-   const url = `${this.interfaceUrld}/${id}`;
-   console.log(`${this.interfaceUrld}`)
-   return this.http.delete(url,{headers: this.headers})
-   .toPromise()
-   .then(()=>null)
-   .catch(this.handleError)
-}
+// deleteInt(id:number):Promise<void>{
+//    const url = `${this.interfaceUrld}/${id}`;
+//    console.log(`${this.interfaceUrld}`)
+//    return this.http.delete(url,{headers: this.headers})
+//    .toPromise()
+//    .then(()=>null)
+//    .catch(this.handleError)
+// }
 /*
   批量删除
 */
@@ -78,8 +92,11 @@ deleteCbox(arrayDate:Array<string>):Observable<ofInterface[]>{
    const url = `${this.interfaceUrld}/${arrayDate}`;
       console.log(this.getSdate())
    return this.http.delete(url,{headers: this.headers})
-   .map(()=>{
-       this.getSdate();//看这个方法执行没有
+   .map((res:Response)=>{
+      let result = res.json().success
+      console.log(result)
+      return result
+      
    })
    .catch(this.handleError)
 
@@ -127,7 +144,7 @@ EditUpdate(Edatas:ofInterface):Observable<ofInterface>{
  * 新增数据
  * */
  public AddDatas(Adatas:ofInterface):Promise<ofInterface>{
-  return this.http.post('http://172.21.21.223:3000/interface/insert',Adatas,{headers:this.headers})
+  return this.http.post('http://172.21.21.254:3000/interface/insert',Adatas,{headers:this.headers})
                   .toPromise()
                   .then(res=>{
                     res.json().data as ofInterface;

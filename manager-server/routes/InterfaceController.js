@@ -14,7 +14,6 @@ router.post('/search',function(req,res,next){
     var description=req.body.description;
     var URL=req.body.URL;
     var remark=req.body.remark;
-    
     var pageNum=req.body.page;
     var pagePer=req.body.itemsPerPage;
     var searchSql="select * from int_information where state='active'";
@@ -68,15 +67,26 @@ router.post('/search',function(req,res,next){
     });
 
 });
+// 查询
+router.get('/searchstate',function(req,res,next){
+  var sql="select * from int_information where state='active'";
+  db.query(sql,function(err,rows){
+      if(err){
+        console.log(new Date()+"查询错误："+Sql+err);
+      }
+      else{
+        var datas=JSON.stringify(rows);
+        var data='{"total":'+rows.length+',"items":'+datas+'}';
+        console.log(new Date()+data);
+        res.send (data);
+    }
+
+  })
+})
 //查询接口所有信息
 router.post('/', function(req, res, next) {
     console.log(JSON.stringify(req.body));
-    var pageNum=req.body.page;
-    var pagePer=req.body.itemsPerPage;
     var limitSql="select * from int_information where state='active'";
-    if(pageNum!=null&&pageNum!=undefined&&pagePer!=null&&pagePer!=undefined){
-        limitSql+=" limit "+(pageNum-1)*pagePer+", "+pagePer;
-    }
     db.query(limitSql,function(err, rows){
         if(err){
             console.log(new Date()+"查询错误："+limitSql+err);
@@ -92,7 +102,9 @@ router.post('/', function(req, res, next) {
 //新增接口信息
 router.post('/insert',function(req, res, next){
     var serviceNum=req.body.int_service_num;
+    
     var softWare=req.body.software_num;
+    console.log(softWare);
     var greatClass=req.body.great_class;
     var lessClass=req.body.less_class;
     var state=req.body.state;
@@ -126,29 +138,35 @@ router.post('/insert',function(req, res, next){
 });
 //删除一条数据
 router.delete("/delete/:id",function(req,res,next){
-    const id=req.params.id+'';
-    var sid = id.split(',');
-    console.log(sid.length);
-    var num;
-    for(var n in sid){
-        console.log(sid[n]);
+    var  id=req.params.id;
+  console.log(id)
+      //var sid = id.split(',');
+    //   console.log(sid.length);
+    //   var num;
+    //   for(var n in sid){
+    //       console.log(sid[n]);
+
+    //   }
     
-    var deleteSql="update int_information set state='hidden' where int_service_num="+sid[n];//此处进行逻辑删除
+    var deleteSql="update int_information set state='hidden' where int_service_num in("+id+")";//此处进行逻辑删除
     db.query(deleteSql,function(err,rows){
         if(err){
             console.log(new Date()+"删除失败！"+err);
+            res.send({success:false,message:'删除失败！'})
         }
         else{ 
             console.log(new Date()+"删除成功！");
             console.log(rows);
-            num++;
+            //num++;
+                res.send({success:true,message:'删除成功！'})
         }
     });
-    if(num==sid.length){
-        res.send({success:"cg"});
-    }
+
 }
-});
+        //  if(num==sid.length){
+        //     res.send({success:true,message:'删除成功！'})
+        //  }
+);
 // router.get("/delete/:id",function(req,res,next){
 //     var id=req.params.id;
 

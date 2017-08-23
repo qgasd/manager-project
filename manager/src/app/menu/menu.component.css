@@ -1,7 +1,19 @@
-
 li{
-   
-    color:#000;
-}
-
-nav{background:lightblue;}
+    
+     color:#000;
+ }
+ 
+ nav{background:#337ab7;}
+ .navbar-brand{color: #ffffff}
+ .navbar-default .navbar-nav>li>a {
+     color: #ffffff!important;
+ }
+ .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+     color: #ffffff!important;
+ }
+ .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+      background-color: #5d9ed6!important;
+ }
+ .dropdown-menu{background-color: #337ab7;}
+ .navbar-collapse{min-width: 1060px;}
+  
