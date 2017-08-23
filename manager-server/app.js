@@ -56,7 +56,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 60 * 1000 * 30,
+      maxAge: 60 * 1000 * 60,
       httpOnly:false
   }
 }));
@@ -67,7 +67,7 @@ app.post('/checkLogin',function(req, res, next) {
     var sessionId = req.cookies.sessionId;
     var cookie = req.cookies;
     var session = req.session;
-
+   // console.log(cookie);
       if(cookie.account!=undefined){
         res.send({'cookie':cookie});
       }else{
@@ -85,7 +85,7 @@ app.get('/logoout',function(req,res,next){
   req.session.destroy();
   res.clearCookie('account');
   res.clearCookie('sessionId');
-
+  res.clearCookie('groups');
   if(req.session == null )
   res.send({"message":"清除成功"});
   next();

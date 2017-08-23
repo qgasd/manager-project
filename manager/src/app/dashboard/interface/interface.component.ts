@@ -6,7 +6,12 @@ import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Location } from '@angular/common';
+
 //import { selectDatasService } from "app/common-service/select-service";
+
+import { NgForm } from '@angular/forms';
+//import { selectDatasService } from "app/common-service/select-service";
+
 // import {MultiSelectModule} from 'primeng/primeng';
 //import { ConfirmationService } from 'primeng/primeng';
 declare var $: any;
@@ -69,6 +74,8 @@ export class InterfaceComponent implements OnInit {
   public alertSearch = false;
   public alertEdit = false;
   public alertAdd = false;
+  //表示选中的编辑的数据
+  public itemtr:ofInterface;
   //,private cdr: ChangeDetectorRef  ,private window: Window
   constructor(public interfaceservice: InterfaceService, public location: Location, public router:Router) {
     //  let getWindow = () => {
@@ -82,7 +89,10 @@ export class InterfaceComponent implements OnInit {
   }
   //获取页面的元素
   @ViewChild('checkvalue')
+
   checkVal: ElementRef
+    @ViewChild('itemtr')
+    itemtrvalue:ElementRef
   /**
    * 需不需要判断当单选框的值为空的时候主页面显示哪个数据，感觉有点问题
    */
@@ -207,7 +217,6 @@ export class InterfaceComponent implements OnInit {
     this.alertEdit = false;
     this.alertAdd = false;
     this.getAlertTitle();
-    console.log(this.alertSearch)
     this.choosedata = cc;
     this.interfaceservice.gadsearch(cc).subscribe(res => {
       this.zbdatas = res['items'];
@@ -225,17 +234,20 @@ export class InterfaceComponent implements OnInit {
   /**
    *初始化实现的方法
    */
+
   ngOnInit(): void {
-    this.getALLdata();
+     this.getALLdata();
     this.loadData();
     this.getAlertTitle();
     this.screen();
-  }
+    // this.getselctDate();
+  }  
+
   changeSearch() {
      this.alertSearch=true;
     this.alertAdd=false;
     this.alertEdit=false;
-    this.alertTitle='搜索'
+    this.alertTitle='搜索';
   }
   //
   changeAdd(){
@@ -243,7 +255,27 @@ export class InterfaceComponent implements OnInit {
       this.alertSearch=false;
     this.alertAdd=true;
     this.alertEdit=false;
-    this.alertTitle='新增'
+    this.alertTitle='新增';
+
+  }
+   onsubmit(f:NgForm){
+     if(this.alertEdit){
+f.value =this.itemtr 
+     }
+          
+       }
+  //  
+  changeEdit(cedit:ofInterface){
+    this.alertSearch=false;
+    this.alertAdd=false;
+    this.alertEdit=true;
+    this.alertTitle='编辑';
+    this.itemtr = cedit;
+
+    console.log(this.itemtr)
+
+    
+
   }
   
   getAlertTitle() {
@@ -274,15 +306,7 @@ export class InterfaceComponent implements OnInit {
       () => { }
     )
   }
-  /**
-  *删除
-  */
-  // deleteInt(itemdata: ofInterface): void {
-  //   $(".waiting").show();
-  //   this.interfaceservice.deleteInt(itemdata.int_service_num).then(() =>
-  //     this.seardata = this.seardata.filter(h => h !== itemdata)
-  //   )
-  // }
+
     /**
    * 单选删除
    */
@@ -358,7 +382,7 @@ export class InterfaceComponent implements OnInit {
   *新增   //刷新问题
   */
   addSave(addDatas: ofInterface): void {
-   
+   console.log(addDatas)
     $(".waiting").show();
     this.alertAdd = true;
     console.log(this.alertAdd)
@@ -396,16 +420,16 @@ export class InterfaceComponent implements OnInit {
     $(".waiting").show();
     //console.log(SSdatas)
     //this.indexw = index + 1.7976931348623157E+10308;//这里给一个无限的数字表示不管怎么递增都不能达到这个数字
-    this.interfaceservice.EditUpdate(SSdatas).subscribe(
+    // this.interfaceservice.EditUpdate(SSdatas).subscribe(
          
-      (h) => {
-          $(".waiting").hide();
-             this.deletdata = h['items']//确定这个是否存在，存在再换成this.seardata
-       console.log(this.deletdata)
+    //   (h) => {
+    //       $(".waiting").hide();
+    //          this.deletdata = h['items']//确定这个是否存在，存在再换成this.seardata
+    //    console.log(this.deletdata)
 
-      }, error => {  $(".waiting").hide();alert("网络错误,请稍后重试！"); },
-      () => { }
-    )
+    //   }, error => {  $(".waiting").hide();alert("网络错误,请稍后重试！"); },
+    //   () => { }
+    // )
   }
   /**
    * 返回
@@ -466,7 +490,5 @@ export class InterfaceComponent implements OnInit {
   public pageChanged(event: any): void {
     this.currentPage = event.page;
     console.log(this.currentPage)
-    console.log('Page changed to: ' + event.page);
-    console.log('Number items per page: ' + event.itemsPerPage);
   }
 }

@@ -37,7 +37,7 @@ router.post('/', function(req,res,next){
     if(user==false||user===undefined){
       res.send({"isok":false})
     }else{
-      console.log("+++++++++++++++>>>>>"+JSON.stringify(user));
+      //console.log("+++++++++++++++>>>>>"+JSON.stringify(user));
       
         var username = user._json.sAMAccountName;
         var password = req.body.password;
@@ -64,53 +64,18 @@ router.post('/', function(req,res,next){
       if(ischecked=="true"){
             res.clearCookie('sessionId');
             res.cookie("account",account,{maxAge:60*1000*60*24*7});
+            res.cookie("groups",groups,{maxAge:60*1000*60*24*7});
           }else{
             res.clearCookie('account');
-            res.cookie('sessionId',req.session.id);
+            res.cookie('sessionId',req.session.id,{maxAge: 60 * 1000 * 60});
+            res.cookie("groups",groups,{maxAge: 60 * 1000 * 60});
           }
-          res.send({"isok":true});
+          res.send({"isok":true,"user":groups});
          // res.send({'username':username,'password':password,'session':req.session});//返回组别信息 
         }//返回组别信息
         })
     } 
   })(req,res,next);
 }),
-//passport验证
-// router.post('/', passport.authenticate('ActiveDirectory', opts), function(req, res) {
-  
-//   var username = req.user._json.sAMAccountName;
-//   var password = req.body.password;
-//   var ischecked = req.body.ischecked;
-//   var account={
-//     username:username,
-//     password:password,
-//   }
-//   //根据当前的验证的用户名获取所属组别的信息
-//   ad.getGroupMembershipForUser(username,function(err,groups){
-// if (err) {
-//     console.log('ERROR: ' +JSON.stringify(err));
-//     return;
-//   }
-//   if (!groups){
-//     console.log('User: ' + sAMAccountName + ' not found.');
-//   }else {
-//     account.username=req.body.username;
-//     account.password=req.body.password;
-//     req.session.user=account;
-//     req.session.sign=true;
-//     console.log("验证成功！"+JSON.stringify(groups));
-//  if(ischecked=="true"){
-//       res.clearCookie('sessionId');
-//       res.cookie("account",account,{maxAge:60*1000*60*24*7});
-//     }else{
-//       res.clearCookie('account');
-//       res.cookie('sessionId',req.session.id);
-//     }
-//     res.send({'username':username,'password':password,'session':req.session});//返回组别信息 
-//   }//返回组别信息
-//   })
-  
-// }, function (err) {
-//   res.status(401).send({success: true, message: '验证失败'})
-// })
+
 module.exports = router;

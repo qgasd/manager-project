@@ -3,6 +3,9 @@ import {Location} from "@angular/common";
 import { ActivatedRoute, Params,Router} from '@angular/router';
 import { InterfaceIoService } from "../interface-io/interfaceIo-service";
 import { interfaceIO } from "../interface-mock-data/io";
+import { FormsModule } from '@angular/forms';
+import { Subject }     from 'rxjs/Subject';
+import { Observable }  from 'rxjs/Observable';
 @Component({
   selector: 'app-interface-io',
   templateUrl: './interface-io.component.html',
@@ -15,9 +18,8 @@ export class InterfaceIoComponent implements OnInit {
 
   public ioinputdata:interfaceIO[];
   public iooutdata:interfaceIO[];
-  constructor(public interfaceioservice:InterfaceIoService,public route:ActivatedRoute,public location :Location ) {
-
-   }
+  public addatas:interfaceIO[];
+  constructor(public interfaceioservice:InterfaceIoService,public route:ActivatedRoute,public location :Location ) { } 
   ngOnInit() {
     this.route.params.forEach((params:Params) => {
       this.id = +params['id'];
@@ -45,4 +47,16 @@ export class InterfaceIoComponent implements OnInit {
     this.location.back()
   }
 
+  //新增
+  addSave(addDatas:interfaceIO):void{
+    console.log("数据："+JSON.stringify(addDatas));
+    if(!addDatas){return}
+    this.interfaceioservice.AddDatas(addDatas)
+  .then(interfaceIO=>{this.addatas.push(interfaceIO);
+    location.reload();
+    console.log(addDatas);
+    console.log(this.addatas);
+  })
+  location.reload();
+ }
 }

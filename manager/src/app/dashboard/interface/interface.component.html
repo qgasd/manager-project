@@ -23,103 +23,7 @@
   <!--- 这里一定要改为button如果是submit他会提交并且跳转页面然后报错-->
 </form>
 <!-- 搜索-->
-<!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"></h4>
-      </div>
-      <div class="modal-body">
-        <div class="malert">
-              <form class="form-horizontal" #mulSearch="ngForm"  (ngSubmit)="mulSearch.form.valid && onsubmit(mulSearch)" novalidate class="form-horizontal" role="form">
-                <div  ngModelGroup="multS" #multS="ngModelGroup">
-              <!--  <div class="form-group">
-                  <label  class="col-sm-2 control-label">接口服务编号</label>
-                  <div class="col-sm-10">
-                    <input type="text" [(ngModel)]='multS.fwbm' name="fwbm" #fwbm='ngModel' class="form-control" placeholder="服务编码">
-                    <div *ngIf="mulSearch.submitted && !fwbm.valid" class="text-danger">请输入正确的服务编码</div>
-                  </div>
-                </div> -->
-             <!--   <div class="form-group">
-                  <label  class="col-sm-2 control-label">软件产品编号</label>
-                  <div class="col-sm-10">
-                    <input type="text" [(ngModel)]='multS.software_num' name="software_num" #software_num='ngModel' class="form-control"  placeholder="软件产品条线名称">
-                     <div *ngIf="mulSearch.submitted && !software_num.valid" class="text-danger">请输入正确的软件产品条线名称</div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label  class="col-sm-2 control-label">大类</label>
-                  <div class="col-sm-10">
-                    <input type="text" [(ngModel)]='multS.great_class' name="great_class" #great_class='ngModel' class="form-control"  placeholder="大类">
-                     <div *ngIf="mulSearch.submitted && !great_class.valid" class="text-danger">请输入正确的大类</div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label  class="col-sm-2 control-label">小类</label>
-                  <div class="col-sm-10">
-                    <input type="text"  [(ngModel)]='multS.less_class' name="less_class" #less_class='ngModel' class="form-control"  placeholder="小类">
-                     <div *ngIf="mulSearch.submitted && !less_class.valid" class="text-danger">请输入正确的小类</div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label  class="col-sm-2 control-label">状态</label>
-                  <div class="col-sm-10">
-                    <select [(ngModel)]='multS.state' name="state" #state='ngModel' class="form-control">
-                       <option>启用</option>
-                       <option>禁止</option>
-                    </select>
-                     <div *ngIf="mulSearch.submitted && !state.valid" class="text-danger">请输入正确的状态</div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label  class="col-sm-2 control-label">接口中文名称</label>
-                  <div class="col-sm-10">
-                    <input type="text" [(ngModel)]='multS.int_name_cn' name="int_name_cn" #int_name_cn='ngModel' class="form-control"  placeholder="中文名称">
-                     <div *ngIf="mulSearch.submitted && !int_name_cn.valid" class="text-danger">请输入正确中文名称</div>
-                  </div>
-                </div>
-                 <div class="form-group">
-                  <label  class="col-sm-2 control-label">接口英文名称</label>
-                  <div class="col-sm-10">
-                    <input type="text" [(ngModel)]='multS.int_name_en' name="int_name_en" #URL='ngModel' class="form-control"  placeholder="int_name_en">
-                     <div *ngIf="mulSearch.submitted && !int_name_en.valid" class="text-danger">请输入正确的英文名称</div>
-                  </div>
-                </div>
-                  <div class="form-group">
-                  <label  class="col-sm-2 control-label">功能描述</label>
-                  <div class="col-sm-10">
-                    <input type="text" [(ngModel)]='multS.description' name="description" #URL='ngModel' class="form-control"  placeholder="functionDescription">
-                     <div *ngIf="mulSearch.submitted && !description.valid" class="text-danger">请输入正确的功能描述</div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label  class="col-sm-2 control-label">URL</label>
-                  <div class="col-sm-10">
-                    <input type="text" [(ngModel)]='multS.URL' name="URL" #URL='ngModel' class="form-control"  placeholder="URL">
-                     <div *ngIf="mulSearch.submitted && !URL.valid" class="text-danger">请输入正确的url</div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label  class="col-sm-2 control-label">备注</label>
-                  <div class="col-sm-10">
-                    <input type="text" [(ngModel)]='multS.remark' name="remark" #URL='ngModel' class="form-control"  placeholder="remark">
-                     <div *ngIf="mulSearch.submitted && !remark.valid" class="text-danger">请输入正确的备注</div>                     
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger pull-right" (click)="advanceSearch(multS.value)" data-dismiss="modal" aria-label="Close">搜索</button>
-                  <button type="button" class="btn btn-danger pull-right"  data-dismiss="modal" aria-label="Close" aria-hidden="true">取消</button>
-                </div>
-                </div>
-                 
-              </form>
-          </div>
-          <div>{{multS.value | json}}</div>
-      </div>
-    </div>
-  </div>
-</div>-->
+
   <!-- 删除的时候的提示框 -->
   <div class="modal fade" tabindex="-1" role="dialog" id="myModal3">
   <div class="modal-dialog" role="document">
@@ -133,12 +37,12 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary" (click)="deleteCC()" data-dismiss="modal">确认删除</button>
+        <button type="button" class="btn btn-primary" (click)="deleteCC(interdatas)" data-dismiss="modal">确认删除</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div>
-<!-- 新增-->
+<!-- 新增，搜索-->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -150,13 +54,146 @@
       </div>
       <div class="modal-body">
         <div class="malert">
+          <div>
               <form class="form-horizontal" #mulSearchAdd="ngForm"  (ngSubmit)="mulSearchAdd.form.valid && onsubmit(mulSearchAdd)" novalidate class="form-horizontal" role="form">
-                <div  ngModelGroup="itemtr" #itemtr="ngModelGroup">
+                <div  ngModelGroup="itemtr"   *ngIf="itemtr" #itemtr='ngModelGroup'>      
                 <div class="form-group">
                   <label  class="col-sm-2 control-label">软件产品编号</label>
                   <div class="col-sm-10">
                     <!--这里要弄一个select的框 -->
-                        <input type="number"  readonly [(ngModel)]='itemtr.software_num' name="software_num" #software_num='ngModel' class="form-control" maxlength="20"  placeholder="软件产品条线名称">     
+                        <input type="number"  [(ngModel)]='itemtr.software_num' name="software_num" #software_num='ngModel' class="form-control" maxlength="20"  placeholder="软件产品条线名称">     
+                       <div [hidden]="software_num.valid || software_num.pristine" class="text-danger">
+                        <p *ngIf="software_num.errors?.maxlength">软件产品编号最大字符为20</p>
+                        <p *ngIf="software_num.errors?.required">必须输入软件产品编号</p>
+                      </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">大类</label>
+                  <div class="col-sm-10">
+                    <input type="text" [(ngModel)]='itemtr.great_class' name="great_class" #great_class='ngModel' class="form-control" required maxlength="10"  placeholder="大类">
+                    <!--<input type='text'   class='flagclass' [ngClass]="{'show':indexw ==inx,'hidden':indexw!==inx}" [(ngModel)]='itemtr.great_class' required maxlength="10"  #great_class='ngModel' class="form-control" [ngModelOptions]="{standalone: true}">   -->
+                      <div [hidden]="great_class.valid || great_class.pristine" class="text-danger">
+                        <p *ngIf="great_class.errors?.maxlength">大类最大字符为10</p> 
+                        <p *ngIf="great_class.errors?.required">必须输入大类</p>
+                      </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">小类</label>
+                  <div class="col-sm-10">
+                    <input type="text"   [(ngModel)]='itemtr.less_class' name="less_class" #less_class='ngModel' class="form-control" required maxlength="10"  placeholder="小类">
+                    <!--<input type='text'  *ngIf="alertAdd" class='flagclass' [ngClass]="{'show':indexw ==inx,'hidden':indexw!==inx}" #less_class='ngModel' class="form-control" [(ngModel)]='itemtr.less_class' [ngModelOptions]="{standalone: true}">   -->
+                      <div [hidden]="less_class.valid || less_class.pristine" class="text-danger">
+                        <p *ngIf="less_class.errors?.maxlength">小类最大字符为10</p>
+                        <p *ngIf="less_class.errors?.required">必须输入小类</p>
+                      </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">状态</label>
+                  <div class="col-sm-10"> 
+                    <select   [(ngModel)]='itemtr.state' name="state" #state='ngModel' class="form-control" required maxlength="10"  placeholder="状态">     
+                       <option (ngModel)="state">active</option>
+                       <option (ngModel)="state">hidden</option>
+                    </select>             
+                      <div [hidden]="state.valid || state.pristine" class="text-danger">
+                        <p *ngIf="state.errors?.required">必须输入状态</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group"><!--  && !submitted  当美誉通过验证的时候让用户输入中文或者英文-->
+                  <label  class="col-sm-2 control-label">接口中文名称</label>
+                  <div class="col-sm-10">
+                    <input type="text" [(ngModel)]='itemtr.int_name_cn' name="int_name_cn" #int_name_cn='ngModel' class="form-control"  required maxlength="200"  placeholder="中文名称">
+                    <!--<input type='text' *ngIf="alertAdd" class='flagclass' [ngClass]="{'show':indexw ==inx,'hidden':indexw!==inx}" #int_name_cn='ngModel' class="form-control" [(ngModel)]='itemtr.int_name_cn' [ngModelOptions]="{standalone: true}">   -->
+                     <!--pattern="^[\u4E00-\u9FA5\uF900-\uFA2D]*"-->
+                    <div [hidden]="int_name_cn.valid || (int_name_cn.pristine && !submitted)" class="text-danger">
+                        <p *ngIf="int_name_cn.errors?.maxlength">接口中文名称最大字符为200</p>
+                        <p *ngIf="int_name_cn.errors?.required || !submitted">必须输入中文名称</p>
+                        <!--<p *ngIf="">输入中文名称</p>                    -->
+                    </div>
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label  class="col-sm-2 control-label">接口英文名称</label>
+                  <div class="col-sm-10">
+                    <input type="text"   [(ngModel)]='itemtr.int_name_en' name="int_name_en" #int_name_en='ngModel' class="form-control" required maxlength="100" pattern="^[a-zA-Z]*" placeholder="int_name_en">
+                    <!--<input type='text' *ngIf="alertAdd" class='flagclass' [ngClass]="{'show':indexw ==inx,'hidden':indexw!==inx}" #int_name_en='ngModel' class="form-control" [(ngModel)]='itemtr.int_name_en' [ngModelOptions]="{standalone: true}">   -->
+                    <div [hidden]="int_name_en.valid || (int_name_en.pristine && !submitted)" class="text-danger">
+                        <p *ngIf="int_name_en.errors?.maxlength">接口英文名称最大字符为200</p>
+                        <p *ngIf="int_name_en.errors?.required || !submitted">必须输入英文名称</p>
+                        <!--<p *ngIf="">输入中文名称</p>-->
+                    </div>
+                  </div>
+                </div>
+                  <div class="form-group">
+                  <label  class="col-sm-2 control-label">功能描述</label>
+                  <div class="col-sm-10">
+                    <input type="text"  [(ngModel)]='itemtr.description' name="description" #description='ngModel' class="form-control" required maxlength="200"  placeholder="functionDescription">
+                    <!--<input type='text' *ngIf="alertAdd" class='flagclass' [ngClass]="{'show':indexw ==inx,'hidden':indexw!==inx}" #description='ngModel' class="form-control" [(ngModel)]='itemtr.description' [ngModelOptions]="{standalone: true}">   -->
+                      <div [hidden]="description.valid || description.pristine" class="text-danger">
+                        <p *ngIf="description.errors?.maxlength">功能描述最大字符为200</p>
+                        <p *ngIf="description.errors?.required">必须输入功能描述</p>
+                     </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">URL</label>
+                  <div class="col-sm-10">
+                    <!--<input type='text' *ngIf="alertAdd"  class='flagclass' [ngClass]="{'show':indexw ==inx,'hidden':indexw!==inx}" #URL='ngModel' class="form-control" [(ngModel)]='itemtr.URL' [ngModelOptions]="{standalone: true}">   -->
+                    <input type="text" [(ngModel)]='itemtr.URL' name="URL" #URL='ngModel' class="form-control" maxlength="200"   placeholder="URL">
+                     <div *ngIf="!URL.valid" class="text-danger">请输入正确的url</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">备注</label>
+                  <div class="col-sm-10">
+                    <input type="text" [(ngModel)]='itemtr.remark' name="remark" #remark='ngModel' class="form-control" maxlength="200"   placeholder="remark">
+                    <!--<input type='text' *ngIf="alertAdd"  class='flagclass' [ngClass]="{'show':indexw ==inx,'hidden':indexw!==inx}" #remark='ngModel' class="form-control" [(ngModel)]='itemtr.remark' [ngModelOptions]="{standalone: true}">   -->
+                     <div [hidden]="remark.valid || remark.pristine" class="alert alert-danger">
+                        <p *ngIf="remark.errors?.minlength">姓名最大长度为200</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">  
+                  <button type="button" class="btn btn-danger pull-right" *ngIf="alertSearch" (click)="advanceSearch(multS.value)" data-dismiss="modal" aria-label="Close">搜索</button>
+                  <button type="button" class="btn btn-danger pull-right"  *ngIf="alertEdit" [disabled]="mulSearchAdd.invalid" (click)="EditUpdatec(itemtr,inx)" data-dismiss="modal" aria-label="Close">保存</button>
+                   <button type="button" class="btn btn-danger pull-right"  *ngIf="alertAdd" [disabled]="mulSearchAdd.invalid" (click)="addSave(itemtr.value)" data-dismiss="modal" aria-label="Close">新增</button>
+                  <!-- 实现添加数据后文本框中的内容为空-->
+                  <button type="button" class="btn btn-danger pull-right"  data-dismiss="modal" aria-label="Close" aria-hidden="true">取消</button>
+                </div>
+                </div>                
+              </form>
+              </div>
+          </div>
+          <!-- 页面元素获取测试 -->
+          <!--<div>{{itemtr.value | json}}</div>
+          <div *ngIf="itemtr">{{itemtr}}</div>-->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 编辑-->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div *ngIf="alertTitle">
+        <h4 class="modal-title" *ngIf="alertAdd || alertSearch || alertEdit" id="myModalLabel2">{{alertTitle}}</h4>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="malert">
+          <div>
+              <form class="form-horizontal" #mulSearchAdd="ngForm"  (ngSubmit)="mulSearchAdd.form.valid && onsubmit(mulSearchAdd)" novalidate class="form-horizontal" role="form">
+                <div  ngModelGroup="itemtr"   *ngIf="itemtr">      
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">软件产品编号</label>
+                  <div class="col-sm-10">
+                    <!--这里要弄一个select的框 -->
+                        <input type="number"  [(ngModel)]='itemtr.software_num' name="software_num" #software_num='ngModel' class="form-control" maxlength="20"  placeholder="软件产品条线名称">     
                        <div [hidden]="software_num.valid || software_num.pristine" class="text-danger">
                         <p *ngIf="software_num.errors?.maxlength">软件产品编号最大字符为20</p>
                         <p *ngIf="software_num.errors?.required">必须输入软件产品编号</p>
@@ -260,10 +297,11 @@
                 </div>
                 </div>                
               </form>
+              </div>
           </div>
           <!-- 页面元素获取测试 -->
-          <div>{{itemtr.value | json}}</div>
-          <div *ngIf="itemtr">{{itemtr}}</div>
+          <!--<div>{{itemtr.value | json}}</div>
+          <div *ngIf="itemtr">{{itemtr}}</div>-->
       </div>
     </div>
   </div>
@@ -319,9 +357,9 @@
              </td>
               <td>
                <span name="state">{{itemtr.state}}</span>
-                <!--<select type='text' class='flagclass'  [ngClass]="{'show':indexw ==inx,'hidden':indexw !==inx}"  [(ngModel)]='itemtr.state' [ngModelOptions]="{standalone: true}">
+                <select type='text' class='flagclass'  [ngClass]="{'show':indexw ==inx,'hidden':indexw !==inx}"  [(ngModel)]='itemtr.state' [ngModelOptions]="{standalone: true}">
                   <option *ngFor="let sstate of selectstate">{{sstate}}</option>
-                </select>-->
+                </select>
              </td>
               <td  *ngIf="flag4">
                <span name="int_name_cn">{{itemtr.int_name_cn}}</span>
@@ -344,7 +382,7 @@
                 <input type='text' class='flagclass'   [ngClass]="{'show':indexw ==inx,'hidden':indexw !==inx}" [(ngModel)]='itemtr.remark' [ngModelOptions]="{standalone: true}">
              </td>
              <td>   
-                <a href="javascript:void(0);" title="编辑" (click)="alertEdit=true;alertSearch=false;alertAdd=false;alertTitle='编辑';itemtr" data-toggle="modal" data-target="#myModal2" class="editclass"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a href="javascript:void(0);" title="编辑" (click)="changeEdit(itemtr)" data-toggle="modal" data-target="#myModal1" class="editclass"><span class="glyphicon glyphicon-pencil"></span></a>
                <!--<a href="javascript:void(0);"  (click)='deleteInt(itemtr);$event.stopPropagation()'><span class="glyphicon glyphicon-remove-circle"></span></a>-->
               <a href="javascript:void(0);"  title="输入输出" [routerLink]="['/dashboard/interface/io',itemtr.int_service_num]">I/O</a>
                <a href="javascript:void(0);" title="其他" [routerLink]="['/dashboard/interface/inputD3',itemtr.int_service_num]"><span class="glyphicon glyphicon-link"></span></a>
@@ -370,6 +408,10 @@
     </form>
 </div> 
 <!-- (click)="loadData()"  -->
-<nav class="paginations"><pagination class="text-center" [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage" class="pagination-sm"
-            previousText="&lsaquo;" [maxSize]='maxSize' (numPages)="smallnumPages = $event" [itemsPerPage]='itemsPerPage' nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (click)="loadData()" (pageChanged)="pageChanged($event)"></pagination></nav>
+<!-- <nav class="paginations">
+  <pagination class="text-center" [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage" class="pagination-sm"
+    previousText="&lsaquo;" [maxSize]='maxSize' (numPages)="smallnumPages = $event" [itemsPerPage]='itemsPerPage' nextText="&rsaquo;"
+    firstText="&laquo;" lastText="&raquo;" (click)="loadData()" (pageChanged)="pageChanged($event)">
+  </pagination>
+</nav> -->
 </div>

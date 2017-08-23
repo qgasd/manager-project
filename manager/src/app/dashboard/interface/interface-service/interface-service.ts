@@ -144,7 +144,7 @@ EditUpdate(Edatas:ofInterface):Observable<ofInterface>{
  * 新增数据
  * */
  public AddDatas(Adatas:ofInterface):Promise<ofInterface>{
-  return this.http.post('http://172.21.21.254:3000/interface/insert',Adatas,{headers:this.headers})
+  return this.http.post(this.ipurl+'/interface/insert',Adatas,{headers:this.headers})
                   .toPromise()
                   .then(res=>{
                     res.json().data as ofInterface;
@@ -165,4 +165,3 @@ EditUpdate(Edatas:ofInterface):Observable<ofInterface>{
     }
 
 }
-
